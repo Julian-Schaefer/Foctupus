@@ -6,27 +6,24 @@ import android.os.AsyncTask;
 
 import java.util.Map;
 
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Container;
 import foctupus.sheeper.com.foctupus.game.renderer.ContainerListener;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.StaticContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.tools.RelativeVector;
-import foctupus.sheeper.com.foctupus.game.tools.Vector;
 
 /**
  * Created by schae on 05.02.2016.
  */
-public class LoadScreen extends StaticContainer {
+public class LoadScreen extends Screen {
 
     private static final int[] BACKGROUND_COLOR = { 255, 246, 213 };
     private static final int[] PROGRESS_BACKGROUND_COLOR = { 160, 90, 44 };
     private static final int[] PROGRESS_COLOR = { 171, 0, 0 };
 
-    private int loaded;
+    private boolean loaded;
+    private int loadedCount;
 
     private Sprite loadScreenImage;
     private Sprite progressBackground;
@@ -34,6 +31,7 @@ public class LoadScreen extends StaticContainer {
 
     public LoadScreen(ContainerListener containerListener) {
         super(STD_PRIORITY);
+
 
         this.containerListener = containerListener;
 
@@ -43,9 +41,6 @@ public class LoadScreen extends StaticContainer {
 
     @Override
     public void setup() {
-        setBottomLeftAligned(true);
-        setPosition(0, 0);
-        setSize(Environment.width, Environment.height);
     }
 
     @Override
@@ -53,6 +48,11 @@ public class LoadScreen extends StaticContainer {
         if(Textures.ratios == null || Textures.ratios.size() != Textures.pictureNames.length ||
                 Textures.bitmaps == null || Textures.bitmaps.size() != Textures.pictureNames.length)
         {
+            if(Textures.ratios != null)
+                Textures.ratios.clear();
+
+            if(Textures.bitmaps != null)
+                Textures.bitmaps.clear();
 
             Bitmap texBackground = Bitmap.createBitmap(Environment.width, Environment.height, Bitmap.Config.ARGB_8888);
             String texBackgroundName = "loadscreen_background";
@@ -104,7 +104,7 @@ public class LoadScreen extends StaticContainer {
         }
         else
         {
-            registerTextures();
+            loaded = true;
         }
     }
 
@@ -113,10 +113,10 @@ public class LoadScreen extends StaticContainer {
         super.update();
 
         if(progress != null)
-            progress.setRelativeSize(new RelativeVector(progressBackground.getRelativeSize().getRelativeX()/Textures.pictureNames.length*loaded,
+            progress.setRelativeSize(new RelativeVector(progressBackground.getRelativeSize().getRelativeX()/Textures.pictureNames.length*loadedCount,
                 progress.getRelativeSize().getRelativeY()));
 
-        if(loaded == Textures.pictureNames.length)
+        if(loaded)
         {
             registerTextures();
         }
@@ -124,6 +124,8 @@ public class LoadScreen extends StaticContainer {
 
     private void registerTextures()
     {
+        Textures.textures.clear();
+
         for(Map.Entry<String, Bitmap> entry : Textures.bitmaps.entrySet())
         {
             Textures.textures.put(entry.getKey(), Loader.loadTexture(entry.getValue()));
@@ -134,7 +136,7 @@ public class LoadScreen extends StaticContainer {
     }
 
 
-    protected class LoadTask extends AsyncTask<Void, Object, Void>
+    private class LoadTask extends AsyncTask<Void, Object, Void>
     {
         @Override
         protected Void doInBackground(Void... params) {
@@ -159,7 +161,10 @@ public class LoadScreen extends StaticContainer {
 
         @Override
         protected void onProgressUpdate(Object... objects) {
-            loaded++;
+            loadedCount++;
+
+            if(loadedCount == Textures.pictureNames.length)
+                loaded = true;
         }
     }
 

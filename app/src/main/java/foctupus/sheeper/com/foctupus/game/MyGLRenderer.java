@@ -9,6 +9,7 @@ import android.util.Log;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
@@ -17,7 +18,6 @@ import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
  * Created by schae on 07.11.2015.
  */
 public class MyGLRenderer implements GLSurfaceView.Renderer {
-
 
     private float[] projectionMatrix = new float[16];
     private GameManager gameManager;
@@ -32,6 +32,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
+        if (BuildConfig.DEBUG)
+            Log.d(Environment.TAG, "MyGLRenderer: onSurfaceCreated called.");
+
         GLES20.glClearColor((110f / 256f), (161f / 256f), (255f / 256f), 1f);
 
         GLES20.glEnable(GLES20.GL_BLEND);
@@ -41,13 +44,16 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glDisable(GLES20.GL_TEXTURE_2D);
         GLES20.glDisable(GLES20.GL_CULL_FACE);
 
-        //Log.i("Testdas", "unSurfaceCreate: " + mHeight + ", " + mWidth);
+
 
         created = true;
     }
 
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
+
+        if (BuildConfig.DEBUG)
+            Log.d(Environment.TAG, "MyGLRenderer: onSurfaceChanged called.");
 
         boolean surfaceChanged = false;
         if(width > 0 && height > 0)
@@ -69,6 +75,10 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         if(created || surfaceChanged)
         {
+            if (BuildConfig.DEBUG)
+                Log.d(Environment.TAG, "Surface got changed");
+
+
             if(Environment.renderer != null)
                 Environment.renderer.loadMatrix(projectionMatrix);
             else
@@ -84,8 +94,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             created = false;
         }
 
-
-       // Log.i("Testdas", "onSurfacechange: " + mWidth + ", " + mHeight);
     }
 
 

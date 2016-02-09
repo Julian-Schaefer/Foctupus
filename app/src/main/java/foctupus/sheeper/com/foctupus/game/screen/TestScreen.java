@@ -10,7 +10,7 @@ import foctupus.sheeper.com.foctupus.game.tools.Vector;
 /**
  * Created by schae on 05.02.2016.
  */
-public class TestScreen extends StaticContainer {
+public class TestScreen extends Screen {
 
 
     public TestScreen(int priority) {
@@ -23,9 +23,6 @@ public class TestScreen extends StaticContainer {
     @Override
     public void setup() {
         setTexture(Textures.BACKGROUND);
-        setBottomLeftAligned(true);
-        setPosition(0, 0);
-        setSize(Environment.width, Environment.height);
         setVisible(true);
     }
 
