@@ -10,7 +10,6 @@ public interface Container extends Drawable, Updatable {
 
     public static final int STD_PRIORITY = 1;
 
-    public abstract void revalidate();
     public abstract void setup();
     public abstract void init();
     public abstract void addChild(Sprite child, RelativeVector relativePosition, RelativeVector relativeSize);

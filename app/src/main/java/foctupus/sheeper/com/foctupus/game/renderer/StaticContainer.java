@@ -60,15 +60,17 @@ public abstract class StaticContainer extends Sprite implements Container  {
 
     @Override
     public final void revalidate() {
+        super.revalidate();
+
         if(containerListener != null)
             containerListener.onRevalidate(this);
 
         for(Sprite child : childs)
         {
-                if (child instanceof AnimatedSprite) {
-                }
-
-                updateChild(child, child.getRelativePosition(), child.getRelativeSize());
+            if (child instanceof AnimatedSprite) {
+            }
+            child.revalidate();
+            updateChild(child, child.getRelativePosition(), child.getRelativeSize());
         }
     }
 

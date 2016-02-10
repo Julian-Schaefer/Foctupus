@@ -16,15 +16,15 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
     private MyGLRenderer renderer;
 
-    public MyGLSurfaceView(Context context) {
+    public MyGLSurfaceView(Context context, boolean emulator) {
         super(context);
 
-        Log.i("Testdas", "SurfaceView Constructor ");
         renderer = new MyGLRenderer(getContext());
 
-        setPreserveEGLContextOnPause(false);
         setEGLContextClientVersion(2);
-        setEGLConfigChooser(8, 8, 8, 8, 16, 0);
+
+        if(emulator)
+            setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
         setRenderer(renderer);
     }

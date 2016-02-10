@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -17,10 +18,8 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.MyGLSurfaceView;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 
 public class MainActivity extends Activity {
 
@@ -43,15 +42,15 @@ public class MainActivity extends Activity {
 
         setUIListener();
 
-        //if(supportsEs2) {
+        if(supportsEs2) {
 
-        LinearLayout surfaceViewContainer = (LinearLayout) findViewById(R.id.mainLayout);
+            LinearLayout surfaceViewContainer = (LinearLayout) findViewById(R.id.mainLayout);
 
-        setupSurface(surfaceViewContainer);
+            setupSurface(surfaceViewContainer);
 
-        setupAd(surfaceViewContainer);
+            setupAd(surfaceViewContainer);
 
-        //}
+        }
 
 
         Log.i("Testdas", "Activity onCreate");
@@ -61,7 +60,8 @@ public class MainActivity extends Activity {
 
     private void setupSurface(LinearLayout container)
     {
-        surfaceView = new MyGLSurfaceView(this);
+        surfaceView = new MyGLSurfaceView(this, isEmulator());
+
 
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, 0, 1);
         container.addView(surfaceView, layout);
@@ -79,7 +79,7 @@ public class MainActivity extends Activity {
             @Override
             public void onAdLoaded() {
                 if (Environment.gameManager != null)
-                    Environment.gameManager.showAd();
+                    showAd();
 
                 loaded = true;
             }
@@ -89,7 +89,14 @@ public class MainActivity extends Activity {
         container.addView(adView, adLayout);
     }
 
-
+    private boolean isEmulator() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
+                && (Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86"));
+    }
 
 
     public static void showAd()

@@ -11,6 +11,7 @@ import android.opengl.GLUtils;
 import android.os.AsyncTask;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 
@@ -71,5 +72,14 @@ public final class Loader {
         return textureHandle[0];
     }
 
+    public static void registerTextures()
+    {
+        Textures.textures.clear();
+
+        for(Map.Entry<String, Bitmap> entry : Textures.bitmaps.entrySet())
+        {
+            Textures.textures.put(entry.getKey(), Loader.loadTexture(entry.getValue()));
+        }
+    }
 
 }

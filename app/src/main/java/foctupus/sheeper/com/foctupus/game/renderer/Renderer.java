@@ -94,6 +94,7 @@ public class Renderer {
         }
 
         sprites.clear();
+        spriteLists.clear();
     }
 
 

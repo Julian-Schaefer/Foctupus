@@ -45,14 +45,16 @@ public class LoadScreen extends Screen {
 
     @Override
     public void init() {
-        if(Textures.ratios == null || Textures.ratios.size() != Textures.pictureNames.length ||
-                Textures.bitmaps == null || Textures.bitmaps.size() != Textures.pictureNames.length)
+        if(!Textures.areDecoded())
         {
             if(Textures.ratios != null)
                 Textures.ratios.clear();
 
             if(Textures.bitmaps != null)
                 Textures.bitmaps.clear();
+
+            if(Textures.textures != null)
+                Textures.textures.clear();
 
             Bitmap texBackground = Bitmap.createBitmap(Environment.width, Environment.height, Bitmap.Config.ARGB_8888);
             String texBackgroundName = "loadscreen_background";
@@ -118,21 +120,11 @@ public class LoadScreen extends Screen {
 
         if(loaded)
         {
-            registerTextures();
+            Loader.registerTextures();
+
+            if(containerListener != null)
+                containerListener.onFinished(this);
         }
-    }
-
-    private void registerTextures()
-    {
-        Textures.textures.clear();
-
-        for(Map.Entry<String, Bitmap> entry : Textures.bitmaps.entrySet())
-        {
-            Textures.textures.put(entry.getKey(), Loader.loadTexture(entry.getValue()));
-        }
-
-        if(containerListener != null)
-            containerListener.onFinished(this);
     }
 
 

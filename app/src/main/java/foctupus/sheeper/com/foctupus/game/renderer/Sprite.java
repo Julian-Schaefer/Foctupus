@@ -129,6 +129,11 @@ public class Sprite extends Rectangle {
         return fb;
     }
 
+    public void revalidate()
+    {
+        setTexture(getTextureName());
+    }
+
     public static FloatBuffer loadVertexArray() {
         return mVertexBuffer;
     }

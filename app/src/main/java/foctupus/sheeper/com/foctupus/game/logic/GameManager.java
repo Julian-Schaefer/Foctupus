@@ -14,6 +14,7 @@ import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.StaticContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.StaticSpriteList;
+import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.screen.LoadScreen;
 import foctupus.sheeper.com.foctupus.game.screen.TestScreen;
 
@@ -23,7 +24,6 @@ import foctupus.sheeper.com.foctupus.game.screen.TestScreen;
 public class GameManager implements ContainerListener {
 
     private Renderer renderer;
-    private boolean changed = false;
     private StaticContainer screen;
 
     public GameManager()
@@ -49,18 +49,24 @@ public class GameManager implements ContainerListener {
         renderer.render();
     }
 
-    public void revalidate()
+    public void revalidate(boolean created)
     {
         if (BuildConfig.DEBUG)
-            Log.d(Environment.TAG, "GameManager.revalidate() called.");
+            Log.d(Environment.TAG, "GameManager.revalidate(" +  created + ") called.");
 
-        if(screen != null)
-            screen = new LoadScreen(this);
+        if(created)
+        {
+            if(Textures.areDecoded())
+                Loader.registerTextures();
+            else
+                screen = new LoadScreen(this);
+        }
+
+        screen.revalidate();
     }
 
-    public void onClick(float x, float y, int mode)
-    {
-        MainActivity.showAd();
+    public void onClick(float x, float y, int mode) {
+
     }
 
     public void showAd()

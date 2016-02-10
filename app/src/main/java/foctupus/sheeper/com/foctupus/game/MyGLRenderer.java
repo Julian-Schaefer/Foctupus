@@ -12,7 +12,9 @@ import javax.microedition.khronos.opengles.GL10;
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 
 /**
  * Created by schae on 07.11.2015.
@@ -45,6 +47,8 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glDisable(GLES20.GL_CULL_FACE);
 
 
+        Environment.width = -1;
+        Environment.height = -1;
 
         created = true;
     }
@@ -56,21 +60,16 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             Log.d(Environment.TAG, "MyGLRenderer: onSurfaceChanged called.");
 
         boolean surfaceChanged = false;
-        if(width > 0 && height > 0)
+        if(width > 0 && height > 0 && (Environment.width != width || Environment.height != height))
         {
+            GLES20.glViewport(0, 0, width, height);
 
-            if(Environment.width != width || Environment.height != height)
-            {
-                GLES20.glViewport(0, 0, width, height);
+            Environment.width = width;
+            Environment.height = height;
 
+            Matrix.orthoM(projectionMatrix, 0, 0, width, 0, height, -1f, 1f);
 
-                Environment.width = width;
-                Environment.height = height;
-
-                Matrix.orthoM(projectionMatrix, 0, 0, width, 0, height, -1f, 1f);
-
-                surfaceChanged = true;
-            }
+            surfaceChanged = true;
         }
 
         if(created || surfaceChanged)
@@ -85,7 +84,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
                 Environment.renderer = new Renderer(projectionMatrix);
 
             if(Environment.gameManager != null)
-                Environment.gameManager.revalidate();
+                Environment.gameManager.revalidate(created);
             else
                 Environment.gameManager = new GameManager();
 

@@ -84,4 +84,11 @@ public class Textures {
 
         return -1;
     }
+
+    public static boolean areDecoded()
+    {
+        return Textures.ratios != null && Textures.ratios.size() == Textures.pictureNames.length &&
+                Textures.bitmaps != null && Textures.bitmaps.size() == Textures.pictureNames.length;
+    }
+
 }
