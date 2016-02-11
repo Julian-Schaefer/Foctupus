@@ -4,7 +4,8 @@ import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
-import foctupus.sheeper.com.foctupus.game.renderer.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.gui.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 
 /**
  * Created by schae on 09.02.2016.
@@ -12,20 +13,14 @@ import foctupus.sheeper.com.foctupus.game.renderer.StaticContainer;
 public abstract class Screen extends StaticContainer {
 
 
-    public Screen(String textureName, int priority) {
-        super(textureName, priority);
+    public Screen(Texture texture, int priority) {
+        super(texture, priority);
         initScreen();
     }
 
     public Screen(int priority)
     {
         super(priority);
-        initScreen();
-    }
-
-    public Screen(int textureID, String textureName, int priority)
-    {
-        super(textureID, textureName, priority);
         initScreen();
     }
 

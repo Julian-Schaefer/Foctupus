@@ -1,11 +1,11 @@
-package foctupus.sheeper.com.foctupus.game.tools;
+package foctupus.sheeper.com.foctupus.game.renderer.util;
 
 /**
  * Created by schae on 09.11.2015.
  */
 public class Vector {
 
-    private float x = -1, y = -1;
+    private float x = Float.MIN_VALUE, y = Float.MIN_VALUE;
 
 
     public Vector(float x, float y)
@@ -16,8 +16,8 @@ public class Vector {
 
     public Vector()
     {
+        
     }
-
 
     public void normalise()
     {

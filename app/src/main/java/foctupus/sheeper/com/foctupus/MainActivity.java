@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
@@ -27,8 +28,6 @@ public class MainActivity extends Activity {
     private static AdView adView;
     private static boolean loaded;
 
-
-    private static Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,31 +121,23 @@ public class MainActivity extends Activity {
     }
 
 
-    public static Context getContext()
-    {
-        return context;
-    }
-
-
     @Override
     protected void onPause() {
         super.onPause();
         surfaceView.onPause();
         Log.i("Testdas", "Activity onPause");
+
     }
 
 
     @Override
     protected void onResume() {
+        super.onResume();
+        surfaceView.onResume();
+
         hideUI();
 
 
-        context = this;
-
-
-        super.onResume();
-
-        surfaceView.onResume();
         loadAd();
 
     }
@@ -181,16 +172,12 @@ public class MainActivity extends Activity {
 
     private void hideUI()
     {
-
         if (android.os.Build.VERSION.SDK_INT >= 19)
             immersiveMode();
         else if (android.os.Build.VERSION.SDK_INT >= 14)
             lightsOut();
-
-
-
-
     }
+
 
     private void lightsOut()
     {
@@ -214,6 +201,7 @@ public class MainActivity extends Activity {
             @Override
             public void run() {
                 try {
+                    getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
                     getWindow().getDecorView().setSystemUiVisibility(
                             View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION

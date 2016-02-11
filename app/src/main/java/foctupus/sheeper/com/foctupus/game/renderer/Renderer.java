@@ -4,12 +4,11 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import java.nio.FloatBuffer;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.game.shader.TextureShader;
+import foctupus.sheeper.com.foctupus.game.renderer.shader.TextureShader;
 
 /**
  * Created by schae on 10.11.2015.
@@ -19,7 +18,7 @@ public class Renderer {
     private TextureShader shader;
 
     private volatile LinkedHashMap<Integer, LinkedList<SpriteList>> spriteLists;
-    private volatile LinkedHashMap<Integer, LinkedList<Sprite>> sprites;
+    private volatile LinkedHashMap<Integer, SpriteList> sprites;
     private volatile LinkedList<Integer> priorities;
 
     private float[] projectionMatrix;
@@ -32,6 +31,8 @@ public class Renderer {
     private FloatBuffer vertices;
     private FloatBuffer textureInformation;
 
+    private boolean revalidated;
+
     public Renderer(float[] projectionMatrix)
     {
         this.projectionMatrix = projectionMatrix;
@@ -43,10 +44,11 @@ public class Renderer {
         setup();
     }
 
-    public void loadMatrix(float[] projectionMatrix)
+    public void revalidate(float[] projectionMatrix)
     {
         this.projectionMatrix = projectionMatrix;
         setup();
+        revalidated = true;
     }
 
     private void setup()
@@ -82,12 +84,11 @@ public class Renderer {
             if(sprites.containsKey(priority))
                 for(Sprite sprite : sprites.get(priority))
                 {
-                    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTextureID());
-                    renderSprite(sprite);
+                    prepareSprite(sprite);
                 }
 
             if(spriteLists.containsKey(priority))
-                for(LinkedList<Sprite> spriteList : spriteLists.get(priority))
+                for(SpriteList spriteList : spriteLists.get(priority))
                 {
                     renderList(spriteList);
                 }
@@ -98,23 +99,41 @@ public class Renderer {
     }
 
 
-    private void renderList(LinkedList<Sprite> list)
+
+    private void renderList(SpriteList list)
     {
         if(list instanceof StaticSpriteList)
         {
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, ((StaticSpriteList) list).getTextureID());
-
-            for(Sprite sprite : list)
+            StaticSpriteList staticList = (StaticSpriteList) list;
+            if(staticList.getTexture() != null)
             {
-                renderSprite(sprite);
+                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, staticList.getTexture().getID());
+
+                for(Sprite sprite : list)
+                {
+                    renderSprite(sprite);
+                }
             }
+
         }
-        else {
+        else
+        {
             for (Sprite sprite : list)
             {
-                GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTextureID());
-                renderSprite(sprite);
+                prepareSprite(sprite);
             }
+        }
+    }
+
+    private void prepareSprite(Sprite sprite)
+    {
+        if(sprite.getTexture() != null)
+        {
+            if(revalidated)
+                sprite.getTexture().revalidate();
+
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTexture().getID());
+            renderSprite(sprite);
         }
     }
 
@@ -142,7 +161,7 @@ public class Renderer {
         }
         else
         {
-            LinkedList<Sprite> spriteContainer = new LinkedList<>();
+            SpriteList spriteContainer = new GenericSpriteList();
             spriteContainer.add(sprite);
             sprites.put(priority, spriteContainer);
         }

@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.tools;
+package foctupus.sheeper.com.foctupus.game.renderer.util;
 
 /**
  * Created by schae on 04.12.2015.

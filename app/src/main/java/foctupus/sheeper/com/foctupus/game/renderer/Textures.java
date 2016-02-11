@@ -9,8 +9,6 @@ import java.util.HashMap;
  */
 public class Textures {
 
-
-
     public static HashMap<String, Integer> textures = new HashMap<>();
     public static HashMap<String, Float> ratios = new HashMap<>();
     public static HashMap<String, Bitmap> bitmaps = new HashMap<>();
@@ -83,6 +81,14 @@ public class Textures {
             return textures.get(textureName);
 
         return -1;
+    }
+
+    public static float getRatio(String textureName)
+    {
+        if(ratios != null && ratios.containsKey(textureName))
+            return ratios.get(textureName);
+
+        return 1;
     }
 
     public static boolean areDecoded()

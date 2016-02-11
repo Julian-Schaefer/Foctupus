@@ -1,8 +1,9 @@
-package foctupus.sheeper.com.foctupus.game.renderer;
+package foctupus.sheeper.com.foctupus.game.gui;
 
 
 
-import foctupus.sheeper.com.foctupus.game.tools.Vector;
+import foctupus.sheeper.com.foctupus.game.renderer.AnimatedSprite;
+import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by schae on 28.11.2015.

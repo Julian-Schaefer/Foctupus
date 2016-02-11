@@ -59,6 +59,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         if (BuildConfig.DEBUG)
             Log.d(Environment.TAG, "MyGLRenderer: onSurfaceChanged called.");
 
+        float oldX = Environment.width;
+        float oldY = Environment.height;
+
         boolean surfaceChanged = false;
         if(width > 0 && height > 0 && (Environment.width != width || Environment.height != height))
         {
@@ -79,12 +82,12 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
 
             if(Environment.renderer != null)
-                Environment.renderer.loadMatrix(projectionMatrix);
+                Environment.renderer.revalidate(projectionMatrix);
             else
                 Environment.renderer = new Renderer(projectionMatrix);
 
             if(Environment.gameManager != null)
-                Environment.gameManager.revalidate(created);
+                Environment.gameManager.revalidate(created, oldX, oldY);
             else
                 Environment.gameManager = new GameManager();
 

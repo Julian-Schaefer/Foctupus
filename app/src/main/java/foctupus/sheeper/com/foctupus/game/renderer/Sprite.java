@@ -31,7 +31,6 @@ public class Sprite extends Rectangle {
     public static final int VERTEX_COUNT = TEX_SQUARE.length/COORDS_PER_VERTEX;
     public static final int VERTEX_STRIDE = COORDS_PER_VERTEX * 4;
 
-
     public static final int TEX_COORDS_PER_VERTEX = 2;
     public static final int TEX_VERTEX_STRIDE = TEX_COORDS_PER_VERTEX * 4;
 
@@ -39,25 +38,16 @@ public class Sprite extends Rectangle {
     private static FloatBuffer mVertexBuffer = createVertexArray(TEX_SQUARE);
 
 
+
     private boolean isVisible;
     private float[] mModelMatrix = new float[16];
 
-    private int textureID = -1;
-    private String textureName;
+    private Texture texture;
 
-    private short priority = 1;
-
-
-    public Sprite(String textureName)
+    public Sprite(Texture texture)
     {
         this();
-        setTexture(textureName);
-    }
-
-    public Sprite(int textureID, String textureName)
-    {
-        this();
-        setTextureID(textureID, textureName);
+        this.texture = texture;
     }
 
     public Sprite()
@@ -73,21 +63,14 @@ public class Sprite extends Rectangle {
         mTexBuffer = fb;
     }
 
-    public void setTexture(String name)
+    public void setTexture(Texture texture)
     {
-        textureID = Textures.getTextureID(name);
-        textureName = name;
+        this.texture = texture;
     }
 
-    public void setTextureID(int id, String name)
+    public Texture getTexture()
     {
-        textureID = id;
-        textureName = name;
-    }
-
-    public String getTextureName()
-    {
-        return textureName;
+        return texture;
     }
 
     public static FloatBuffer loadTexArray() {
@@ -110,7 +93,7 @@ public class Sprite extends Rectangle {
     {
         Matrix.setIdentityM(mModelMatrix, 0);
 
-        Matrix.translateM(mModelMatrix, 0, (int) xPos, (int) yPos, 0f);
+        Matrix.translateM(mModelMatrix, 0, xPos, yPos, 0f);
 
         Matrix.rotateM(mModelMatrix, 0, angle, 0.0f, 0.0f, 1.0f);
 
@@ -120,7 +103,6 @@ public class Sprite extends Rectangle {
     }
 
     public static FloatBuffer createVertexArray(float[] coords) {
-        // Allocate a direct ByteBuffer, using 4 bytes per float, and copy coords into it.
         ByteBuffer bb = ByteBuffer.allocateDirect(coords.length * 4);
         bb.order(ByteOrder.nativeOrder());
         FloatBuffer fb = bb.asFloatBuffer();
@@ -129,20 +111,9 @@ public class Sprite extends Rectangle {
         return fb;
     }
 
-    public void revalidate()
-    {
-        setTexture(getTextureName());
-    }
-
     public static FloatBuffer loadVertexArray() {
         return mVertexBuffer;
     }
-
-    public int getTextureID()
-    {
-        return textureID;
-    }
-
 
     public void setVisible(boolean isVisible)
     {
@@ -152,18 +123,6 @@ public class Sprite extends Rectangle {
     public boolean isVisible()
     {
         return isVisible;
-    }
-
-
-
-    public void setPriority(short priority)
-    {
-        this.priority = priority;
-    }
-
-    public short getPriority()
-    {
-        return priority;
     }
 
 

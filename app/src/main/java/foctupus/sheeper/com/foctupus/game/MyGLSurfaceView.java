@@ -5,6 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
 
+import foctupus.sheeper.com.foctupus.MainActivity;
 import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
@@ -15,7 +16,7 @@ import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 public class MyGLSurfaceView extends GLSurfaceView {
 
     private MyGLRenderer renderer;
-
+    private boolean visible;
     public MyGLSurfaceView(Context context, boolean emulator) {
         super(context);
 
@@ -45,6 +46,16 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        if(!visible) {
+            visible = true;
+            MainActivity.showAd();
+        }
+        else {
+            visible = false;
+            MainActivity.hideAd();
+        }
+
         if(event != null)
         {
             final int eventAction = event.getAction();

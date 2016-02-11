@@ -1,8 +1,6 @@
 package foctupus.sheeper.com.foctupus.game.renderer;
 
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
-import foctupus.sheeper.com.foctupus.game.tools.RelativeVector;
-import foctupus.sheeper.com.foctupus.game.tools.Vector;
+import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by schae on 04.12.2015.
@@ -14,11 +12,8 @@ public class Rectangle {
     protected float angle;
     protected float xSize = Float.MIN_VALUE;
     protected float ySize = Float.MIN_VALUE;
-    private RelativeVector relativePosition;
-    private RelativeVector relativeSize;
 
     private boolean bottomLeftAligned;
-
 
     public Rectangle()
     {
@@ -37,17 +32,38 @@ public class Rectangle {
 
     public float getXPos()
     {
-        return xPos;
+        if(bottomLeftAligned)
+            return xPos - getXSize()/2;
+        else
+            return xPos;
     }
 
     public float getYPos()
     {
+        if(bottomLeftAligned)
+            return yPos - getYSize()/2;
+        else
+            return yPos;
+    }
+
+    public float getActualXPos()
+    {
+        return xPos;
+    }
+
+    public float getActualYPos()
+    {
         return yPos;
+    }
+
+    public Vector getActualPosition()
+    {
+        return new Vector(xPos, yPos);
     }
 
     public Vector getPosition()
     {
-        return new Vector(xPos, yPos);
+        return new Vector(getXPos(), getYPos());
     }
 
     public void setPosition(Vector vec)
@@ -99,26 +115,6 @@ public class Rectangle {
         setSize((int) vec.getX(), (int) vec.getY());
     }
 
-    public void setRelativePosition(RelativeVector relativePosition)
-    {
-        this.relativePosition = relativePosition;
-    }
-
-    public RelativeVector getRelativePosition()
-    {
-        return relativePosition;
-    }
-
-    public void setRelativeSize(RelativeVector relativeSize)
-    {
-        this.relativeSize = relativeSize;
-    }
-
-    public RelativeVector getRelativeSize()
-    {
-        return relativeSize;
-    }
-
     public void setBottomLeftAligned(boolean bool)
     {
         bottomLeftAligned = bool;
@@ -129,5 +125,18 @@ public class Rectangle {
         return bottomLeftAligned;
     }
 
+    public boolean intersects(float x, float y)
+    {
+        float left = xPos - xSize/2;
+        float right = xPos + xSize/2;
+        float bottom = yPos - ySize/2;
+        float top = yPos + ySize/2;
 
+        return x >= left && x <= right && y >= bottom && y <= top;
+    }
+
+    public boolean intersects(Vector pos)
+    {
+        return intersects(pos.getX(), pos.getY());
+    }
 }

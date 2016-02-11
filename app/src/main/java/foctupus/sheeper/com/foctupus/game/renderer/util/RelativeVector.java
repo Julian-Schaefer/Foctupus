@@ -1,7 +1,7 @@
-package foctupus.sheeper.com.foctupus.game.tools;
+package foctupus.sheeper.com.foctupus.game.renderer.util;
 
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by schae on 28.11.2015.

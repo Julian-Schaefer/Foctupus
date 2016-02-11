@@ -4,14 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-import java.util.Map;
-
-import foctupus.sheeper.com.foctupus.game.renderer.ContainerListener;
+import foctupus.sheeper.com.foctupus.game.gui.IContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.tools.RelativeVector;
+import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
 
 /**
  * Created by schae on 05.02.2016.
@@ -29,7 +28,7 @@ public class LoadScreen extends Screen {
     private Sprite progressBackground;
     private Sprite progress;
 
-    public LoadScreen(ContainerListener containerListener) {
+    public LoadScreen(IContainer.Listener containerListener) {
         super(STD_PRIORITY);
 
 
@@ -64,14 +63,14 @@ public class LoadScreen extends Screen {
 
             int texBackgroundID = Loader.loadTexture(texBackground);
 
-            setTextureID(texBackgroundID, texBackgroundName);
+            setTexture(new Texture(texBackgroundName, texBackgroundID));
             setVisible(true);
 
 
             Bitmap texLoadScreenImage = Loader.decodeTexture(Textures.LOADSCREEN);
             int loadScreenImageID = Loader.loadTexture(texLoadScreenImage);
             loadScreenImage = new Sprite();
-            loadScreenImage.setTextureID(loadScreenImageID, Textures.LOADSCREEN);
+            loadScreenImage.setTexture(new Texture(Textures.LOADSCREEN, loadScreenImageID));
             addChild(loadScreenImage, new RelativeVector(50, 50), new RelativeVector(50, RelativeVector.RATIO));
 
 
@@ -85,7 +84,7 @@ public class LoadScreen extends Screen {
             int texProgressBackgroundID= Loader.loadTexture(texProgressBackground);
 
             progressBackground = new Sprite();
-            progressBackground.setTextureID(texProgressBackgroundID, texProgressBackgroundName);
+            progressBackground.setTexture(new Texture(texProgressBackgroundName, texProgressBackgroundID));
             addChild(progressBackground, new RelativeVector(10, 50), new RelativeVector(50, 50));
 
 
@@ -97,7 +96,7 @@ public class LoadScreen extends Screen {
 
             int tex_progress_id = Loader.loadTexture(texProgress);
             progress = new Sprite();
-            progress.setTextureID(tex_progress_id, texProgressName);
+            progress.setTexture(new Texture(texProgressName, tex_progress_id));
             progress.setBottomLeftAligned(true);
             addChild(progress, new RelativeVector(50, 10), new RelativeVector(0, 20));
 
@@ -115,8 +114,8 @@ public class LoadScreen extends Screen {
         super.update();
 
         if(progress != null)
-            progress.setRelativeSize(new RelativeVector(progressBackground.getRelativeSize().getRelativeX()/Textures.pictureNames.length*loadedCount,
-                progress.getRelativeSize().getRelativeY()));
+            progress.setSize(new RelativeVector(progressBackground.getXSize()/Textures.pictureNames.length*loadedCount,
+                progress.getYSize()));
 
         if(loaded)
         {

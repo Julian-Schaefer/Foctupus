@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.shader;
+package foctupus.sheeper.com.foctupus.game.renderer.shader;
 
 import android.opengl.GLES20;
 

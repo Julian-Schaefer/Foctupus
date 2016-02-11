@@ -7,43 +7,26 @@ import java.util.LinkedList;
  */
 public class StaticSpriteList extends SpriteList {
 
-    private int id;
-    private boolean visible;
+    private Texture texture;
 
-    public StaticSpriteList(String textureName)
+    public StaticSpriteList(Texture texture)
     {
-        this(textureName, 0);
+        this(texture, 0);
     }
 
-    public StaticSpriteList(int textureID)
-    {
-        this(textureID, 0);
-    }
-
-    public StaticSpriteList(String textureName, int priority)
+    public StaticSpriteList(Texture texture, int priority)
     {
         super(priority);
-        id = Textures.getTextureID(textureName);
+        this.texture = texture;
     }
 
-    public StaticSpriteList(int textureID, int priority)
+    public void setTexture(Texture texture)
     {
-        super(priority);
-        id = textureID;
+        this.texture = texture;
     }
 
-    public int getTextureID()
+    public Texture getTexture()
     {
-        return id;
-    }
-
-    public boolean isVisible()
-    {
-        return visible;
-    }
-
-    public void setVisible(boolean visible)
-    {
-        this.visible = visible;
+        return texture;
     }
 }
