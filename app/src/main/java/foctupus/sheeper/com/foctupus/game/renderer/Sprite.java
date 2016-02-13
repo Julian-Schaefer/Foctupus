@@ -37,10 +37,16 @@ public class Sprite extends Rectangle {
     private static FloatBuffer mTexBuffer = createVertexArray(TEX_COORDS);
     private static FloatBuffer mVertexBuffer = createVertexArray(TEX_SQUARE);
 
-
+    static
+    {
+        ByteBuffer vertexByteBuffer = ByteBuffer.allocateDirect(TEX_SQUARE.length * 4);
+        vertexByteBuffer.order(ByteOrder.nativeOrder());
+        mVertexBuffer = vertexByteBuffer.asFloatBuffer();
+        mVertexBuffer.put(TEX_SQUARE);
+        mVertexBuffer.position(0);
+    }
 
     private boolean isVisible;
-    private float[] mModelMatrix = new float[16];
 
     private Texture texture;
 
@@ -77,31 +83,6 @@ public class Sprite extends Rectangle {
         return mTexBuffer;
     }
 
-    public static FloatBuffer loadVertexBuffer()
-    {
-        FloatBuffer mVertexBuffer;
-
-        ByteBuffer vertexByteBuffer = ByteBuffer.allocateDirect(TEX_SQUARE.length * 4);
-        vertexByteBuffer.order(ByteOrder.nativeOrder());
-        mVertexBuffer = vertexByteBuffer.asFloatBuffer();
-        mVertexBuffer.put(TEX_SQUARE);
-        mVertexBuffer.position(0);
-        return mVertexBuffer;
-    }
-
-    public float[] getTransformationMatrix()
-    {
-        Matrix.setIdentityM(mModelMatrix, 0);
-
-        Matrix.translateM(mModelMatrix, 0, xPos, yPos, 0f);
-
-        Matrix.rotateM(mModelMatrix, 0, angle, 0.0f, 0.0f, 1.0f);
-
-        Matrix.scaleM(mModelMatrix, 0, xSize, ySize, 1);
-
-        return mModelMatrix;
-    }
-
     public static FloatBuffer createVertexArray(float[] coords) {
         ByteBuffer bb = ByteBuffer.allocateDirect(coords.length * 4);
         bb.order(ByteOrder.nativeOrder());
@@ -111,7 +92,7 @@ public class Sprite extends Rectangle {
         return fb;
     }
 
-    public static FloatBuffer loadVertexArray() {
+    public static FloatBuffer loadVertexBuffer() {
         return mVertexBuffer;
     }
 

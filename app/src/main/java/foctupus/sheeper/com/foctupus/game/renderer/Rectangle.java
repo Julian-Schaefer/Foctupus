@@ -1,5 +1,7 @@
 package foctupus.sheeper.com.foctupus.game.renderer;
 
+import android.opengl.Matrix;
+
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
@@ -7,17 +9,32 @@ import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
  */
 public class Rectangle {
 
-    protected float xPos = Float.MIN_VALUE;
-    protected float yPos = Float.MIN_VALUE;
-    protected float angle;
-    protected float xSize = Float.MIN_VALUE;
-    protected float ySize = Float.MIN_VALUE;
+    private float xPos = Float.MIN_VALUE;
+    private float yPos = Float.MIN_VALUE;
+    private float angle;
+    private float xSize = Float.MIN_VALUE;
+    private float ySize = Float.MIN_VALUE;
 
     private boolean bottomLeftAligned;
+
+    private float[] mModelMatrix = new float[16];
 
     public Rectangle()
     {
 
+    }
+
+    public float[] getTransformationMatrix()
+    {
+        Matrix.setIdentityM(mModelMatrix, 0);
+
+        Matrix.translateM(mModelMatrix, 0, xPos, yPos, 0f);
+
+        Matrix.rotateM(mModelMatrix, 0, angle, 0.0f, 0.0f, 1.0f);
+
+        Matrix.scaleM(mModelMatrix, 0, xSize, ySize, 1);
+
+        return mModelMatrix;
     }
 
     public void setAngle(float angle)
@@ -33,7 +50,7 @@ public class Rectangle {
     public float getXPos()
     {
         if(bottomLeftAligned)
-            return xPos - getXSize()/2;
+            return xPos - xSize/2;
         else
             return xPos;
     }
@@ -41,7 +58,7 @@ public class Rectangle {
     public float getYPos()
     {
         if(bottomLeftAligned)
-            return yPos - getYSize()/2;
+            return yPos - ySize/2;
         else
             return yPos;
     }
@@ -78,8 +95,8 @@ public class Rectangle {
         }
         else
         {
-            xPos = (int) (x + (getXSize() / 2));
-            yPos = (int) (y + (getYSize() / 2));
+            xPos = x + xSize / 2;
+            yPos = y + ySize / 2;
         }
     }
 
@@ -109,6 +126,8 @@ public class Rectangle {
         if(bottomLeftAligned)
             setPosition(getXPos()-oldX/2, getYPos()-oldY/2);
     }
+
+
 
     public void setSize(Vector vec)
     {

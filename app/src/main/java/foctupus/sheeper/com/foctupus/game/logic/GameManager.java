@@ -3,12 +3,17 @@ package foctupus.sheeper.com.foctupus.game.logic;
 import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
+import foctupus.sheeper.com.foctupus.game.gui.Component;
+import foctupus.sheeper.com.foctupus.game.gui.Container;
 import foctupus.sheeper.com.foctupus.game.gui.IContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.gui.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
+import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
+import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.screen.LoadScreen;
 import foctupus.sheeper.com.foctupus.game.screen.TestScreen;
 
@@ -19,6 +24,7 @@ public class GameManager implements IContainer.Listener {
 
     private Renderer renderer;
     private StaticContainer screen;
+    private Container container;
 
     public GameManager()
     {
@@ -34,13 +40,20 @@ public class GameManager implements IContainer.Listener {
 
     public void update()
     {
-        screen.update();
+        if(container != null)
+            container.update();
+        else
+            screen.update();
     }
 
-    public void render()
+    public void draw()
     {
-        screen.render();
-        renderer.render();
+        if(container != null)
+            container.draw();
+        else
+            screen.render();
+
+        renderer.draw();
     }
 
     public void revalidate(boolean created, float oldX, float oldY)
@@ -89,7 +102,16 @@ public class GameManager implements IContainer.Listener {
         if (BuildConfig.DEBUG)
             Log.d(Environment.TAG, toString() + " Screen onFinished() Event called");
 
-        screen = new TestScreen(10);
+        this.container = new Container(renderer, 10, new Texture(Textures.BACKGROUND));
+
+        this.container.setPosition(Environment.width / 2, Environment.height / 2);
+        this.container.setSize(Environment.width, Environment.height);
+
+        Component c = new Component(new Texture(Textures.BEACH));
+        c.setBottomLeftAligned(true);
+        c.setRelativePosition(new Vector(0,0));
+        c.setRelativeSize(new Vector(100, 30));
+        this.container.addChild(c);
 
         if (BuildConfig.DEBUG)
             Log.d(Environment.TAG, screen.toString() + " New Screen");

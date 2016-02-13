@@ -124,6 +124,11 @@ public final class Maths {
         return null;
     }
 
+    public static float percentToPixel(float percent, float relation)
+    {
+        return relation/100*percent;
+    }
+
     public static int lengthOf(double x, double y)
     {
         return (int) Math.sqrt(x*x+y*y);

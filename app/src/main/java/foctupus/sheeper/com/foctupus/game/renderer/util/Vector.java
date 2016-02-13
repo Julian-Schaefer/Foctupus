@@ -16,7 +16,7 @@ public class Vector {
 
     public Vector()
     {
-        
+
     }
 
     public void normalise()

@@ -80,16 +80,16 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             if (BuildConfig.DEBUG)
                 Log.d(Environment.TAG, "Surface got changed");
 
-
-            if(Environment.renderer != null)
-                Environment.renderer.revalidate(projectionMatrix);
-            else
+            if(Environment.gameManager == null || Environment.renderer == null)
+            {
                 Environment.renderer = new Renderer(projectionMatrix);
-
-            if(Environment.gameManager != null)
-                Environment.gameManager.revalidate(created, oldX, oldY);
-            else
                 Environment.gameManager = new GameManager();
+            }
+            else
+            {
+                Environment.renderer.revalidate(projectionMatrix);
+                Environment.gameManager.revalidate(created, oldX, oldY);
+            }
 
             gameManager = Environment.gameManager;
 
@@ -106,7 +106,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         if (gameManager != null) {
             gameManager.update();
-            gameManager.render();
+            gameManager.draw();
         }
     }
 

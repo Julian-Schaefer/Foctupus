@@ -77,7 +77,7 @@ public class Renderer {
 
 
 
-    public void render()
+    public void draw()
     {
         for(int priority : priorities)
         {
@@ -90,7 +90,7 @@ public class Renderer {
             if(spriteLists.containsKey(priority))
                 for(SpriteList spriteList : spriteLists.get(priority))
                 {
-                    renderList(spriteList);
+                    drawList(spriteList);
                 }
         }
 
@@ -100,7 +100,7 @@ public class Renderer {
 
 
 
-    private void renderList(SpriteList list)
+    private void drawList(SpriteList list)
     {
         if(list instanceof StaticSpriteList)
         {
@@ -111,7 +111,7 @@ public class Renderer {
 
                 for(Sprite sprite : list)
                 {
-                    renderSprite(sprite);
+                    drawSprite(sprite);
                 }
             }
 
@@ -133,11 +133,11 @@ public class Renderer {
                 sprite.getTexture().revalidate();
 
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTexture().getID());
-            renderSprite(sprite);
+            drawSprite(sprite);
         }
     }
 
-    private void renderSprite(Sprite sprite)
+    private void drawSprite(Sprite sprite)
     {
         if (sprite.isVisible()) {
 
