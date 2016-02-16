@@ -1,5 +1,8 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -19,6 +22,7 @@ public class Container extends Component implements IDrawable, IUpdateble {
 
     private Renderer renderer;
     private LinkedHashMap<Component, Vector> childs;
+
     private GenericSpriteList renderList;
     private int priority;
 
@@ -57,7 +61,9 @@ public class Container extends Component implements IDrawable, IUpdateble {
     public void draw()
     {
         renderer.addSprite(this, priority);
-        renderList.clear();
+
+
+        renderer.addSpriteList(renderList);
 
         for(Map.Entry<Component, Vector> entry : childs.entrySet())
         {
@@ -65,11 +71,8 @@ public class Container extends Component implements IDrawable, IUpdateble {
 
             if(child instanceof IDrawable)
                 ((IDrawable) child).draw();
-            else
-                renderList.add(child);
         }
 
-        renderer.addSpriteList(renderList);
     }
 
     public void revalidate(Vector old, Vector updated) {
@@ -77,12 +80,15 @@ public class Container extends Component implements IDrawable, IUpdateble {
         Vector oldSize = getSize();
         Vector oldPos = getPosition();
 
-        double ratioX = (double) updated.getX() / old.getX();
-        double ratioY = (double) updated.getY() / old.getY();
+        BigDecimal ratioX = new BigDecimal(updated.getX()).divide(new BigDecimal(old.getX()), 10, BigDecimal.ROUND_HALF_DOWN);
+        BigDecimal ratioY = new BigDecimal(updated.getY()).divide(new BigDecimal(old.getY()), 10, BigDecimal.ROUND_HALF_DOWN);
 
+        Vector newSize = new Vector(new BigDecimal(getXSize()).multiply(ratioX).intValue(),
+                new BigDecimal(getYSize()).multiply(ratioY).intValue());
 
-        Vector newSize = new Vector((float) (getXSize()*ratioX), (float) (getYSize() * ratioY));
-        Vector newPos = new Vector((float) (getXPos()*ratioX), (float) (getYPos() * ratioY));
+        Vector newPos = new Vector(new BigDecimal(getXPos()).multiply(ratioX).intValue(),
+                new BigDecimal(getYPos()).multiply(ratioY).intValue());
+
         setSize(newSize);
         setPosition(newPos);
 
@@ -102,8 +108,12 @@ public class Container extends Component implements IDrawable, IUpdateble {
             }
             else
             {
-                newSize = new Vector((float) (child.getXSize()*ratioX), (float) (child.getYSize() * ratioY));
-                newPos = new Vector((float) (relative.getX()*ratioX), (float) (relative.getY() * ratioY));
+                newSize = new Vector(new BigDecimal(child.getXSize()).multiply(ratioX).intValue(),
+                        new BigDecimal(child.getYSize()).multiply(ratioY).intValue());
+
+                newPos = new Vector(new BigDecimal(relative.getX()).multiply(ratioX).intValue(),
+                        new BigDecimal(relative.getY()).multiply(ratioY).intValue());
+
                 child.setSize(newSize);
                 childs.put(child, newPos);
 
@@ -125,6 +135,8 @@ public class Container extends Component implements IDrawable, IUpdateble {
         return new Vector(component.getX() + (float) (component.getX() * xRatio), component.getY() * (float) (component.getY() * yRatio));
 
     }
+
+
 
 
     public void addChild(Component child)
