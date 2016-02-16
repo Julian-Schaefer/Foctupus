@@ -31,7 +31,6 @@ public class Renderer {
     private FloatBuffer vertices;
     private FloatBuffer textureInformation;
 
-    private boolean revalidated;
 
     public Renderer(float[] projectionMatrix)
     {
@@ -48,7 +47,6 @@ public class Renderer {
     {
         this.projectionMatrix = projectionMatrix;
         setup();
-        revalidated = true;
     }
 
     private void setup()
@@ -129,8 +127,6 @@ public class Renderer {
     {
         if(sprite.getTexture() != null)
         {
-            if(revalidated)
-                sprite.getTexture().revalidate();
 
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTexture().getID());
             drawSprite(sprite);

@@ -47,9 +47,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         GLES20.glDisable(GLES20.GL_CULL_FACE);
 
 
-        Environment.width = -1;
-        Environment.height = -1;
-
         created = true;
     }
 

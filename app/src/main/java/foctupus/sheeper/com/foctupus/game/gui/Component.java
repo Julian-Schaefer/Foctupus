@@ -1,5 +1,8 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
+import java.util.LinkedList;
+
+import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
@@ -10,50 +13,30 @@ import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
  */
 public class Component extends Sprite {
 
-    private Vector relativePosition;
-    private Vector relativeSize;
 
+    private Transition current;
+    private LinkedList<Transition> transitions;
+
+    private Container parent;
 
     public Component()
     {
-        this(null, null);
+        this(null);
     }
 
     public Component(Texture texture)
     {
-        this(texture, null, null);
-    }
-
-    public Component(Vector relativePosition, Vector relativeSize)
-    {
-        this(null, null, null);
-    }
-
-    public Component(Texture texture, Vector relativePosition, Vector relativeSize)
-    {
         super(texture);
-        this.relativePosition = relativePosition;
-        this.relativeSize = relativeSize;
     }
 
-    public void setRelativePosition(Vector relativePosition)
+    public Container getParent()
     {
-        this.relativePosition = relativePosition;
+        return parent;
     }
 
-    public Vector getRelativePosition()
+    public void setParent(Container parent)
     {
-        return relativePosition;
-    }
-
-    public void setRelativeSize(Vector relativeSize)
-    {
-        this.relativeSize = relativeSize;
-    }
-
-    public Vector getRelativeSize()
-    {
-        return relativeSize;
+        this.parent = parent;
     }
 
 }

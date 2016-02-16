@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="LoadScreen.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4186">
+      <stop
+         style="stop-color:#ffb9b9;stop-opacity:1"
+         offset="0"
+         id="stop4188" />
+      <stop
+         style="stop-color:#d50000;stop-opacity:1"
+         offset="1"
+         id="stop4190" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4186"
+       id="linearGradient4192"
+       x1="388.90872"
+       y1="566.47882"
+       x2="388.90872"
+       y2="493.40121"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="-9.0579907"
+     inkscape:cy="771.71082"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#87cdde;fill-opacity:0.94117647;stroke:none"
+       id="rect4136"
+       width="723.23859"
+       height="1032.3844"
+       x="12.552567"
+       y="13.486199" />
+    <path
+       style="fill:#280b0b;fill-opacity:0.94117647;stroke:none"
+       d="M 72.300781 466.5332 L 72.300781 549.36523 L 664.9668 549.36523 L 664.9668 466.5332 L 72.300781 466.5332 z M 87.472656 477.96094 L 649.79688 477.96094 L 649.79688 537.9375 L 87.472656 537.9375 L 87.472656 477.96094 z "
+       id="rect4140" />
+    <rect
+       y="477.96179"
+       x="87.47171"
+       height="59.975368"
+       width="562.32434"
+       id="rect4142"
+       style="fill:url(#linearGradient4192);fill-opacity:1;stroke:none"
+       inkscape:export-filename="C:\Users\schae\Documents\Programmierung\Sources\Android Studio\Foctupus\Images\LoadScreen\progressImage"
+       inkscape:export-xdpi="46"
+       inkscape:export-ydpi="46" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4152"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:sans-serif;font-style:normal;font-weight:normal;font-size:80px;line-height:125%;letter-spacing:0px;word-spacing:0px;"><flowRegion
+         id="flowRegion4154"><rect
+           id="rect4156"
+           width="337.39096"
+           height="262.63965"
+           x="127.27922"
+           y="219.99651"
+           style="font-size:80px;" /></flowRegion><flowPara
+         id="flowPara4158" /></flowRoot>    <g
+       id="g4176"
+       transform="translate(18.182746,105.05586)">
+      <flowRoot
+         transform="translate(225.91734,-6.4423812)"
+         style="font-style:normal;font-weight:normal;font-size:206.86390686px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4160"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4162"><rect
+             style="fill:#d40000"
+             y="206.06522"
+             x="-151.31488"
+             height="1003.0277"
+             width="1650.8163"
+             id="rect4164" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:116.36094666px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#d40000"
+           id="flowPara4166">Foctupus</flowPara></flowRoot>      <flowRoot
+         transform="matrix(1,0,0,0.97777895,-4.0406102,-130.76022)"
+         xml:space="preserve"
+         id="flowRoot4168"
+         style="font-style:normal;font-weight:normal;font-size:201.10826111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+           id="flowRegion4170"><rect
+             id="rect4172"
+             width="1604.8851"
+             height="975.12018"
+             x="86.789116"
+             y="340.41043"
+             style="fill:#ff2a2a" /></flowRegion><flowPara
+           id="flowPara4174"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:113.12339783px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff2a2a">Foctupus</flowPara></flowRoot>    </g>
+    <rect
+       y="14.914771"
+       x="-911.73315"
+       height="1032.3844"
+       width="723.23859"
+       id="rect4153"
+       style="fill:#87cdde;fill-opacity:0.94117647;stroke:none"
+       inkscape:export-filename="C:\Users\schae\Documents\Programmierung\Sources\Android Studio\Foctupus\Images\LoadScreen\loadScreenBackground.png"
+       inkscape:export-xdpi="49.779999"
+       inkscape:export-ydpi="49.779999" />
+    <g
+       transform="translate(-84.674397,-409.22985)"
+       id="g4155"
+       inkscape:export-filename="C:\Users\schae\Documents\Programmierung\Sources\Android Studio\Foctupus\Images\LoadScreen\loadScreenTitle"
+       inkscape:export-xdpi="46.47995"
+       inkscape:export-ydpi="46.47995">
+      <flowRoot
+         xml:space="preserve"
+         id="flowRoot4157"
+         style="font-style:normal;font-weight:normal;font-size:206.86390686px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#d40000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         transform="translate(225.91734,-6.4423812)"><flowRegion
+           id="flowRegion4159"><rect
+             id="rect4161"
+             width="1650.8163"
+             height="1003.0277"
+             x="-151.31488"
+             y="206.06522"
+             style="fill:#d40000" /></flowRegion><flowPara
+           id="flowPara4163"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:116.36094666px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#d40000">Foctupus</flowPara></flowRoot>      <flowRoot
+         style="font-style:normal;font-weight:normal;font-size:201.10826111px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff2a2a;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4165"
+         xml:space="preserve"
+         transform="matrix(1,0,0,0.97777895,-4.0406102,-130.76022)"><flowRegion
+           id="flowRegion4167"><rect
+             style="fill:#ff2a2a"
+             y="340.41043"
+             x="86.789116"
+             height="975.12018"
+             width="1604.8851"
+             id="rect4169" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:113.12339783px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff2a2a"
+           id="flowPara4171">Foctupus</flowPara></flowRoot>    </g>
+    <path
+       id="path4178"
+       d="m -670.55636,-164.89537 0,82.832029 592.666017,0 0,-82.832029 -592.666017,0 z m 15.17187,11.42774 562.324227,0 0,59.976559 -562.324227,0 0,-59.976559 z"
+       style="fill:#280b0b;fill-opacity:0.94117647;stroke:none"
+       inkscape:connector-curvature="0"
+       inkscape:export-filename="C:\Users\schae\Documents\Programmierung\Sources\Android Studio\Foctupus\Images\LoadScreen\progressBackground.png"
+       inkscape:export-xdpi="46.47995"
+       inkscape:export-ydpi="46.47995" />
+  </g>
+</svg>

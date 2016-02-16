@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   viewBox="0 0 744.09448819 1052.3622047"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91pre3 r13670"
+   sodipodi:docname="Bubble.svg"
+   inkscape:export-filename="D:\Git\Foctupus\Images\Bubble\bubble_mhdpi.png"
+   inkscape:export-xdpi="3.8099999"
+   inkscape:export-ydpi="3.8099999">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.7"
+     inkscape:cx="123.18992"
+     inkscape:cy="312.30252"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4154"
+     showgrid="false"
+     showborder="true"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Ebene 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g4154">
+      <circle
+         inkscape:export-ydpi="3.8100116"
+         inkscape:export-xdpi="3.8100116"
+         cy="802.36218"
+         cx="250"
+         id="path4140"
+         style="opacity:1;fill:#c8e3fb;fill-opacity:0.69999999;fill-rule:nonzero;stroke:none;stroke-width:2.68145251;stroke-opacity:1"
+         r="250" />
+      <circle
+         cy="785.19751"
+         cx="260.10907"
+         id="path4142"
+         style="opacity:1;fill:#e4f5fd;fill-opacity:0.69999999;fill-rule:nonzero;stroke:none;stroke-width:0.3610962;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:0"
+         r="201.88168" />
+      <circle
+         cy="671.33008"
+         cx="323.57959"
+         id="path4144"
+         style="opacity:1;fill:#f1f9fc;fill-opacity:0.69999999;fill-rule:nonzero;stroke:none;stroke-width:0.36919942;stroke-opacity:0"
+         r="52.732231" />
+      <circle
+         style="opacity:1;fill:#f1f9fc;fill-opacity:0.69999999;fill-rule:nonzero;stroke:none;stroke-width:0.26371387;stroke-opacity:0"
+         id="circle4146"
+         cx="356.84161"
+         cy="724.75085"
+         r="37.665882" />
+    </g>
+  </g>
+</svg>
