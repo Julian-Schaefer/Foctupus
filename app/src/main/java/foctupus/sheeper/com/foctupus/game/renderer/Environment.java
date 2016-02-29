@@ -11,11 +11,5 @@ public final class Environment {
 
     private Environment() {}
 
-    public static int width;
-    public static int height;
-    public static Renderer renderer;
-    public static GameManager gameManager;
-    public static Context context;
 
-    public static final String TAG = "com.sheeper.foctupus";
 }

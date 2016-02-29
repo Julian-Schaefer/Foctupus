@@ -2,6 +2,7 @@ package foctupus.sheeper.com.foctupus.game.screen;
 
 import foctupus.sheeper.com.foctupus.game.renderer.AnimatedSprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
@@ -25,13 +26,12 @@ public class TestScreen extends Screen {
         setVisible(true);
 
         AnimatedSprite a = new AnimatedSprite();
-        a.setPosition(Environment.width / 2, Environment.height / 2);
+        a.setPosition(Renderer.getWidth() / 2, Renderer.getHeight() / 2);
         a.addTexture(new Texture(Textures.BTN_BACK));
         a.addTexture(new Texture(Textures.BTN_RETRY));
         a.addTexture(new Texture(Textures.BTN_BEST));
         a.addTexture(new Texture(Textures.BTN_HOME));
         a.addTexture(new Texture(Textures.BTN_START));
-        a.setSize(new RelativeVector(40, RelativeVector.RATIO, Textures.getRatio(Textures.BTN_BACK)));
         addChild(a);
     }
 

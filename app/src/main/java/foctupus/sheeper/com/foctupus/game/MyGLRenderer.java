@@ -22,12 +22,14 @@ import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private float[] projectionMatrix = new float[16];
+
     private GameManager gameManager;
+
     private boolean created = false;
 
     public MyGLRenderer(Context context)
     {
-        Environment.context = context;
+        Renderer.setContext(context);
     }
 
 
@@ -35,7 +37,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
         if (BuildConfig.DEBUG)
-            Log.d(Environment.TAG, "MyGLRenderer: onSurfaceCreated called.");
+            Log.d("asdasd", "MyGLRenderer: onSurfaceCreated called.");
 
         GLES20.glClearColor((110f / 256f), (161f / 256f), (255f / 256f), 1f);
 
@@ -54,18 +56,15 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     public void onSurfaceChanged(GL10 gl, int width, int height) {
 
         if (BuildConfig.DEBUG)
-            Log.d(Environment.TAG, "MyGLRenderer: onSurfaceChanged called.");
+            Log.d("asdsa", "MyGLRenderer: onSurfaceChanged called.");
 
-        float oldX = Environment.width;
-        float oldY = Environment.height;
+        float oldX = Renderer.getInstance().getWidth();
+        float oldY = Renderer.getInstance().getHeight();
 
         boolean surfaceChanged = false;
-        if(width > 0 && height > 0 && (Environment.width != width || Environment.height != height))
+        if(width > 0 && height > 0 && (Renderer.getInstance().getWidth() != width || Renderer.getInstance().getHeight() != height))
         {
             GLES20.glViewport(0, 0, width, height);
-
-            Environment.width = width;
-            Environment.height = height;
 
             Matrix.orthoM(projectionMatrix, 0, 0, width, 0, height, -1f, 1f);
 
@@ -75,20 +74,12 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
         if(created || surfaceChanged)
         {
             if (BuildConfig.DEBUG)
-                Log.d(Environment.TAG, "Surface got changed");
+                Log.d("sdadasa", "Surface got changed");
 
-            if(Environment.gameManager == null || Environment.renderer == null)
-            {
-                Environment.renderer = new Renderer(projectionMatrix);
-                Environment.gameManager = new GameManager();
-            }
-            else
-            {
-                Environment.renderer.revalidate(projectionMatrix);
-                Environment.gameManager.revalidate(created, oldX, oldY);
-            }
 
-            gameManager = Environment.gameManager;
+            Renderer.getInstance().revalidate(projectionMatrix, width, height);
+            gameManager = GameManager.getInstance();
+            gameManager.revalidate(created, oldX, oldY);
 
             created = false;
         }

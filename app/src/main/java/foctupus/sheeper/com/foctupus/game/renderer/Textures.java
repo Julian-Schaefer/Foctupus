@@ -10,7 +10,7 @@ import java.util.HashMap;
 public class Textures {
 
     public static HashMap<String, Integer> textures = new HashMap<>();
-    public static HashMap<String, Float> ratios = new HashMap<>();
+    //public static HashMap<String, Float> ratios = new HashMap<>();
     public static HashMap<String, Bitmap> bitmaps = new HashMap<>();
 
 
@@ -83,18 +83,25 @@ public class Textures {
         return -1;
     }
 
-    public static float getRatio(String textureName)
+    /*public static float getRatio(String textureName)
     {
         if(ratios != null && ratios.containsKey(textureName))
             return ratios.get(textureName);
 
         return 1;
+    }*/
+
+    public static Bitmap getBitmap(String textureName)
+    {
+        if(bitmaps.containsKey(textureName))
+            return bitmaps.get(textureName);
+
+        return null;
     }
 
     public static boolean areDecoded()
     {
-        return Textures.ratios != null && Textures.ratios.size() == Textures.pictureNames.length &&
-                Textures.bitmaps != null && Textures.bitmaps.size() == Textures.pictureNames.length;
+        return Textures.bitmaps != null && Textures.bitmaps.size() == Textures.pictureNames.length;
     }
 
 }

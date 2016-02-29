@@ -1,20 +1,127 @@
 package foctupus.sheeper.com.foctupus.game.gui.transition;
 
+import android.util.Log;
+
+import foctupus.sheeper.com.foctupus.game.gui.Component;
+
 /**
  * Created by schae on 12.02.2016.
  */
 public class Transition {
 
-    private String name;
+    private static final int STD_ANIM_TIME = 700;
 
-    public Transition(String name)
+    public enum Direction
     {
-        this.name = name;
+        IN, OUT
     }
 
-    public String getString()
+    private String name;
+    private PositionTransition positionTransition;
+    private ResizeTransition resizeTransition;
+    private RotateTransition rotateTransition;
+
+    private Component component;
+    private Direction direction;
+    private TransitionListener listener;
+
+    private boolean autoRevert;
+    private boolean autoRepeat;
+
+    private long startTime;
+    private int animationTime = STD_ANIM_TIME;
+
+
+    public Transition(String name, Component component)
+    {
+        this.name = name;
+        this.component = component;
+
+        direction = Direction.IN;
+    }
+
+    public void start()
+    {
+        startTime = System.currentTimeMillis();
+    }
+
+    public void update()
+    {
+        double time = System.currentTimeMillis() - startTime;
+
+        if(time < animationTime) {
+
+            double ratio = time / animationTime;
+
+            if (resizeTransition != null)
+                component.setRelativeSize(resizeTransition.update(ratio, direction));
+
+            if(positionTransition != null)
+                component.setRelativePosition(positionTransition.update(ratio, direction));
+        }
+        else if(autoRepeat)
+        {
+            if(autoRevert)
+                revert();
+
+            start();
+        }
+        else if(listener != null)
+            listener.onTransitionFinished(this);
+    }
+
+    public void revert()
+    {
+        direction = direction == Direction.IN ? Direction.OUT : Direction.IN;
+    }
+
+    public void setResizeTransition(ResizeTransition resizeTransition)
+    {
+        this.resizeTransition = resizeTransition;
+    }
+
+    public void setPositionTransition(PositionTransition positionTransition)
+    {
+        this.positionTransition = positionTransition;
+    }
+
+    public void setRotateTransition(RotateTransition rotateTransition)
+    {
+        this.rotateTransition = rotateTransition;
+    }
+
+    public void setListener(TransitionListener listener)
+    {
+        this.listener = listener;
+    }
+
+    public void setAutoRepeating(boolean autoRepeat)
+    {
+        this.autoRepeat = autoRepeat;
+    }
+
+    public boolean isAutoRepeating()
+    {
+        return autoRepeat;
+    }
+
+    public void setAutoReverting(boolean autoRevert)
+    {
+        this.autoRevert = autoRevert;
+    }
+
+    public boolean isAutoReverting()
+    {
+        return autoRevert;
+    }
+
+    public String getName()
     {
         return name;
     }
 
+    public interface TransitionListener
+    {
+        void onTransitionFinished(Transition transition);
+    }
 }

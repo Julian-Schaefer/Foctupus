@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import foctupus.sheeper.com.foctupus.game.gui.IContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
+import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
@@ -46,16 +47,13 @@ public class LoadScreen extends Screen {
     public void init() {
         if(!Textures.areDecoded())
         {
-            if(Textures.ratios != null)
-                Textures.ratios.clear();
-
             if(Textures.bitmaps != null)
                 Textures.bitmaps.clear();
 
             if(Textures.textures != null)
                 Textures.textures.clear();
 
-            Bitmap texBackground = Bitmap.createBitmap(Environment.width, Environment.height, Bitmap.Config.ARGB_8888);
+            Bitmap texBackground = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
             String texBackgroundName = "loadscreen_background";
 
             Canvas canvas = new Canvas(texBackground);
@@ -75,7 +73,7 @@ public class LoadScreen extends Screen {
 
 
 
-            Bitmap texProgressBackground = Bitmap.createBitmap(Environment.width, Environment.height, Bitmap.Config.ARGB_8888);
+            Bitmap texProgressBackground = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
             String texProgressBackgroundName = "progress_background";
 
             canvas = new Canvas(texProgressBackground);
@@ -88,7 +86,7 @@ public class LoadScreen extends Screen {
             addChild(progressBackground, new RelativeVector(10, 50), new RelativeVector(50, 50));
 
 
-            Bitmap texProgress = Bitmap.createBitmap(Environment.width, Environment.height, Bitmap.Config.ARGB_8888);
+            Bitmap texProgress = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
             String texProgressName = "progress";
 
             canvas = new Canvas(texProgress);
@@ -136,7 +134,7 @@ public class LoadScreen extends Screen {
 
                 Bitmap texture = Loader.decodeTexture(name);
                 Textures.bitmaps.put(name, texture);
-                Textures.ratios.put(name, Loader.getRatio(texture));
+                //Textures.ratios.put(name, Loader.getRatio(texture));
 
                 publishProgress();
 

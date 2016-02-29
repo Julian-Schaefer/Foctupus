@@ -12,8 +12,8 @@ public class Rectangle {
     private float xPos = Float.MIN_VALUE;
     private float yPos = Float.MIN_VALUE;
     private float angle;
-    private float xSize = Float.MIN_VALUE;
-    private float ySize = Float.MIN_VALUE;
+    private float xSize = 0f;
+    private float ySize = 0f;
 
     private boolean bottomLeftAligned;
 

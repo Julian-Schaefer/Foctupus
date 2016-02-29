@@ -1,6 +1,7 @@
 package foctupus.sheeper.com.foctupus.game.renderer.util;
 
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
@@ -76,15 +77,15 @@ public class RelativeVector extends Vector {
 
         if(width <= 0 && height <= 0)
         {
-            height = Environment.height;
+            height = Renderer.getHeight();
             width = (int) (height / (16.0f/9.0f));
         }
 
         Vector position = percentToPixel(new Vector(rX, rY), ratio, width, height);
         if(centered)
         {
-            position.setX(position.getX() + (Environment.width - width)/2);
-            position.setY(position.getY() + (Environment.height - height)/2);
+            position.setX(position.getX() + (Renderer.getWidth() - width)/2);
+            position.setY(position.getY() + (Renderer.getHeight() - height)/2);
         }
         setVector(position);
     }

@@ -33,8 +33,8 @@ public abstract class StaticContainer extends Sprite implements IContainer {
 
     private void load(int priority)
     {
-        childs = new GenericSpriteList(priority);
-        renderer = Environment.renderer;
+        childs = new GenericSpriteList();
+        renderer = Renderer.getInstance();
     }
 
     public void setContainerListener(IContainer.Listener containerListener)
@@ -45,8 +45,7 @@ public abstract class StaticContainer extends Sprite implements IContainer {
 
     @Override
     public void render() {
-        renderer.addSprite(this, childs.getPriority());
-        renderer.addSpriteList(childs);
+        renderer.addSprite(this,2);
     }
 
     public void update() {

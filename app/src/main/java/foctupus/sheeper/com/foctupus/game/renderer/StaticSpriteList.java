@@ -11,12 +11,6 @@ public class StaticSpriteList extends SpriteList {
 
     public StaticSpriteList(Texture texture)
     {
-        this(texture, 0);
-    }
-
-    public StaticSpriteList(Texture texture, int priority)
-    {
-        super(priority);
         this.texture = texture;
     }
 

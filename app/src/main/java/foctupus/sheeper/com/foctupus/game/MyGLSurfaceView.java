@@ -9,6 +9,7 @@ import foctupus.sheeper.com.foctupus.MainActivity;
 import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 
 /**
  * Created by schae on 07.11.2015.
@@ -59,11 +60,11 @@ public class MyGLSurfaceView extends GLSurfaceView {
         if(event != null)
         {
             final int eventAction = event.getAction();
-            final GameManager gameManager = Environment.gameManager;
+            final GameManager gameManager = GameManager.getInstance();
 
             if(gameManager != null) {
                 final int x = (int) event.getX();
-                final int y = (int) (Environment.height - event.getY());
+                final int y = (int) (foctupus.sheeper.com.foctupus.game.renderer.Renderer.getHeight() - event.getY());
 
                 queueEvent(new Runnable() {
                     @Override

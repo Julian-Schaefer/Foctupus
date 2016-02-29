@@ -4,6 +4,7 @@ package foctupus.sheeper.com.foctupus.game.renderer;
  * Created by schae on 05.02.2016.
  */
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
@@ -17,26 +18,28 @@ import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 
 public final class Loader {
 
+    private static Context context;
+
     private Loader()
     {
 
     }
 
-    public static float getRatio(Bitmap bitmap)
+    /*public static float getRatio(Bitmap bitmap)
     {
         if(bitmap != null)
             return (float) bitmap.getWidth() / (float) bitmap.getHeight();
 
         return -1;
-    }
+    }*/
 
     public static Bitmap decodeTexture(String name)
     {
-        int resID = Environment.context.getResources().getIdentifier(name , "drawable", Environment.context.getPackageName());
+        int resID = context.getResources().getIdentifier(name , "drawable", context.getPackageName());
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
 
-        Bitmap bitmap = BitmapFactory.decodeResource(Environment.context.getResources(), resID, options);
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID, options);
 
         return bitmap;
     }
@@ -80,6 +83,16 @@ public final class Loader {
         {
             Textures.textures.put(entry.getKey(), Loader.loadTexture(entry.getValue()));
         }
+    }
+
+    public static void setContext(Context context)
+    {
+        Loader.context = context;
+    }
+
+    public static Context getContext()
+    {
+        return context;
     }
 
 }

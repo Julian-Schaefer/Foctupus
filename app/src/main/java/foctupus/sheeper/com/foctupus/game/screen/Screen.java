@@ -5,6 +5,7 @@ import android.util.Log;
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 import foctupus.sheeper.com.foctupus.game.gui.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 
 /**
@@ -27,10 +28,10 @@ public abstract class Screen extends StaticContainer {
     private void initScreen()
     {
         if (BuildConfig.DEBUG)
-            Log.d(Environment.TAG, toString() + " Screen Constructor called.");
+            Log.d("sadsas", toString() + " Screen Constructor called.");
 
         setBottomLeftAligned(true);
-        setSize(Environment.width, Environment.height);
+        setSize(Renderer.getWidth(), Renderer.getHeight());
         setPosition(0, 0);
     }
 }

@@ -7,25 +7,4 @@ import java.util.LinkedList;
  */
 public abstract class SpriteList extends LinkedList<Sprite> {
 
-    private int priority;
-
-    public SpriteList()
-    {
-
-    }
-
-    public SpriteList(int priority)
-    {
-        this.priority = priority;
-    }
-
-    public void setPriority(int priority)
-    {
-        this.priority = priority;
-    }
-
-    public int getPriority()
-    {
-        return priority;
-    }
 }

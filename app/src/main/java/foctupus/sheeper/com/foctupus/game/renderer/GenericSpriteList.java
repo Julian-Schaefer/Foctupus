@@ -13,9 +13,5 @@ public class GenericSpriteList extends SpriteList {
 
     }
 
-    public GenericSpriteList(int priority)
-    {
-        super(priority);
-    }
 
 }

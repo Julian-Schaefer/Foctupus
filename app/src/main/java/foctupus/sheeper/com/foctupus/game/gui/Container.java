@@ -1,170 +1,193 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.game.gui.transition.IDrawable;
-import foctupus.sheeper.com.foctupus.game.renderer.GenericSpriteList;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
-import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by schae on 12.02.2016.
  */
-public class Container extends Component implements IDrawable, IUpdateble {
+public class Container extends Component implements IDrawable {
+
+    private static final int STD_PRIORITY = 10;
 
     private Renderer renderer;
-    private LinkedHashMap<Component, Vector> childs;
+    private LinkedList<Component> childs;
 
-    private GenericSpriteList renderList;
-    private int priority;
+    private Container parent;
 
-
-    public Container(Renderer renderer, int priority)
+    public Container(Renderer renderer)
     {
-        this(renderer, priority, null);
+        this(renderer, null);
     }
 
-    public Container(Renderer renderer, int priority, Texture texture)
+    public Container(Renderer renderer, Sprite sprite)
     {
-        super(texture);
+        super(sprite);
         this.renderer = renderer;
-        childs = new LinkedHashMap<>();
-        renderList = new GenericSpriteList(priority);
+        childs = new LinkedList<>();
 
-        setVisible(true);
+        setPriority(STD_PRIORITY);
+        sprite.setVisible(true);
     }
 
     @Override
     public void update()
     {
-        for(Map.Entry<Component, Vector> entry : childs.entrySet())
-        {
-            Component child = entry.getKey();
-            updateChild(child, entry.getValue());
+        super.update();
 
-            if(child instanceof IUpdateble)
-            {
-                ((IUpdateble) child).update();
-            }
+        for(Component child : childs)
+        {
+            child.update();
+            updateChild(child);
         }
     }
 
     @Override
     public void draw()
     {
-        renderer.addSprite(this, priority);
+        renderer.addSprite(sprite, getPriority());
 
-
-        renderer.addSpriteList(renderList);
-
-        for(Map.Entry<Component, Vector> entry : childs.entrySet())
+        for(Component child : childs)
         {
-            Component child = entry.getKey();
-
-            if(child instanceof IDrawable)
-                ((IDrawable) child).draw();
+            if(child instanceof Container)
+                ((Container) child).draw();
+            else
+                renderer.addSprite(child.getSprite(), child.getPriority());
         }
 
     }
 
-    public void revalidate(Vector old, Vector updated) {
+    public void revalidate() {
 
-        Vector oldSize = getSize();
-        Vector oldPos = getPosition();
+        calculateSprite();
 
-        BigDecimal ratioX = new BigDecimal(updated.getX()).divide(new BigDecimal(old.getX()), 10, BigDecimal.ROUND_HALF_DOWN);
-        BigDecimal ratioY = new BigDecimal(updated.getY()).divide(new BigDecimal(old.getY()), 10, BigDecimal.ROUND_HALF_DOWN);
+        sprite.getTexture().revalidate();
 
-        Vector newSize = new Vector(new BigDecimal(getXSize()).multiply(ratioX).intValue(),
-                new BigDecimal(getYSize()).multiply(ratioY).intValue());
-
-        Vector newPos = new Vector(new BigDecimal(getXPos()).multiply(ratioX).intValue(),
-                new BigDecimal(getYPos()).multiply(ratioY).intValue());
-
-        setSize(newSize);
-        setPosition(newPos);
-
-
-        getTexture().revalidate();
-
-        for(Map.Entry<Component, Vector> entry : childs.entrySet())
+        for(Component child : childs)
         {
-            Component child = entry.getKey();
-            Vector relative = entry.getValue();
 
-            child.getTexture().revalidate();
+            child.getSprite().getTexture().revalidate();
 
             if(child instanceof Container)
             {
-                ((Container) child).revalidate(old, updated);
+                ((Container) child).revalidate();
             }
             else
             {
-                newSize = new Vector(new BigDecimal(child.getXSize()).multiply(ratioX).intValue(),
-                        new BigDecimal(child.getYSize()).multiply(ratioY).intValue());
-
-                newPos = new Vector(new BigDecimal(relative.getX()).multiply(ratioX).intValue(),
-                        new BigDecimal(relative.getY()).multiply(ratioY).intValue());
-
-                child.setSize(newSize);
-                childs.put(child, newPos);
-
-                updateChild(child, newPos);
+                updateChild(child);
             }
+            updateChild(child);
         }
     }
 
-    private Vector calculateNewPosition(Vector component, Vector diff)
+    public void clearChilds()
     {
-        double xRatio = 0, yRatio = 0;
-
-        if(component.getX() > 0)
-            xRatio = (double) diff.getX() / component.getX();
-
-        if(component.getY() > 0)
-            yRatio = (double) diff.getY() / component.getY();
-
-        return new Vector(component.getX() + (float) (component.getX() * xRatio), component.getY() * (float) (component.getY() * yRatio));
-
+        childs.clear();
     }
 
-
-
-
+    public void removeChild(Component component)
+    {
+        if(childs.contains(component))
+        {
+            childs.remove(component);
+        }
+    }
     public void addChild(Component child)
     {
             if(child != null)
             {
-                child.setParent(this);
-                child.setVisible(true);
+                child.getSprite().setVisible(true);
 
-                childs.put(child, child.getPosition());
-                updateChild(child, child.getPosition());
+                childs.add(child);
+                updateChild(child);
+
+                if(child instanceof Container)
+                    child.setPriority(getPriority() + 1);
+                else
+                    child.setPriority(getPriority());
         }
     }
 
-    private Vector getRelativePos(Component child)
+    private void updateChild(Component child) {
+
+        Vector relativePosition = child.getRelativePosition();
+        Vector relativeSize = child.getRelativeSize();
+        Sprite childSprite = child.getSprite();
+
+        if(relativePosition != null && relativeSize != null) {
+            Vector bottomLeft = new Vector(sprite.getActualXPos() - sprite.getXSize() / 2, sprite.getActualYPos() - sprite.getYSize() / 2);
+
+            float width, height;
+
+            if(relativeSize.getX() == Component.USE_SAME)
+            {
+                height = sprite.getYSize() / 100f * relativeSize.getY();
+                width = height;
+            }
+            else if(relativeSize.getY() == Component.USE_SAME)
+            {
+                width = sprite.getXSize() / 100f * relativeSize.getX();
+                height = width;
+            }
+            else if(relativeSize.getX() == Component.USE_RATIO)
+            {
+                height = sprite.getYSize() / 100f * relativeSize.getY();
+                width = height / childSprite.getTexture().getRatio();
+            }
+            else if(relativeSize.getY() == Component.USE_RATIO)
+            {
+                width = sprite.getXSize() / 100f * relativeSize.getX();
+                height = width * childSprite.getTexture().getRatio();
+            }
+            else {
+                width = sprite.getXSize() / 100f * relativeSize.getX();
+                height = sprite.getYSize() / 100f * relativeSize.getY();
+            }
+
+            childSprite.setSize(width, height);
+
+            childSprite.setPosition(bottomLeft.getX() + (sprite.getXSize() / 100f * relativePosition.getX()),
+                    bottomLeft.getY() + (sprite.getYSize() / 100f * relativePosition.getY()));
+        }
+    }
+
+    private void calculateSprite()
     {
-        return new Vector(child.getXPos()/getXSize(), child.getYPos()/getYSize());
+        if(parent == null && getRelativePosition() != null)
+            sprite.setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
+                    Renderer.getHeight() / 100f * getRelativePosition().getY());
+
+        if(parent == null && getRelativeSize() != null)
+            sprite.setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
+                    Renderer.getHeight() / 100f * getRelativeSize().getY());
     }
 
-    private void updateChild(Component child, Vector rPos) {
-        Vector bottomLeft = new Vector(getActualXPos()-getXSize()/2, getActualYPos() - getYSize() / 2);
+    @Override
+    public void setPriority(int priority) {
+        super.setPriority(priority);
 
-        child.setPosition(bottomLeft.getX() + rPos.getX(),
-                bottomLeft.getY() + rPos.getY());
-
-
+        for(Component child : childs)
+        {
+            if(child instanceof Container)
+                child.setPriority(priority+1);
+            else
+                child.setPriority(priority);
+        }
     }
 
+    @Override
+    public void setRelativePosition(Vector relativePosition) {
+        super.setRelativePosition(relativePosition);
+        calculateSprite();
+    }
 
-
+    @Override
+    public void setRelativeSize(Vector relativeSize) {
+        super.setRelativeSize(relativeSize);
+        calculateSprite();
+    }
 }

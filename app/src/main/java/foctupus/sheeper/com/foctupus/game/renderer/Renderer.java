@@ -1,5 +1,6 @@
 package foctupus.sheeper.com.foctupus.game.renderer;
 
+import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
@@ -21,6 +22,9 @@ public class Renderer {
     private volatile LinkedHashMap<Integer, SpriteList> sprites;
     private volatile LinkedList<Integer> priorities;
 
+    private static int width;
+    private static int height;
+
     private float[] projectionMatrix;
     private float[] mvp;
     private float[] transformation;
@@ -31,21 +35,31 @@ public class Renderer {
     private FloatBuffer vertices;
     private FloatBuffer textureInformation;
 
+    private static Renderer instance;
 
-    public Renderer(float[] projectionMatrix)
+    public static Renderer getInstance()
     {
-        this.projectionMatrix = projectionMatrix;
+        if(instance == null)
+            instance = new Renderer();
 
+        return instance;
+    }
+
+    private Renderer()
+    {
         spriteLists = new LinkedHashMap<>();
         sprites = new LinkedHashMap<>();
         priorities = new LinkedList<>();
-
-        setup();
     }
 
-    public void revalidate(float[] projectionMatrix)
+
+
+    public void revalidate(float[] projectionMatrix, int width, int height)
     {
         this.projectionMatrix = projectionMatrix;
+        this.width = width;
+        this.height = height;
+
         setup();
     }
 
@@ -164,17 +178,17 @@ public class Renderer {
         updatePriorities();
     }
 
-    public void addSpriteList(SpriteList spriteList)
+    public void addSpriteList(SpriteList spriteList, int priority)
     {
-        if(spriteLists.containsKey(spriteList.getPriority()))
+        if(spriteLists.containsKey(priority))
         {
-            spriteLists.get(spriteList.getPriority()).add(spriteList);
+            spriteLists.get(priority).add(spriteList);
         }
         else
         {
             LinkedList<SpriteList> spriteListContainer = new LinkedList<>();
             spriteListContainer.add(spriteList);
-            spriteLists.put(spriteList.getPriority(), spriteListContainer);
+            spriteLists.put(priority, spriteListContainer);
         }
         updatePriorities();
     }
@@ -186,7 +200,19 @@ public class Renderer {
         Collections.sort(priorities);
     }
 
+    public static int getHeight()
+    {
+        return height;
+    }
 
+    public static int getWidth()
+    {
+        return width;
+    }
 
+    public static void setContext(Context context)
+    {
+        Loader.setContext(context);
+    }
 
 }
