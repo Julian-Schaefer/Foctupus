@@ -5,19 +5,15 @@ import android.util.Log;
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.renderer.components.Component;
 import foctupus.sheeper.com.foctupus.game.renderer.components.Container;
-import foctupus.sheeper.com.foctupus.game.renderer.components.asd;
 import foctupus.sheeper.com.foctupus.game.renderer.components.transition.PositionTransition;
 import foctupus.sheeper.com.foctupus.game.renderer.components.transition.ResizeTransition;
 import foctupus.sheeper.com.foctupus.game.renderer.components.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.components.StaticContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
-import foctupus.sheeper.com.foctupus.game.screen.LoadScreen;
-
 /**
  * Created by schae on 04.02.2016.
  */
@@ -95,8 +91,7 @@ public class GameManager {
     }
 
 
-    @Override
-    public synchronized void onFinished(asd container) {
+    public synchronized void onFinished() {
 
         if (BuildConfig.DEBUG)
             Log.d("asds", toString() + " Screen onFinished() Event called");
@@ -141,6 +136,6 @@ public class GameManager {
         this.container.addChild(con);
 
         if (BuildConfig.DEBUG)
-            Log.d("asdas", screen.toString() + " New Screen");
+            Log.d("asdas", " New Screen");
     }
 }

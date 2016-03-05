@@ -68,17 +68,13 @@ public class Container extends Component implements IDrawable {
 
         for(Component child : childs)
         {
-
             child.getSprite().getTexture().revalidate();
 
             if(child instanceof Container)
             {
                 ((Container) child).revalidate();
             }
-            else
-            {
-                updateChild(child);
-            }
+
             updateChild(child);
         }
     }

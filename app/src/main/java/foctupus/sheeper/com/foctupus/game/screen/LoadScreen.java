@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-import foctupus.sheeper.com.foctupus.game.renderer.components.asd;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
