@@ -3,15 +3,15 @@ package foctupus.sheeper.com.foctupus.game.screen;
 import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
-import foctupus.sheeper.com.foctupus.game.gui.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.renderer.components.Container;
+import foctupus.sheeper.com.foctupus.game.renderer.components.StaticContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 
 /**
  * Created by schae on 09.02.2016.
  */
-public abstract class Screen extends StaticContainer {
+public abstract class Screen extends Container {
 
 
     public Screen(Texture texture, int priority) {

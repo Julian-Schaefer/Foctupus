@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.gui;
+package foctupus.sheeper.com.foctupus.game.renderer.components;
 
 /**
  * Created by schae on 12.02.2016.

@@ -1,6 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.gui.transition;
-
-import android.util.Log;
+package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
 
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 

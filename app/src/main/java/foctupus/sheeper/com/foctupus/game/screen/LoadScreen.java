@@ -4,8 +4,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
 
-import foctupus.sheeper.com.foctupus.game.gui.IContainer;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.components.asd;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
@@ -29,7 +28,7 @@ public class LoadScreen extends Screen {
     private Sprite progressBackground;
     private Sprite progress;
 
-    public LoadScreen(IContainer.Listener containerListener) {
+    public LoadScreen(asd.Listener containerListener) {
         super(STD_PRIORITY);
 
 

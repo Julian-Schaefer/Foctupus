@@ -1,17 +1,15 @@
-package foctupus.sheeper.com.foctupus.game.gui;
+package foctupus.sheeper.com.foctupus.game.renderer.components;
 
 import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
+import foctupus.sheeper.com.foctupus.game.renderer.components.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by schae on 12.02.2016.
  */
-public class Component implements IUpdateble {
+public class Component implements IUpdateble, Transition.TransitionListener {
 
     public static final int USE_RATIO = -1;
     public static final int USE_SAME = -2;
@@ -93,11 +91,14 @@ public class Component implements IUpdateble {
 
     public void addTransition(Transition transition)
     {
+        transition.setListener(this);
         transitions.add(transition);
     }
 
     public void startTransition(String name)
     {
+        stopTransition();
+
         for(Transition transition : transitions)
         {
             if(transition.getName().equals(name))
@@ -109,4 +110,18 @@ public class Component implements IUpdateble {
 
     }
 
+    public void stopTransition()
+    {
+        current = null;
+    }
+
+    public void clearTransitions()
+    {
+        transitions.clear();
+    }
+
+    @Override
+    public void onTransitionFinished(Transition transition) {
+
+    }
 }

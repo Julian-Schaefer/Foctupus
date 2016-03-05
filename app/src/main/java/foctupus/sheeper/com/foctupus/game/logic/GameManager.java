@@ -3,32 +3,27 @@ package foctupus.sheeper.com.foctupus.game.logic;
 import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
-import foctupus.sheeper.com.foctupus.game.gui.Component;
-import foctupus.sheeper.com.foctupus.game.gui.Container;
-import foctupus.sheeper.com.foctupus.game.gui.IContainer;
-import foctupus.sheeper.com.foctupus.game.gui.transition.PositionTransition;
-import foctupus.sheeper.com.foctupus.game.gui.transition.ResizeTransition;
-import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
+import foctupus.sheeper.com.foctupus.game.renderer.components.Component;
+import foctupus.sheeper.com.foctupus.game.renderer.components.Container;
+import foctupus.sheeper.com.foctupus.game.renderer.components.asd;
+import foctupus.sheeper.com.foctupus.game.renderer.components.transition.PositionTransition;
+import foctupus.sheeper.com.foctupus.game.renderer.components.transition.ResizeTransition;
+import foctupus.sheeper.com.foctupus.game.renderer.components.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.Loader;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.gui.StaticContainer;
+import foctupus.sheeper.com.foctupus.game.renderer.components.StaticContainer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.RelativeVector;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.screen.LoadScreen;
-import foctupus.sheeper.com.foctupus.game.screen.TestScreen;
-import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by schae on 04.02.2016.
  */
-public class GameManager implements IContainer.Listener {
+public class GameManager {
 
     private Renderer renderer;
-    private StaticContainer screen;
     private Container container;
 
     private static GameManager instance;
@@ -51,7 +46,7 @@ public class GameManager implements IContainer.Listener {
         if(container != null)
             container.update();
         else
-            screen.update();
+           ;
     }
 
     public void draw()
@@ -59,7 +54,7 @@ public class GameManager implements IContainer.Listener {
         if(container != null)
             container.draw();
         else
-            screen.render();
+           ;
 
         renderer.draw();
     }
@@ -76,13 +71,13 @@ public class GameManager implements IContainer.Listener {
             if(Textures.areDecoded())
                 Loader.registerTextures();
             else
-                screen = new LoadScreen(this);
+                ;
         }
 
         if(container != null)
             container.revalidate();
 
-        screen.revalidate(oldX, oldY);
+
     }
 
     public void onClick(float x, float y, int mode) {
@@ -99,18 +94,9 @@ public class GameManager implements IContainer.Listener {
 
     }
 
-    @Override
-    public void onRevalidate(IContainer container) {
-
-    }
 
     @Override
-    public void onLoaded(IContainer container) {
-
-    }
-
-    @Override
-    public synchronized void onFinished(IContainer container) {
+    public synchronized void onFinished(asd container) {
 
         if (BuildConfig.DEBUG)
             Log.d("asds", toString() + " Screen onFinished() Event called");

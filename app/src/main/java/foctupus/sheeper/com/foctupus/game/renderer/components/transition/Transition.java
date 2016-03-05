@@ -1,8 +1,6 @@
-package foctupus.sheeper.com.foctupus.game.gui.transition;
+package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
 
-import android.util.Log;
-
-import foctupus.sheeper.com.foctupus.game.gui.Component;
+import foctupus.sheeper.com.foctupus.game.renderer.components.Component;
 
 /**
  * Created by schae on 12.02.2016.
@@ -58,6 +56,9 @@ public class Transition {
 
             if(positionTransition != null)
                 component.setRelativePosition(positionTransition.update(ratio, direction));
+
+            if(rotateTransition != null)
+                component.getSprite().setAngle(rotateTransition.update(ratio, direction));
         }
         else if(autoRepeat)
         {

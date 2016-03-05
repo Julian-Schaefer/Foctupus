@@ -1,8 +1,7 @@
-package foctupus.sheeper.com.foctupus.game.gui;
+package foctupus.sheeper.com.foctupus.game.renderer.components;
 
 import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.game.gui.transition.IDrawable;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
@@ -123,22 +122,22 @@ public class Container extends Component implements IDrawable {
 
             float width, height;
 
-            if(relativeSize.getX() == Component.USE_SAME)
+            if(relativeSize.getX() == USE_SAME)
             {
                 height = sprite.getYSize() / 100f * relativeSize.getY();
                 width = height;
             }
-            else if(relativeSize.getY() == Component.USE_SAME)
+            else if(relativeSize.getY() == USE_SAME)
             {
                 width = sprite.getXSize() / 100f * relativeSize.getX();
                 height = width;
             }
-            else if(relativeSize.getX() == Component.USE_RATIO)
+            else if(relativeSize.getX() == USE_RATIO)
             {
                 height = sprite.getYSize() / 100f * relativeSize.getY();
                 width = height / childSprite.getTexture().getRatio();
             }
-            else if(relativeSize.getY() == Component.USE_RATIO)
+            else if(relativeSize.getY() == USE_RATIO)
             {
                 width = sprite.getXSize() / 100f * relativeSize.getX();
                 height = width * childSprite.getTexture().getRatio();
