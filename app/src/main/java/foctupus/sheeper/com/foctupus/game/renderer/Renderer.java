@@ -1,13 +1,16 @@
 package foctupus.sheeper.com.foctupus.game.renderer;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import java.nio.FloatBuffer;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import foctupus.sheeper.com.foctupus.game.renderer.shader.TextureShader;
 
@@ -15,6 +18,9 @@ import foctupus.sheeper.com.foctupus.game.renderer.shader.TextureShader;
  * Created by schae on 10.11.2015.
  */
 public class Renderer {
+
+    private static HashMap<String, Integer> textures = new HashMap<>();
+    private static HashMap<String, Bitmap> bitmaps = new HashMap<>();
 
     private TextureShader shader;
 
@@ -214,5 +220,53 @@ public class Renderer {
     {
         Loader.setContext(context);
     }
+
+    public static int getTextureID(String textureName)
+    {
+        if(textures != null && textures.containsKey(textureName))
+            return textures.get(textureName);
+
+        return -1;
+    }
+
+    public static Bitmap getBitmap(String textureName)
+    {
+        if(bitmaps.containsKey(textureName))
+            return bitmaps.get(textureName);
+
+        return null;
+    }
+
+    public static boolean areTexturesDecoded()
+    {
+        return Renderer.bitmaps != null && Renderer.bitmaps.size() > 0;
+    }
+
+    public static void updateTextureBitmap(String name, Bitmap bitmap)
+    {
+        bitmaps.put(name, bitmap);
+    }
+
+    public static void updateTextureID(String name, int id)
+    {
+        textures.put(name, id);
+    }
+
+    public static void registerTextures()
+    {
+        Renderer.textures.clear();
+
+        for(Map.Entry<String, Bitmap> entry : Renderer.bitmaps.entrySet())
+        {
+            updateTextureID(entry.getKey(), Loader.loadTexture(entry.getValue()));
+        }
+    }
+
+    public static void resetTextures()
+    {
+        textures.clear();
+        bitmaps.clear();
+    }
+
 
 }

@@ -3,26 +3,32 @@ package foctupus.sheeper.com.foctupus.game.logic;
 import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
-import foctupus.sheeper.com.foctupus.game.renderer.components.Component;
-import foctupus.sheeper.com.foctupus.game.renderer.components.Container;
-import foctupus.sheeper.com.foctupus.game.renderer.components.transition.PositionTransition;
-import foctupus.sheeper.com.foctupus.game.renderer.components.transition.ResizeTransition;
-import foctupus.sheeper.com.foctupus.game.renderer.components.transition.Transition;
-import foctupus.sheeper.com.foctupus.game.renderer.Loader;
+import foctupus.sheeper.com.foctupus.game.gui.Component;
+import foctupus.sheeper.com.foctupus.game.gui.Container;
+import foctupus.sheeper.com.foctupus.game.gui.Screen;
+import foctupus.sheeper.com.foctupus.game.gui.SplashScreen;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.screen.StartScreen;
+
 /**
  * Created by schae on 04.02.2016.
  */
-public class GameManager {
+public class GameManager implements Component.ComponentListener {
+
+    public enum GameState
+    {
+        LOADING, STARTSCREEN, SCORESCREEN, PLAYING
+    }
 
     private Renderer renderer;
-    private Container container;
+    private Screen screen;
 
     private static GameManager instance;
+
 
     public static GameManager getInstance()
     {
@@ -39,18 +45,14 @@ public class GameManager {
 
     public void update()
     {
-        if(container != null)
-            container.update();
-        else
-           ;
+        if(screen != null)
+            screen.update();
     }
 
     public void draw()
     {
-        if(container != null)
-            container.draw();
-        else
-           ;
+        if(screen != null)
+            screen.draw();
 
         renderer.draw();
     }
@@ -64,20 +66,14 @@ public class GameManager {
 
         if(created)
         {
-            if(Textures.areDecoded())
-                Loader.registerTextures();
+            if (!Renderer.areTexturesDecoded() || screen == null)
+                startSplashScreen();
             else
-                ;
+                Renderer.registerTextures();
         }
 
-        if(container != null)
-            container.revalidate();
-
-
-    }
-
-    public void onClick(float x, float y, int mode) {
-
+        if(screen != null)
+            screen.revalidate();
     }
 
     public void showAd()
@@ -90,13 +86,30 @@ public class GameManager {
 
     }
 
+    private void startSplashScreen()
+    {
+        SplashScreen splashScreen = new SplashScreen(renderer);
+        splashScreen.setListener(this);
+        splashScreen.setBackgroundColor(new int[]{255, 0, 0});
+        splashScreen.setProgressBackgroundColor(new int[]{0, 0, 255});
+        splashScreen.setProgressColor(new int[]{0, 255, 0});
+        splashScreen.load(Textures.pictureNames);
+
+        screen = splashScreen;
+    }
+
+
+    public void onTouch(float x, float y, int mode)
+    {
+        screen.onTouch(x, y, mode);
+    }
 
     public synchronized void onFinished() {
 
         if (BuildConfig.DEBUG)
             Log.d("asds", toString() + " Screen onFinished() Event called");
 
-        Sprite back = new Sprite(new Texture(Textures.BACKGROUND));
+        /*Sprite back = new Sprite(new Texture(Textures.BACKGROUND));
         this.container = new Container(renderer, back);
         this.container.setRelativeSize(new Vector(100, 100));
         this.container.setRelativePosition(new Vector(50, 50));
@@ -133,9 +146,23 @@ public class GameManager {
         con.addTransition(t2);
         con.startTransition("test2");
 
-        this.container.addChild(con);
+        this.container.addChild(con);*/
 
         if (BuildConfig.DEBUG)
             Log.d("asdas", " New Screen");
+    }
+
+    @Override
+    public void onFinished(Component component)
+    {
+        if(component instanceof SplashScreen)
+        {
+
+            Sprite sprite = new Sprite(new Texture(Textures.BACKGROUND));
+            Screen screen = new StartScreen(renderer);
+
+
+            this.screen = screen;
+        }
     }
 }

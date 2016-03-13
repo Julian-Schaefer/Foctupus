@@ -50,11 +50,11 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
         if(!visible) {
             visible = true;
-            MainActivity.showAd();
+            //MainActivity.showAd();
         }
         else {
             visible = false;
-            MainActivity.hideAd();
+            //MainActivity.hideAd();
         }
 
         if(event != null)
@@ -69,7 +69,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
                 queueEvent(new Runnable() {
                     @Override
                     public void run() {
-                        gameManager.onClick(x, y, eventAction);
+                        gameManager.onTouch(x, y, eventAction);
                     }
                 });
             }

@@ -1,18 +1,20 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components;
+package foctupus.sheeper.com.foctupus.game.gui;
 
 import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.components.transition.Transition;
+import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by schae on 12.02.2016.
  */
-public class Component implements IUpdateble, Transition.TransitionListener {
+public class Component implements IUpdateble {
 
     public static final int USE_RATIO = -1;
     public static final int USE_SAME = -2;
+
+    protected ComponentListener listener;
 
     private Transition current;
     private volatile LinkedList<Transition> transitions;
@@ -26,7 +28,7 @@ public class Component implements IUpdateble, Transition.TransitionListener {
 
     public Component()
     {
-        this(null);
+        this(new Sprite());
     }
 
     public Component(Sprite sprite)
@@ -91,7 +93,6 @@ public class Component implements IUpdateble, Transition.TransitionListener {
 
     public void addTransition(Transition transition)
     {
-        transition.setListener(this);
         transitions.add(transition);
     }
 
@@ -110,6 +111,21 @@ public class Component implements IUpdateble, Transition.TransitionListener {
 
     }
 
+    public void onTouch(float x, float y, int mode)
+    {
+
+    }
+
+    public boolean isIntersected(float x, float y) {
+        Sprite sprite = getSprite();
+        float left = sprite.getActualXPos() - sprite.getXSize()/2;
+        float right = sprite.getActualXPos() + sprite.getXSize()/2;
+        float bottom = sprite.getActualYPos() - sprite.getYSize()/2;
+        float top = sprite.getActualYPos() + sprite.getYSize()/2;
+
+        return x >= left && x <= right && y >= bottom && y <= top;
+    }
+
     public void stopTransition()
     {
         current = null;
@@ -120,8 +136,13 @@ public class Component implements IUpdateble, Transition.TransitionListener {
         transitions.clear();
     }
 
-    @Override
-    public void onTransitionFinished(Transition transition) {
+    public void setListener(ComponentListener listener)
+    {
+        this.listener = listener;
+    }
 
+    public interface ComponentListener
+    {
+        void onFinished(Component component);
     }
 }

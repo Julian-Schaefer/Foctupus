@@ -16,7 +16,7 @@ public class Texture {
     {
         this.name = name;
         this.id = id;
-        bitmap = Textures.getBitmap(name);
+        bitmap = Renderer.getBitmap(name);
 
         if(bitmap != null)
             ratio = (float) bitmap.getHeight() / (float) bitmap.getWidth();
@@ -24,12 +24,12 @@ public class Texture {
 
     public Texture(String name)
     {
-        this(name, Textures.getTextureID(name));
+        this(name, Renderer.getTextureID(name));
     }
 
     public void revalidate()
     {
-        id = Textures.getTextureID(name);
+        id = Renderer.getTextureID(name);
     }
 
     public void setID(int id)

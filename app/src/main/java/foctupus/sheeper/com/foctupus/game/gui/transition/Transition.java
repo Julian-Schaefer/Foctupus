@@ -1,6 +1,6 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
+package foctupus.sheeper.com.foctupus.game.gui.transition;
 
-import foctupus.sheeper.com.foctupus.game.renderer.components.Component;
+import foctupus.sheeper.com.foctupus.game.gui.Component;
 
 /**
  * Created by schae on 12.02.2016.
@@ -62,13 +62,29 @@ public class Transition {
         }
         else if(autoRepeat)
         {
+            setEndPosition();
+
             if(autoRevert)
                 revert();
 
             start();
         }
-        else if(listener != null)
+        else if(listener != null) {
+            setEndPosition();
             listener.onTransitionFinished(this);
+        }
+    }
+
+    private void setEndPosition()
+    {
+        if (resizeTransition != null)
+            component.setRelativeSize(resizeTransition.getEndSize(direction));
+
+        if(positionTransition != null)
+            component.setRelativePosition(positionTransition.getEndPosition(direction));
+
+        if(rotateTransition != null)
+            component.getSprite().setAngle(rotateTransition.getEndAngle(direction));
     }
 
     public void revert()

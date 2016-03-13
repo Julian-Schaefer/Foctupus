@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
+package foctupus.sheeper.com.foctupus.game.gui.transition;
 
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
@@ -24,5 +24,13 @@ public class RotateTransition {
         else
             return endAngle + (float) (ratio * diff * -1);
 
+    }
+
+    public float getEndAngle(Transition.Direction direction)
+    {
+        if(direction == Transition.Direction.IN)
+            return startAngle;
+        else
+            return endAngle;
     }
 }

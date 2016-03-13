@@ -1,19 +1,21 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
+import java.util.LinkedList;
+
+import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.components.Container;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
 /**
  * Created by JSchaefer on 05.03.2016.
  */
-public abstract class Screen extends Container {
+public abstract class Screen extends Container implements Component.ComponentListener, Transition.TransitionListener {
 
-    protected ScreenListener listener;
+    private Component popUp;
 
     public Screen(Renderer renderer) {
-        this(renderer, null);
+        this(renderer, new Sprite());
     }
 
     public Screen(Renderer renderer, Sprite sprite)
@@ -25,13 +27,28 @@ public abstract class Screen extends Container {
 
     protected abstract void init();
 
-    public void setListener(ScreenListener listener)
+    @Override
+    public void onTouch(float x, float y, int mode)
     {
-        this.listener = listener;
+        if(popUp != null)
+            popUp.onTouch(x, y, mode);
+        else
+            super.onTouch(x, y, mode);
     }
 
-    public interface ScreenListener
+    public void showPopUp(Component component)
     {
-        void onFinished(Screen screen);
+        if(popUp != null)
+            removePopUp();
+
+        component.setListener(this);
+        addChild(component);
+        popUp = component;
+    }
+
+    public void removePopUp()
+    {
+        childs.remove(popUp);
+        popUp = null;
     }
 }

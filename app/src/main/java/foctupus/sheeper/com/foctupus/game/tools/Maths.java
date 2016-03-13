@@ -126,7 +126,7 @@ public final class Maths {
 
     public static float percentToPixel(float percent, float relation)
     {
-        return relation/100*percent;
+        return (float) (relation / (double) 100 * percent);
     }
 
     public static int lengthOf(double x, double y)

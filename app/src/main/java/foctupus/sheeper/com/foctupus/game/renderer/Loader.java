@@ -41,6 +41,7 @@ public final class Loader {
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID, options);
 
+
         return bitmap;
     }
 
@@ -75,15 +76,7 @@ public final class Loader {
         return textureHandle[0];
     }
 
-    public static void registerTextures()
-    {
-        Textures.textures.clear();
 
-        for(Map.Entry<String, Bitmap> entry : Textures.bitmaps.entrySet())
-        {
-            Textures.textures.put(entry.getKey(), Loader.loadTexture(entry.getValue()));
-        }
-    }
 
     public static void setContext(Context context)
     {

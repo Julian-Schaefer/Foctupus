@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
+package foctupus.sheeper.com.foctupus.game.gui.transition;
 
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
@@ -24,5 +24,13 @@ public class ResizeTransition {
             return new Vector(startSize.getX() + (float) (ratio * diff.getX()), startSize.getY() + (float) (ratio * diff.getY()));
         else
             return new Vector(endSize.getX() + (float) (ratio * diff.getX() * -1), endSize.getY() + (float) (ratio * diff.getY() * -1));
+    }
+
+    public Vector getEndSize(Transition.Direction direction)
+    {
+        if(direction == Transition.Direction.IN)
+            return endSize;
+        else
+            return startSize;
     }
 }

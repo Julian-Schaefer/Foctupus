@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components;
+package foctupus.sheeper.com.foctupus.game.gui;
 
 import java.util.LinkedList;
 
@@ -14,13 +14,13 @@ public class Container extends Component implements IDrawable {
     private static final int STD_PRIORITY = 10;
 
     private Renderer renderer;
-    private LinkedList<Component> childs;
+    protected LinkedList<Component> childs;
 
     private Container parent;
 
     public Container(Renderer renderer)
     {
-        this(renderer, null);
+        this(renderer, new Sprite());
     }
 
     public Container(Renderer renderer, Sprite sprite)
@@ -60,24 +60,34 @@ public class Container extends Component implements IDrawable {
 
     }
 
+    @Override
+    public void onTouch(float x, float y, int mode) {
+        for(Component child : childs)
+        {
+            child.onTouch(x, y, mode);
+        }
+    }
+
     public void revalidate() {
 
         calculateSprite();
 
-        sprite.getTexture().revalidate();
+        if (sprite.getTexture() != null)
+            sprite.getTexture().revalidate();
 
-        for(Component child : childs)
-        {
-            child.getSprite().getTexture().revalidate();
+        for (Component child : childs) {
+            if (child.getSprite().getTexture() != null)
+                child.getSprite().getTexture().revalidate();
 
-            if(child instanceof Container)
-            {
+            if (child instanceof Container) {
                 ((Container) child).revalidate();
             }
 
             updateChild(child);
         }
     }
+
+
 
     public void clearChilds()
     {
@@ -95,10 +105,11 @@ public class Container extends Component implements IDrawable {
     {
             if(child != null)
             {
-                child.getSprite().setVisible(true);
 
                 childs.add(child);
                 updateChild(child);
+
+                child.getSprite().setVisible(true);
 
                 if(child instanceof Container)
                     child.setPriority(getPriority() + 1);
@@ -184,5 +195,10 @@ public class Container extends Component implements IDrawable {
     public void setRelativeSize(Vector relativeSize) {
         super.setRelativeSize(relativeSize);
         calculateSprite();
+    }
+
+    public interface ContainerListener
+    {
+        void onFinished(Container container);
     }
 }

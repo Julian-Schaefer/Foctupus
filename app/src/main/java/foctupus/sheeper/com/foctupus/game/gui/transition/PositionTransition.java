@@ -1,4 +1,4 @@
-package foctupus.sheeper.com.foctupus.game.renderer.components.transition;
+package foctupus.sheeper.com.foctupus.game.gui.transition;
 
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 
@@ -28,5 +28,12 @@ public class PositionTransition {
                               endPosition.getY() + (float) (ratio * diff.getY() * -1));
     }
 
+    public Vector getEndPosition(Transition.Direction direction)
+    {
+        if(direction == Transition.Direction.IN)
+            return endPosition;
+        else
+            return startPosition;
+    }
 
 }

@@ -79,7 +79,8 @@ public class MainActivity extends Activity {
             @Override
             public void onAdLoaded() {
                 if (GameManager.getInstance() != null)
-                    showAd();
+                    //showAd();
+                ;
 
                 loaded = true;
             }
