@@ -6,6 +6,7 @@ import foctupus.sheeper.com.foctupus.game.gui.Screen;
 import foctupus.sheeper.com.foctupus.game.gui.transition.PositionTransition;
 import foctupus.sheeper.com.foctupus.game.gui.transition.RotateTransition;
 import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
+import foctupus.sheeper.com.foctupus.game.logic.Popup;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
@@ -35,18 +36,23 @@ public class StartScreen extends Screen {
         Transition startTransition = new Transition("slideIn", startButton);
         startTransition.setPositionTransition(new PositionTransition(new Vector(-50, 70), new Vector(50, 70)));
         startTransition.setRotateTransition(new RotateTransition(0, 720));
-        startButton.addTransition(startTransition);
         startTransition.setListener(this);
-        startButton.startTransition("slideIn");
+        startButton.startTransition(startTransition);
 
         bestButton = new Button(new Sprite(new Texture(Textures.BTN_BEST)));
         bestButton.setRelativePosition(new Vector(150, 35));
-        bestButton.setRelativeSize(new Vector(30, USE_SAME));
+        bestButton.setRelativeSize(new Vector(35, USE_SAME));
 
         Transition bestTransition = new Transition("slideIn", bestButton);
         bestTransition.setPositionTransition(new PositionTransition(new Vector(150, 35), new Vector(50, 35)));
         bestButton.addTransition(bestTransition);
         bestButton.startTransition("slideIn");
+        bestButton.addButtonListener(new Button.ButtonListener() {
+            @Override
+            public void onClick(Button button) {
+                showPopUp(new Popup(Renderer.getInstance()));
+            }
+        });
 
         addChild(startButton);
         addChild(bestButton);
@@ -54,7 +60,7 @@ public class StartScreen extends Screen {
 
     @Override
     public void onFinished(Component component) {
-
+        removePopUp();
     }
 
     @Override

@@ -79,7 +79,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
             Renderer.getInstance().revalidate(projectionMatrix, width, height);
             gameManager = GameManager.getInstance();
-            gameManager.revalidate(created, oldX, oldY);
+            gameManager.revalidate(created);
 
             created = false;
         }

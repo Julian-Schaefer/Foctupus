@@ -57,7 +57,7 @@ public class GameManager implements Component.ComponentListener {
         renderer.draw();
     }
 
-    public void revalidate(boolean created, float oldX, float oldY)
+    public void revalidate(boolean created)
     {
         if (BuildConfig.DEBUG)
             Log.d("asd", "GameManager.revalidate(" +  created + ") called.");
@@ -90,6 +90,7 @@ public class GameManager implements Component.ComponentListener {
     {
         SplashScreen splashScreen = new SplashScreen(renderer);
         splashScreen.setListener(this);
+        splashScreen.setScreenImage(Textures.LOADSCREEN);
         splashScreen.setBackgroundColor(new int[]{255, 0, 0});
         splashScreen.setProgressBackgroundColor(new int[]{0, 0, 255});
         splashScreen.setProgressColor(new int[]{0, 255, 0});
@@ -98,58 +99,15 @@ public class GameManager implements Component.ComponentListener {
         screen = splashScreen;
     }
 
+    private void setScreen(Screen screen)
+    {
+        this.screen = screen;
+    }
+
 
     public void onTouch(float x, float y, int mode)
     {
         screen.onTouch(x, y, mode);
-    }
-
-    public synchronized void onFinished() {
-
-        if (BuildConfig.DEBUG)
-            Log.d("asds", toString() + " Screen onFinished() Event called");
-
-        /*Sprite back = new Sprite(new Texture(Textures.BACKGROUND));
-        this.container = new Container(renderer, back);
-        this.container.setRelativeSize(new Vector(100, 100));
-        this.container.setRelativePosition(new Vector(50, 50));
-
-        Component c = new Component(new Sprite(new Texture(Textures.BEACH)));
-        c.getSprite().setBottomLeftAligned(true);
-        c.setRelativeSize(new Vector(100, Component.USE_RATIO));
-        c.setRelativePosition(new Vector(0, 0));
-        this.container.addChild(c);
-
-        Container con = new Container(renderer, new Sprite(new Texture(Textures.SCORE_BACKGROUND)));
-        con.setRelativeSize(new Vector(60, 50));
-
-        Transition t2 = new Transition("test2", con);
-        t2.setPositionTransition(new PositionTransition(new Vector(50, 50), new Vector(50, 50)));
-        t2.setAutoRepeating(true);
-        t2.setAutoReverting(true);
-
-        Component c2 = new Component(new Sprite(new Texture(Textures.BTN_START)));
-        //c.setBottomLeftAligned(true);
-
-        c2.setRelativePosition(new Vector(50, 50));
-        con.addChild(c2);
-
-        Transition t = new Transition("test", c2);
-        t.setResizeTransition(new ResizeTransition(new Vector(10, Component.USE_SAME), new Vector(100, Component.USE_SAME)));
-        t.setPositionTransition(new PositionTransition(new Vector(50, 0), new Vector(50, 100)));
-        t.setAutoRepeating(true);
-        t.setAutoReverting(true);
-
-        c2.addTransition(t);
-        c2.startTransition("test");
-
-        con.addTransition(t2);
-        con.startTransition("test2");
-
-        this.container.addChild(con);*/
-
-        if (BuildConfig.DEBUG)
-            Log.d("asdas", " New Screen");
     }
 
     @Override
@@ -157,12 +115,7 @@ public class GameManager implements Component.ComponentListener {
     {
         if(component instanceof SplashScreen)
         {
-
-            Sprite sprite = new Sprite(new Texture(Textures.BACKGROUND));
-            Screen screen = new StartScreen(renderer);
-
-
-            this.screen = screen;
+            setScreen(new StartScreen(renderer));
         }
     }
 }

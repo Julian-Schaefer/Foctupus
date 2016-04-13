@@ -32,7 +32,8 @@ public class Popup extends Container {
         b.addButtonListener(new Button.ButtonListener() {
             @Override
             public void onClick(Button button) {
-                listener.onFinished(Popup.this);
+                if(listener != null)
+                    listener.onFinished(Popup.this);
             }
         });
         addChild(b);

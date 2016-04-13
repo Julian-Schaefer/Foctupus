@@ -111,6 +111,26 @@ public class Component implements IUpdateble {
 
     }
 
+    public void startTransition()
+    {
+        stopTransition();
+
+        if(transitions.size() > 0)
+        {
+            current = transitions.getFirst();
+            current.start();
+        }
+    }
+
+    public void startTransition(Transition transition)
+    {
+        if(transition != null)
+        {
+            current = transition;
+            current.start();
+        }
+    }
+
     public void onTouch(float x, float y, int mode)
     {
 

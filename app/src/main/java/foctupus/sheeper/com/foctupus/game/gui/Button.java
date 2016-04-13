@@ -7,6 +7,7 @@ import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by schae on 08.03.2016.
@@ -16,7 +17,7 @@ public class Button extends Component {
     private boolean pressed;
 
     private LinkedList<ButtonListener> listeners;
-
+    private float normalWidth;
 
     public Button(Sprite sprite)
     {
@@ -56,7 +57,8 @@ public class Button extends Component {
 
     private void press()
     {
-        if(pressed == false) {
+        if(!pressed) {
+            normalWidth = sprite.getXSize();
             pressed = true;
             setRelativeSize(new Vector(getRelativeSize().getX() * 0.85f, USE_SAME));
         }
@@ -64,10 +66,18 @@ public class Button extends Component {
 
     private void release()
     {
-        if(pressed == true) {
+        if(pressed) {
             pressed = false;
             setRelativeSize(new Vector(getRelativeSize().getX() / 0.85f, USE_SAME));
         }
+    }
+
+    @Override
+    public boolean isIntersected(float x, float y) {
+        if(Maths.lengthOf(sprite.getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth : sprite.getXSize()))
+            return true;
+
+        return false;
     }
 
     private void onButtonClick() {
@@ -94,7 +104,7 @@ public class Button extends Component {
 
     public interface ButtonListener
     {
-        public void onClick(Button button);
+        void onClick(Button button);
     }
 
 }

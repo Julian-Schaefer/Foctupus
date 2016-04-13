@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
 
         setUIListener();
 
-        if(supportsEs2) {
+        if(supportsEs2 || isEmulator()) {
 
             LinearLayout surfaceViewContainer = (LinearLayout) findViewById(R.id.mainLayout);
 

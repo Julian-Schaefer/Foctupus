@@ -57,13 +57,13 @@ public class Container extends Component implements IDrawable {
             else
                 renderer.addSprite(child.getSprite(), child.getPriority());
         }
-
     }
 
     @Override
     public void onTouch(float x, float y, int mode) {
-        for(Component child : childs)
+        for(int i = 0; i < childs.size(); i++)
         {
+            Component child = childs.get(i);
             child.onTouch(x, y, mode);
         }
     }
@@ -103,18 +103,17 @@ public class Container extends Component implements IDrawable {
     }
     public void addChild(Component child)
     {
-            if(child != null)
-            {
+        if(child != null)
+        {
+            childs.add(child);
+            updateChild(child);
 
-                childs.add(child);
-                updateChild(child);
+            child.getSprite().setVisible(true);
 
-                child.getSprite().setVisible(true);
-
-                if(child instanceof Container)
-                    child.setPriority(getPriority() + 1);
-                else
-                    child.setPriority(getPriority());
+            if(child instanceof Container)
+                child.setPriority(getPriority() + 1);
+            else
+                child.setPriority(getPriority());
         }
     }
 
