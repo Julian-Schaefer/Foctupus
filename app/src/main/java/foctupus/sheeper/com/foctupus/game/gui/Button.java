@@ -58,7 +58,7 @@ public class Button extends Component {
     private void press()
     {
         if(!pressed) {
-            normalWidth = sprite.getXSize();
+            normalWidth = getSprite().getXSize();
             pressed = true;
             setRelativeSize(new Vector(getRelativeSize().getX() * 0.85f, USE_SAME));
         }
@@ -74,7 +74,7 @@ public class Button extends Component {
 
     @Override
     public boolean isIntersected(float x, float y) {
-        if(Maths.lengthOf(sprite.getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth : sprite.getXSize()))
+        if(Maths.lengthOf(getSprite().getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth/2 : getSprite().getXSize()/2))
             return true;
 
         return false;

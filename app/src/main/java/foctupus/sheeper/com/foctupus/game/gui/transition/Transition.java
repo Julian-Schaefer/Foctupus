@@ -29,6 +29,7 @@ public class Transition {
     private long startTime;
     private int animationTime = STD_ANIM_TIME;
 
+    private boolean finished;
 
     public Transition(String name, Component component)
     {
@@ -71,6 +72,7 @@ public class Transition {
         }
         else if(listener != null) {
             setEndPosition();
+            finished = true;
             listener.onTransitionFinished(this);
         }
     }
@@ -107,6 +109,11 @@ public class Transition {
         this.rotateTransition = rotateTransition;
     }
 
+    public Component getComponent()
+    {
+        return component;
+    }
+
     public void setListener(TransitionListener listener)
     {
         this.listener = listener;
@@ -130,6 +137,16 @@ public class Transition {
     public boolean isAutoReverting()
     {
         return autoRevert;
+    }
+
+    public boolean isFinished()
+    {
+        return finished;
+    }
+
+    public void setAnimationTime(int animationTime)
+    {
+        this.animationTime = animationTime;
     }
 
     public String getName()

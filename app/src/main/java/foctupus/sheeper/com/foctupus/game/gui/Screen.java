@@ -14,15 +14,14 @@ public abstract class Screen extends Container implements Component.ComponentLis
 
     private Component popUp;
 
-    public Screen(Renderer renderer) {
-        this(renderer, new Sprite());
-    }
-
-    public Screen(Renderer renderer, Sprite sprite)
+    public Screen(Renderer renderer)
     {
-        super(renderer, sprite);
+        super(renderer);
+
         setRelativePosition(new Vector(50, 50));
         setRelativeSize(new Vector(100, 100));
+
+        getSprite().setVisible(false);
     }
 
     protected abstract void init();

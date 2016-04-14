@@ -18,7 +18,7 @@ public class Component implements IUpdateble {
 
     private Transition current;
     private volatile LinkedList<Transition> transitions;
-    protected Sprite sprite;
+    private Sprite sprite;
 
     private Vector relativePosition;
     private Vector relativeSize;
@@ -47,10 +47,8 @@ public class Component implements IUpdateble {
     @Override
     public void update() {
 
-        if(current != null)
-        {
+        if(current != null && !current.isFinished())
             current.update();
-        }
     }
 
     public Sprite getSprite() {

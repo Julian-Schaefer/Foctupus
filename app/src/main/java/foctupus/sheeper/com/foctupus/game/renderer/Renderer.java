@@ -19,8 +19,8 @@ import foctupus.sheeper.com.foctupus.game.renderer.shader.TextureShader;
  */
 public class Renderer {
 
-    private static HashMap<String, Integer> textures = new HashMap<>();
-    private static HashMap<String, Bitmap> bitmaps = new HashMap<>();
+    private volatile static HashMap<String, Integer> textures = new HashMap<>();
+    private volatile static HashMap<String, Bitmap> bitmaps = new HashMap<>();
 
     private TextureShader shader;
 
@@ -145,7 +145,7 @@ public class Renderer {
 
     private void prepareSprite(Sprite sprite)
     {
-        if(sprite.getTexture() != null)
+        if(sprite.getTexture() != null && sprite.isVisible())
         {
 
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTexture().getID());
@@ -155,18 +155,14 @@ public class Renderer {
 
     private void drawSprite(Sprite sprite)
     {
-        if (sprite.isVisible()) {
+        mvp = new float[16];
+        transformation = sprite.getTransformationMatrix();
 
-            mvp = new float[16];
-            transformation = sprite.getTransformationMatrix();
+        Matrix.multiplyMM(mvp, 0, projectionMatrix, 0, transformation, 0);
 
-            Matrix.multiplyMM(mvp, 0, projectionMatrix, 0, transformation, 0);
+        shader.loadMVPMatrix(mvp);
 
-            shader.loadMVPMatrix(mvp);
-
-            GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, Sprite.VERTEX_COUNT);
-
-        }
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, Sprite.VERTEX_COUNT);
     }
 
     public void addSprite(Sprite sprite, int priority)

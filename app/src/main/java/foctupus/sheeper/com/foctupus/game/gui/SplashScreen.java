@@ -38,6 +38,8 @@ public class SplashScreen extends Screen {
     @Override
     protected void init()
     {
+        getSprite().setVisible(true);
+
         screenImage = new Component();
         progressBackground = new Component();
         progress = new Component();

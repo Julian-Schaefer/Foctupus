@@ -13,10 +13,8 @@ public class Container extends Component implements IDrawable {
 
     private static final int STD_PRIORITY = 10;
 
-    private Renderer renderer;
+    protected Renderer renderer;
     protected LinkedList<Component> childs;
-
-    private Container parent;
 
     public Container(Renderer renderer)
     {
@@ -48,7 +46,7 @@ public class Container extends Component implements IDrawable {
     @Override
     public void draw()
     {
-        renderer.addSprite(sprite, getPriority());
+        renderer.addSprite(getSprite(), getPriority());
 
         for(Component child : childs)
         {
@@ -70,10 +68,8 @@ public class Container extends Component implements IDrawable {
 
     public void revalidate() {
 
-        calculateSprite();
-
-        if (sprite.getTexture() != null)
-            sprite.getTexture().revalidate();
+        if (getSprite().getTexture() != null)
+            getSprite().getTexture().revalidate();
 
         for (Component child : childs) {
             if (child.getSprite().getTexture() != null)
@@ -86,8 +82,6 @@ public class Container extends Component implements IDrawable {
             updateChild(child);
         }
     }
-
-
 
     public void clearChilds()
     {
@@ -105,6 +99,8 @@ public class Container extends Component implements IDrawable {
     {
         if(child != null)
         {
+            calculateSprite();
+
             childs.add(child);
             updateChild(child);
 
@@ -122,6 +118,8 @@ public class Container extends Component implements IDrawable {
         Vector relativePosition = child.getRelativePosition();
         Vector relativeSize = child.getRelativeSize();
         Sprite childSprite = child.getSprite();
+
+        Sprite sprite = getSprite();
 
         if(relativePosition != null && relativeSize != null) {
             Vector bottomLeft = new Vector(sprite.getActualXPos() - sprite.getXSize() / 2, sprite.getActualYPos() - sprite.getYSize() / 2);
@@ -160,14 +158,20 @@ public class Container extends Component implements IDrawable {
         }
     }
 
+    @Override
+    public void setSprite(Sprite sprite) {
+        super.setSprite(sprite);
+        calculateSprite();
+    }
+
     private void calculateSprite()
     {
-        if(parent == null && getRelativePosition() != null)
-            sprite.setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
+        if(getRelativePosition() != null)
+            getSprite().setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
                     Renderer.getHeight() / 100f * getRelativePosition().getY());
 
-        if(parent == null && getRelativeSize() != null)
-            sprite.setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
+        if(getRelativeSize() != null)
+            getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
                     Renderer.getHeight() / 100f * getRelativeSize().getY());
     }
 
@@ -194,10 +198,5 @@ public class Container extends Component implements IDrawable {
     public void setRelativeSize(Vector relativeSize) {
         super.setRelativeSize(relativeSize);
         calculateSprite();
-    }
-
-    public interface ContainerListener
-    {
-        void onFinished(Container container);
     }
 }

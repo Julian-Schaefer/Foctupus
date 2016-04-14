@@ -3,15 +3,12 @@ package foctupus.sheeper.com.foctupus.game.logic;
 import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
+import foctupus.sheeper.com.foctupus.MainActivity;
 import foctupus.sheeper.com.foctupus.game.gui.Component;
-import foctupus.sheeper.com.foctupus.game.gui.Container;
 import foctupus.sheeper.com.foctupus.game.gui.Screen;
 import foctupus.sheeper.com.foctupus.game.gui.SplashScreen;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.screen.StartScreen;
 
 /**
@@ -26,9 +23,11 @@ public class GameManager implements Component.ComponentListener {
 
     private Renderer renderer;
     private Screen screen;
+    private Background background;
 
     private static GameManager instance;
 
+    private boolean adVisible;
 
     public static GameManager getInstance()
     {
@@ -45,12 +44,18 @@ public class GameManager implements Component.ComponentListener {
 
     public void update()
     {
+        if(background != null)
+            background.update();
+
         if(screen != null)
             screen.update();
     }
 
     public void draw()
     {
+        if(background != null)
+            background.draw();
+
         if(screen != null)
             screen.draw();
 
@@ -72,18 +77,37 @@ public class GameManager implements Component.ComponentListener {
                 Renderer.registerTextures();
         }
 
+        if(background != null)
+            background.revalidate();
+
         if(screen != null)
             screen.revalidate();
     }
 
     public void showAd()
     {
-
+        MainActivity.showAd();
+        adVisible = true;
     }
 
     public void hideAd()
     {
+        MainActivity.hideAd();
+        adVisible = false;
+    }
 
+    public void toggleAd()
+    {
+        if(adVisible)
+        {
+            MainActivity.hideAd();
+            adVisible = false;
+        }
+        else
+        {
+            MainActivity.showAd();
+            adVisible = true;
+        }
     }
 
     private void startSplashScreen()
@@ -102,6 +126,12 @@ public class GameManager implements Component.ComponentListener {
     private void setScreen(Screen screen)
     {
         this.screen = screen;
+
+        if(!(screen instanceof SplashScreen) && background == null)
+            background = new Background();
+        else
+            background = null;
+
     }
 
 

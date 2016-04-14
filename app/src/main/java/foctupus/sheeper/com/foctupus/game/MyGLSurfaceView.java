@@ -48,15 +48,6 @@ public class MyGLSurfaceView extends GLSurfaceView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
-        if(!visible) {
-            visible = true;
-            //MainActivity.showAd();
-        }
-        else {
-            visible = false;
-            //MainActivity.hideAd();
-        }
-
         if(event != null)
         {
             final int eventAction = event.getAction();
