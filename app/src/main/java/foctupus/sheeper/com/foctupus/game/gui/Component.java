@@ -1,5 +1,7 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
@@ -49,6 +51,7 @@ public class Component implements IUpdateble {
 
         if(current != null && !current.isFinished())
             current.update();
+
     }
 
     public Sprite getSprite() {
@@ -115,7 +118,7 @@ public class Component implements IUpdateble {
 
         if(transitions.size() > 0)
         {
-            current = transitions.getFirst();
+            current = transitions.removeFirst();
             current.start();
         }
     }

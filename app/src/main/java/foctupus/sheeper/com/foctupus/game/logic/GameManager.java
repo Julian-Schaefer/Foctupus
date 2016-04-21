@@ -23,7 +23,7 @@ public class GameManager implements Component.ComponentListener {
 
     private Renderer renderer;
     private Screen screen;
-    private Background background;
+    private BackgroundScreen backgroundScreen;
 
     private static GameManager instance;
 
@@ -44,8 +44,8 @@ public class GameManager implements Component.ComponentListener {
 
     public void update()
     {
-        if(background != null)
-            background.update();
+        if(backgroundScreen != null)
+            backgroundScreen.update();
 
         if(screen != null)
             screen.update();
@@ -53,11 +53,10 @@ public class GameManager implements Component.ComponentListener {
 
     public void draw()
     {
-        if(background != null)
-            background.draw();
+        if(backgroundScreen != null)
+            backgroundScreen.draw();
 
-        if(screen != null)
-            screen.draw();
+        screen.draw();
 
         renderer.draw();
     }
@@ -77,8 +76,8 @@ public class GameManager implements Component.ComponentListener {
                 Renderer.registerTextures();
         }
 
-        if(background != null)
-            background.revalidate();
+        if(backgroundScreen != null)
+            backgroundScreen.revalidate();
 
         if(screen != null)
             screen.revalidate();
@@ -127,10 +126,10 @@ public class GameManager implements Component.ComponentListener {
     {
         this.screen = screen;
 
-        if(!(screen instanceof SplashScreen) && background == null)
-            background = new Background();
+        if(!(screen instanceof SplashScreen) && backgroundScreen == null)
+            backgroundScreen = new BackgroundScreen();
         else
-            background = null;
+            backgroundScreen = null;
 
     }
 

@@ -17,9 +17,9 @@ import foctupus.sheeper.com.foctupus.game.tools.Maths;
 /**
  * Created by julianschafer on 14.04.16.
  */
-public class Background extends Screen {
+public class BackgroundScreen extends Screen {
 
-    private static final int BUBBLE_PRIO = 10;
+    private static final int BUBBLE_PRIO = 1000;
     private static final int BUBBLE_SPAWN_TIME = 11000;
 
     private Component cliffs;
@@ -30,9 +30,9 @@ public class Background extends Screen {
 
     private long lastBubble;
 
-    public Background()
+    public BackgroundScreen()
     {
-        super(Renderer.getInstance());
+        super(Renderer.getInstance(), true);
 
         bubbles = new LinkedList<>();
 

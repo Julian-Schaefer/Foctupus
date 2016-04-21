@@ -17,7 +17,7 @@ public abstract class Popup extends Container {
 
     protected abstract void init();
 
-    private void close()
+    public void close()
     {
         if(listener != null)
             listener.onFinished(this);

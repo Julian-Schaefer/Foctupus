@@ -14,7 +14,7 @@ public class Container extends Component implements IDrawable {
     private static final int STD_PRIORITY = 10;
 
     protected Renderer renderer;
-    protected LinkedList<Component> childs;
+    protected volatile LinkedList<Component> childs;
 
     public Container(Renderer renderer)
     {
@@ -68,6 +68,8 @@ public class Container extends Component implements IDrawable {
 
     public void revalidate() {
 
+        calculateSprite();
+
         if (getSprite().getTexture() != null)
             getSprite().getTexture().revalidate();
 
@@ -95,6 +97,7 @@ public class Container extends Component implements IDrawable {
             childs.remove(component);
         }
     }
+
     public void addChild(Component child)
     {
         if(child != null)

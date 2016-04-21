@@ -14,12 +14,23 @@ public abstract class Screen extends Container implements Component.ComponentLis
 
     private Component popUp;
 
+
     public Screen(Renderer renderer)
+    {
+        this(renderer, false);
+    }
+
+
+    public Screen(Renderer renderer, boolean fullScreen)
     {
         super(renderer);
 
         setRelativePosition(new Vector(50, 50));
-        setRelativeSize(new Vector(100, 100));
+
+        if(fullScreen)
+            setRelativeSize(new Vector(100, 100));
+        else
+            setRelativeSize(new Vector(calcWidth(), 100));
 
         getSprite().setVisible(false);
     }
@@ -49,5 +60,15 @@ public abstract class Screen extends Container implements Component.ComponentLis
     {
         childs.remove(popUp);
         popUp = null;
+    }
+
+    private float calcWidth()
+    {
+        float width = Renderer.getWidth();
+        float height = Renderer.getHeight();
+
+        float innerWidth = height * (9f/16f);
+
+        return 100f * (innerWidth / width);
     }
 }

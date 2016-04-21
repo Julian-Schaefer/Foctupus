@@ -18,8 +18,7 @@ public class Texture {
         this.id = id;
         bitmap = Renderer.getBitmap(name);
 
-        if(bitmap != null)
-            ratio = (float) bitmap.getHeight() / (float) bitmap.getWidth();
+        ratio = (float) calcRatio(bitmap);
     }
 
     public Texture(String name)
@@ -56,4 +55,14 @@ public class Texture {
     {
         return ratio;
     }
+
+    public static double calcRatio(Bitmap bitmap)
+    {
+        if(bitmap != null)
+            return (float) bitmap.getHeight() / (float) bitmap.getWidth();
+
+        return -1;
+    }
+
+
 }

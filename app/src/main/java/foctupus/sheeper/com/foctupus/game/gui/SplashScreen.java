@@ -30,7 +30,7 @@ public class SplashScreen extends Screen {
 
     public SplashScreen(Renderer renderer)
     {
-        super(renderer);
+        super(renderer, true);
 
         init();
     }

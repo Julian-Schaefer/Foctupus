@@ -139,7 +139,6 @@ public class MainActivity extends Activity {
 
         hideUI();
 
-
         loadAd();
 
     }
