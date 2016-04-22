@@ -17,9 +17,6 @@ public class Counter extends Container {
 
     private int count = 0;
 
-    private float actualWidth;
-    private float actualHeight;
-
     public Counter()
     {
         this(0);
@@ -27,7 +24,8 @@ public class Counter extends Container {
 
     public Counter(int count)
     {
-        super(Renderer.getInstance(), new Sprite(new Texture(Textures.BEACH)));
+        super(Renderer.getInstance());
+        getSprite().setVisible(false);
         this.count = count;
     }
 
@@ -41,29 +39,24 @@ public class Counter extends Container {
             String numberStr = String.valueOf(count);
             int length = numberStr.length();
 
-            float numberHeight = getRelativeSize().getY();
+            float numberHeight = 100f;
             float numberWidth = numberHeight / zeroRatio;
 
             float cellWidth = (numberWidth * 1.2f);
 
-            if (cellWidth * length > getRelativeSize().getX()) {
-                cellWidth = getRelativeSize().getX() / length;
-                numberWidth = (int) (cellWidth * 0.8);
-
+            if (cellWidth * length > 100f) {
+                cellWidth = 100f / length;
+                numberWidth = cellWidth * 0.8f;
                 numberHeight = numberWidth * zeroRatio;
             }
 
-
-            actualWidth = cellWidth * length;
-            actualHeight = numberHeight;
-
             int cell = 0;
-            float startPos = getRelativePosition().getX() - (actualWidth / 2.0f);
+            float startPos = 50f - (cellWidth * length / 2f);
 
             for (char c : numberStr.toCharArray()) {
                 Component number = getNumber(c);
                 number.setRelativeSize(new Vector(numberWidth, numberHeight));
-                number.setRelativePosition(new Vector(startPos + (cell * cellWidth) + (cellWidth / 2), getRelativePosition().getY()));
+                number.setRelativePosition(new Vector(startPos + (cell * cellWidth) + (cellWidth / 2f), 50f));
                 addChild(number);
 
                 cell++;
@@ -82,17 +75,6 @@ public class Counter extends Container {
         super.setRelativeSize(relativeSize);
         validate();
     }
-
-    public float getActualWidth()
-    {
-        return actualWidth;
-    }
-
-    public float getActualHeight()
-    {
-        return actualHeight;
-    }
-
 
     private Component getNumber(char number)
     {

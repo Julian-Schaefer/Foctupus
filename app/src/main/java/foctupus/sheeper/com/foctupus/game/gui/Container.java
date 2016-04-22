@@ -1,7 +1,10 @@
 package foctupus.sheeper.com.foctupus.game.gui;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 
+import foctupus.sheeper.com.foctupus.game.logic.Scoreboard;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;

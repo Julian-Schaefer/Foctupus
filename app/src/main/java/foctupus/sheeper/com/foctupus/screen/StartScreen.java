@@ -46,32 +46,19 @@ public class StartScreen extends Screen {
 
         bestButton = new Button(new Sprite(new Texture(Textures.BTN_BEST)));
         bestButton.setRelativeSize(new Vector(38, USE_SAME));
-        bestButton.addButtonListener(new Button.ButtonListener() {
-            @Override
-            public void onClick(Button button) {
-                GameManager.getInstance().toggleAd();
-            }
-        });
 
         soundButton = new Button(new Sprite(new Texture(Textures.BTN_RETRY)));
         soundButton.setRelativeSize(new Vector(22, USE_SAME));
-
-
-        Counter counter = new Counter(10023);
-        counter.setRelativePosition(new Vector(60, 70));
-        counter.setRelativeSize(new Vector(50, 30));
-
-        addChild(counter);
 
         addChild(title);
         addChild(startButton);
         addChild(bestButton);
         addChild(soundButton);
 
-        initTransitions();
+        animateIn();
     }
 
-    private void initTransitions()
+    private void animateIn()
     {
         Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
         titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(0, USE_RATIO), new Vector(100, USE_RATIO)));
@@ -96,47 +83,36 @@ public class StartScreen extends Screen {
         Transition soundTransition = new Transition(TRANS_SLIDE_IN, soundButton);
         soundTransition.setPositionTransition(new PositionTransition(new Vector(-50, 20), new Vector(30, 20)));
         soundButton.startTransition(soundTransition);
-
-        soundButton.addButtonListener(new Button.ButtonListener() {
-            @Override
-            public void onClick(Button button) {
-                showPopUp(new Popuptest());
-
-
-            }
-        });
     }
 
-    private class Popuptest extends Popup
+    private void animateOut()
     {
-        public Popuptest()
-        {
-            super(Renderer.getInstance());
-            init();
-        }
+        Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
+        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(94, USE_RATIO), new Vector(100, USE_RATIO)));
+        titleGrowTransition.setListener(this);
+        titleGrowTransition.setAnimationTime(200);
+        title.addTransition(titleGrowTransition);
 
-        @Override
-        protected void init() {
+        Transition titleShrinkTransition = new Transition(TRANS_SLIDE_IN, title);
+        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(100, USE_RATIO), new Vector(0, USE_RATIO)));
+        titleShrinkTransition.setAnimationTime(400);
+        title.addTransition(titleShrinkTransition);
 
+        title.startTransition();
 
+        Transition startTransition = new Transition(TRANS_SLIDE_IN, startButton);
+        startTransition.setPositionTransition(new PositionTransition(new Vector(50, 67), new Vector(-50, 67)));
+        startTransition.setListener(this);
+        startButton.startTransition(startTransition);
 
-            setSprite(new Sprite(new Texture(Textures.SCORE_BACKGROUND)));
-            getSprite().setVisible(true);
-            setRelativePosition(new Vector(50, 50));
-            setRelativeSize(new Vector(80, 80));
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        Transition bestTransition = new Transition(TRANS_SLIDE_IN, bestButton);
+        bestTransition.setPositionTransition(new PositionTransition(new Vector(50, 38), new Vector(150, 38)));
+        bestTransition.setListener(this);
+        bestButton.startTransition(bestTransition);
 
-                    Popuptest.this.close();
-                }
-            }).start();
-        }
+        Transition soundTransition = new Transition(TRANS_SLIDE_IN, soundButton);
+        soundTransition.setPositionTransition(new PositionTransition(new Vector(30, 20), new Vector(-50, 20)));
+        soundButton.startTransition(soundTransition);
     }
 
     private void startSliding()
@@ -165,6 +141,18 @@ public class StartScreen extends Screen {
         if(transition.getName().equals(TRANS_SLIDE_IN) && transition.getComponent() == startButton)
         {
             startSliding();
+            bestButton.addButtonListener(new Button.ButtonListener() {
+                @Override
+                public void onClick(Button button) {
+                    animateOut();
+                    bestButton.clearButtonListeners();
+                }
+            });
+        }
+
+        if(transition.getComponent() == bestButton)
+        {
+            finish();
         }
     }
 }

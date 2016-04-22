@@ -29,6 +29,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     public MyGLRenderer(Context context)
     {
+        FoctupusDatabase.getInstance(context);
         Renderer.setContext(context);
     }
 
@@ -57,9 +58,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         if (BuildConfig.DEBUG)
             Log.d("asdsa", "MyGLRenderer: onSurfaceChanged called.");
-
-        float oldX = Renderer.getInstance().getWidth();
-        float oldY = Renderer.getInstance().getHeight();
 
         boolean surfaceChanged = false;
         if(width > 0 && height > 0 && (Renderer.getInstance().getWidth() != width || Renderer.getInstance().getHeight() != height))

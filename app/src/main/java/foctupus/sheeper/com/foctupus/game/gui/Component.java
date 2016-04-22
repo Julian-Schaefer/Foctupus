@@ -137,6 +137,12 @@ public class Component implements IUpdateble {
 
     }
 
+    public void finish()
+    {
+        if(listener != null)
+            listener.onFinished(this);
+    }
+
     public boolean isIntersected(float x, float y) {
         Sprite sprite = getSprite();
         float left = sprite.getActualXPos() - sprite.getXSize()/2;

@@ -9,7 +9,7 @@ import foctupus.sheeper.com.foctupus.game.gui.Component;
  */
 public class Transition {
 
-    private static final int STD_ANIM_TIME = 700;
+    public static final int STD_ANIM_TIME = 700;
 
     public enum Direction
     {

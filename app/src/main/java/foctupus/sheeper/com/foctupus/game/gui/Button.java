@@ -97,7 +97,7 @@ public class Button extends Component {
         listeners.add(listener);
     }
 
-    public void clearListeners()
+    public void clearButtonListeners()
     {
         listeners.clear();
     }

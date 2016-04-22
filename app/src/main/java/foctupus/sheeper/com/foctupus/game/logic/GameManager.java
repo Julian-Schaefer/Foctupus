@@ -9,6 +9,7 @@ import foctupus.sheeper.com.foctupus.game.gui.Screen;
 import foctupus.sheeper.com.foctupus.game.gui.SplashScreen;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
+import foctupus.sheeper.com.foctupus.screen.BestScreen;
 import foctupus.sheeper.com.foctupus.screen.StartScreen;
 
 /**
@@ -125,12 +126,10 @@ public class GameManager implements Component.ComponentListener {
     private void setScreen(Screen screen)
     {
         this.screen = screen;
+        screen.setListener(this);
 
         if(!(screen instanceof SplashScreen) && backgroundScreen == null)
             backgroundScreen = new BackgroundScreen();
-        else
-            backgroundScreen = null;
-
     }
 
 
@@ -146,5 +145,11 @@ public class GameManager implements Component.ComponentListener {
         {
             setScreen(new StartScreen(renderer));
         }
+        else if(component instanceof StartScreen)
+        {
+            setScreen(new BestScreen(renderer));
+        }
+        else if(component instanceof BestScreen)
+            setScreen(new StartScreen(renderer));
     }
 }
