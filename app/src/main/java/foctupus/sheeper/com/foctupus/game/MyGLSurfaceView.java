@@ -18,6 +18,9 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
     private MyGLRenderer renderer;
     private boolean visible;
+
+    private GameManager gameManager;
+
     public MyGLSurfaceView(Context context, boolean emulator) {
         super(context);
 
@@ -29,6 +32,8 @@ public class MyGLSurfaceView extends GLSurfaceView {
             setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
         setRenderer(renderer);
+
+        gameManager = GameManager.getInstance();
     }
 
     @Override
@@ -46,25 +51,19 @@ public class MyGLSurfaceView extends GLSurfaceView {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(final MotionEvent event) {
 
-        if(event != null)
-        {
-            final int eventAction = event.getAction();
-            final GameManager gameManager = GameManager.getInstance();
-
-            if(gameManager != null) {
-                final int x = (int) event.getX();
-                final int y = (int) (foctupus.sheeper.com.foctupus.game.renderer.Renderer.getHeight() - event.getY());
-
+            if(event != null && gameManager != null) {
                 queueEvent(new Runnable() {
                     @Override
                     public void run() {
-                        gameManager.onTouch(x, y, eventAction);
+                        gameManager.onTouch(event.getX(),
+                                foctupus.sheeper.com.foctupus.game.renderer.Renderer.getHeight() - event.getY(), event.getAction());
                     }
                 });
             }
-        }
+            else
+                gameManager = GameManager.getInstance();
 
         return true;
     }

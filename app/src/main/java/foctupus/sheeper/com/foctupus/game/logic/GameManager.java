@@ -10,6 +10,7 @@ import foctupus.sheeper.com.foctupus.game.gui.SplashScreen;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.screen.BestScreen;
+import foctupus.sheeper.com.foctupus.screen.GameScreen;
 import foctupus.sheeper.com.foctupus.screen.StartScreen;
 
 /**
@@ -150,6 +151,6 @@ public class GameManager implements Component.ComponentListener {
             setScreen(new BestScreen(renderer));
         }
         else if(component instanceof BestScreen)
-            setScreen(new StartScreen(renderer));
+            setScreen(new GameScreen(renderer, backgroundScreen.getTreasure()));
     }
 }

@@ -26,7 +26,9 @@ public class BackgroundScreen extends Screen {
     private Component beach;
     private LinkedList<Bubble> bubbles;
 
-    //protected Treasure treasure;
+    private int priority;
+
+    private Treasure treasure;
 
     private long lastBubble;
 
@@ -47,8 +49,9 @@ public class BackgroundScreen extends Screen {
     {
 
         cliffs = new Component(new Sprite(new Texture(Textures.CLIFFS)));
-        cliffs.setRelativePosition(new Vector(30, 30));
-        cliffs.setRelativeSize(new Vector(60, USE_RATIO));
+        cliffs.getSprite().setBottomLeftAligned(true);
+        cliffs.setRelativePosition(new Vector(0, 8));
+        cliffs.setRelativeSize(new Vector(80, USE_RATIO));
 
         beach = new Component(new Sprite(new Texture(Textures.BEACH)));
 
@@ -58,19 +61,22 @@ public class BackgroundScreen extends Screen {
 
         addChild(cliffs);
         addChild(beach);
-        //treasure = new Treasure();
-        //treasure.setVisible(true);
+
+        priority = getPriority();
+        treasure = new Treasure();
     }
 
-    //public Treasure getTreasure()
-    //{
-    //    return treasure;
-    //}
+    public Treasure getTreasure()
+    {
+        return treasure;
+    }
 
 
     @Override
     public void revalidate() {
         super.revalidate();
+
+        treasure.getTexture().revalidate();
 
         for(Bubble bubble : bubbles)
             bubble.getTexture().revalidate();
@@ -105,6 +111,8 @@ public class BackgroundScreen extends Screen {
     @Override
     public void draw() {
         super.draw();
+
+        renderer.addSprite(treasure, priority);
 
         for(Bubble bubble : bubbles)
         {
