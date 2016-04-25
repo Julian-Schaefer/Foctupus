@@ -77,7 +77,6 @@ public class Slider {
         if(textures.size() > 20)
         {
             textures.removeLast();
-            textures.removeLast();
         }
 
     }

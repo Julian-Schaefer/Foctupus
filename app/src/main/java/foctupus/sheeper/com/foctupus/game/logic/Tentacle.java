@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -342,6 +343,10 @@ public class Tentacle extends StaticSpriteList {
         float yPos = pos1.getY() + ((pos2.getY() - pos1.getY())/2);
 
         float angle = (float) Math.toDegrees(Math.atan((pos2.getY() - pos1.getY()) / (pos2.getX() - pos1.getX())));
+
+        if(angle < 0)
+            angle += 180;
+
         int distance = Maths.lengthOf(pos1, pos2);
 
 

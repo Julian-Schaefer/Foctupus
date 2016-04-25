@@ -24,8 +24,17 @@ public class SoundPlayer {
     private int loaded = 0;
     private int cutSoundID;
 
+    private static SoundPlayer instance;
 
-    public SoundPlayer()
+    public static SoundPlayer getInstance()
+    {
+        if(instance == null)
+            instance = new SoundPlayer();
+
+        return instance;
+    }
+
+    private SoundPlayer()
     {
         context = Loader.getContext();
 

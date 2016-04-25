@@ -23,8 +23,8 @@ public class Score extends Container {
 
         setPriority(Game.SCORE_PRIO);
 
-        setRelativeSize(new Vector(USE_RATIO, 10));
-        setRelativePosition(new Vector(50, 80));
+        setRelativeSize(new Vector(USE_RATIO, 11));
+        setRelativePosition(new Vector(50, 85));
 
         score = new Counter(scoreCount);
         score.setRelativePosition(new Vector(50, 50));

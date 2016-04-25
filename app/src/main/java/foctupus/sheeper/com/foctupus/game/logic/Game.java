@@ -2,6 +2,7 @@ package foctupus.sheeper.com.foctupus.game.logic;
 
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.ListIterator;
 
 import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
@@ -23,7 +24,6 @@ public class Game implements Tentacle.TentacleListener {
     private SoundPlayer soundPlayer;
     private GameListener listener;
     private Slider slider;
-    private Score score;
 
     private int animationTime = 3000;
     private boolean hasCut = false;
@@ -37,25 +37,26 @@ public class Game implements Tentacle.TentacleListener {
         this.treasure = treasure;
         tentacles = new LinkedList<>();
 
-        soundPlayer = new SoundPlayer();
+        soundPlayer = SoundPlayer.getInstance();
         slider = new Slider();
+
+        start();
     }
 
 
-    private void createTentacle()
+    private Tentacle createTentacle()
     {
         Tentacle t = new Tentacle(treasure, animationTime);
         t.setListener(this);
-        tentacles.add(t);
+        return t;
     }
 
-    public void render(boolean gameOver)
+    public void draw(boolean gameOver)
     {
         if(clear)
             tentacles.clear();
 
-        Iterator<Tentacle> iterator = tentacles.iterator();
-        int removed = 0;
+        ListIterator<Tentacle> iterator = tentacles.listIterator();
 
         while(iterator.hasNext())
         {
@@ -67,21 +68,24 @@ public class Game implements Tentacle.TentacleListener {
             if(tentacle.isOutside())
             {
                 iterator.remove();
-                removed++;
+                iterator.add(createTentacle());
             }
             else
                 renderer.addSpriteList(tentacle, 15);
         }
 
-        for(int i = 0; i < removed; i++)
-            createTentacle();
-
         if(!gameOver) {
             slider.render(renderer);
-            score.draw();
         }
 
+    }
 
+    public void revalidate()
+    {
+        for(Tentacle tentacle : tentacles)
+        {
+            tentacle.getTexture().revalidate();
+        }
     }
 
     public void clear()
@@ -125,27 +129,28 @@ public class Game implements Tentacle.TentacleListener {
 
     public void start()
     {
-        score = new Score(renderer);
-
         slider.reset();
         tentacles.clear();
+
         for(int i = 0; i < 4; i++)
         {
-            createTentacle();
+            tentacles.add(createTentacle());
         }
     }
 
     @Override
     public void isCut(Tentacle t) {
         soundPlayer.playCutSound();
-        score.increase();
         hasCut = true;
+
+        if(listener != null)
+            listener.onScoreIncrease();
     }
 
     @Override
     public void hasFinished() {
         if(listener != null)
-            listener.onGameOver(score.getCount());
+            listener.onGameOver();
     }
 
     public void setListener(GameListener listener)
@@ -156,6 +161,7 @@ public class Game implements Tentacle.TentacleListener {
 
     public interface GameListener
     {
-        void onGameOver(int score);
+        void onGameOver();
+        void onScoreIncrease();
     }
 }

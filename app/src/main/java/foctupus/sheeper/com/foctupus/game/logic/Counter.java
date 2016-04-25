@@ -62,6 +62,7 @@ public class Counter extends Container {
                 cell++;
             }
         }
+
     }
 
     @Override
