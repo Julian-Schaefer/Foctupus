@@ -16,7 +16,8 @@ import foctupus.sheeper.com.foctupus.screen.StartScreen;
 /**
  * Created by schae on 04.02.2016.
  */
-public class GameManager implements Component.ComponentListener {
+public class GameManager implements Screen.ScreenListener {
+
 
     public enum GameState
     {
@@ -114,7 +115,7 @@ public class GameManager implements Component.ComponentListener {
     private void startSplashScreen()
     {
         SplashScreen splashScreen = new SplashScreen(renderer);
-        splashScreen.setListener(this);
+        splashScreen.setScreenListener(this);
         splashScreen.setScreenImage(Textures.LOADSCREEN);
         splashScreen.setBackgroundColor(new int[]{255, 0, 0});
         splashScreen.setProgressBackgroundColor(new int[]{0, 0, 255});
@@ -127,7 +128,7 @@ public class GameManager implements Component.ComponentListener {
     private void setScreen(Screen screen)
     {
         this.screen = screen;
-        screen.setListener(this);
+        screen.setScreenListener(this);
 
         if(!(screen instanceof SplashScreen) && backgroundScreen == null)
             backgroundScreen = new BackgroundScreen();
@@ -140,17 +141,7 @@ public class GameManager implements Component.ComponentListener {
     }
 
     @Override
-    public void onFinished(Component component)
-    {
-        if(component instanceof SplashScreen)
-        {
-            setScreen(new StartScreen(renderer));
-        }
-        else if(component instanceof StartScreen)
-        {
-            setScreen(new BestScreen(renderer));
-        }
-        else if(component instanceof BestScreen)
-            setScreen(new GameScreen(renderer, backgroundScreen.getTreasure()));
+    public void OnScreenFinished(Screen nextScreen) {
+        setScreen(nextScreen);
     }
 }

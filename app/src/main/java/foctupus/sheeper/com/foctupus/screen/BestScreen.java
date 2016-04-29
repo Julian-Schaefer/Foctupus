@@ -77,9 +77,13 @@ public class BestScreen extends Screen {
 
     @Override
     public void onTransitionFinished(Transition transition) {
+
         if(transition.getComponent() == backButton)
-            finish();
+        {
+            finishScreen(new StartScreen(renderer));
+        }
         else if(transition.getComponent() == scoreboard)
+        {
             backButton.addButtonListener(new Button.ButtonListener() {
                 @Override
                 public void onClick(Button button) {
@@ -87,5 +91,7 @@ public class BestScreen extends Screen {
                     backButton.clearButtonListeners();
                 }
             });
+        }
+
     }
 }

@@ -12,6 +12,7 @@ import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
 import foctupus.sheeper.com.foctupus.game.renderer.Textures;
 import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.screen.StartScreen;
 
 /**
  * Created by JSchaefer on 05.03.2016.
@@ -23,6 +24,10 @@ public class SplashScreen extends Screen {
     private int toLoad;
     private boolean finished;
 
+    private int[] rgbProgressBackground;
+    private int[] rgbProgess;
+    private int[] rgbBackground;
+    private String screenImageName;
 
     private Component screenImage;
     private Component progressBackground;
@@ -57,22 +62,26 @@ public class SplashScreen extends Screen {
 
     public void setBackgroundColor(int[] rgb)
     {
+        rgbBackground = rgb;
         loadSprite(this, "loadscreen_background", rgb);
     }
 
     public void setProgressBackgroundColor(int[] rgb)
     {
+        rgbProgressBackground = rgb;
         loadSprite(progressBackground, "progress_background", rgb);
         align();
     }
 
     public void setProgressColor(int[] rgb)
     {
+        rgbProgess = rgb;
         loadSprite(progress, "progress", rgb);
         align();
     }
 
     public void setScreenImage(String name) {
+        screenImageName = name;
         loadScreenImage(name);
 
         screenImage.setRelativePosition(new Vector(50, 50));
@@ -91,7 +100,16 @@ public class SplashScreen extends Screen {
 
         screenImage.getSprite().setTexture(new Texture(name, screenImageId));
     }
-    
+
+    @Override
+    public void revalidate() {
+        calculateSprite();
+        setScreenImage(screenImageName);
+        setBackgroundColor(rgbBackground);
+        setProgressBackgroundColor(rgbProgressBackground);
+        setProgressColor(rgbProgess);
+    }
+
     private void loadSprite(Component component, String name, int[] rgb)
     {
         Bitmap bitmap = Bitmap.createBitmap(12, 12, Bitmap.Config.ARGB_8888);
@@ -101,8 +119,8 @@ public class SplashScreen extends Screen {
 
         int id = Loader.loadTexture(bitmap);
 
-        Renderer.updateTextureBitmap(name, bitmap);
-        Renderer.updateTextureID(name, id);
+        //Renderer.updateTextureBitmap(name, bitmap);
+        //Renderer.updateTextureID(name, id);
 
         component.getSprite().setTexture(new Texture(name, id));
     }
@@ -114,10 +132,10 @@ public class SplashScreen extends Screen {
         if(progress != null && toLoad != 0)
             progress.setRelativeSize(new Vector(progressBackground.getRelativeSize().getX() * loadedCount / toLoad, progress.getRelativeSize().getY()));
 
-        if(loaded && listener != null && !finished) {
+        if(loaded && !finished) {
             Renderer.registerTextures();
             finished = true;
-            listener.onFinished(this);
+            finishScreen(new StartScreen(renderer));
         }
     }
 

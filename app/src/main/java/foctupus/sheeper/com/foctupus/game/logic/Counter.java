@@ -31,6 +31,8 @@ public class Counter extends Container {
 
     protected void validate()
     {
+        calculateSprite();
+
         if(getRelativePosition() != null && getRelativeSize() != null) {
             clearChilds();
 

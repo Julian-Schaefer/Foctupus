@@ -76,7 +76,7 @@ public class BackgroundScreen extends Screen {
     public void revalidate() {
         super.revalidate();
 
-        treasure.getTexture().revalidate();
+        treasure = new Treasure();
 
         for(Bubble bubble : bubbles)
             bubble.getTexture().revalidate();

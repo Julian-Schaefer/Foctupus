@@ -19,6 +19,8 @@ public class Container extends Component implements IDrawable {
     protected Renderer renderer;
     protected volatile LinkedList<Component> childs;
 
+    private Container parent;
+
     public Container(Renderer renderer)
     {
         this(renderer, new Sprite());
@@ -42,7 +44,6 @@ public class Container extends Component implements IDrawable {
         for(Component child : childs)
         {
             child.update();
-            updateChild(child);
         }
     }
 
@@ -53,6 +54,8 @@ public class Container extends Component implements IDrawable {
 
         for(Component child : childs)
         {
+            updateChild(child);
+
             if(child instanceof Container)
                 ((Container) child).draw();
             else
@@ -113,9 +116,14 @@ public class Container extends Component implements IDrawable {
             child.getSprite().setVisible(true);
 
             if(child instanceof Container)
+            {
+                ((Container) child).setParent(this);
                 child.setPriority(getPriority() + 1);
+            }
             else
+            {
                 child.setPriority(getPriority());
+            }
         }
     }
 
@@ -164,21 +172,34 @@ public class Container extends Component implements IDrawable {
         }
     }
 
+    public void setParent(Container parent)
+    {
+        this.parent = parent;
+    }
+
+    public Container getParent()
+    {
+        return parent;
+    }
+
+    protected void calculateSprite()
+    {
+        if(parent == null)
+        {
+            if(getRelativePosition() != null)
+                getSprite().setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
+                        Renderer.getHeight() / 100f * getRelativePosition().getY());
+
+            if(getRelativeSize() != null)
+                getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
+                        Renderer.getHeight() / 100f * getRelativeSize().getY());
+        }
+    }
+
     @Override
     public void setSprite(Sprite sprite) {
         super.setSprite(sprite);
         calculateSprite();
-    }
-
-    private void calculateSprite()
-    {
-        if(getRelativePosition() != null)
-            getSprite().setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
-                    Renderer.getHeight() / 100f * getRelativePosition().getY());
-
-        if(getRelativeSize() != null)
-            getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
-                    Renderer.getHeight() / 100f * getRelativeSize().getY());
     }
 
     @Override

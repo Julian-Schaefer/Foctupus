@@ -10,6 +10,7 @@ import foctupus.sheeper.com.foctupus.game.gui.transition.RotateTransition;
 import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.logic.Counter;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
+import foctupus.sheeper.com.foctupus.game.logic.Treasure;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
@@ -28,6 +29,8 @@ public class StartScreen extends Screen {
     private Button startButton;
     private Button bestButton;
     private Button soundButton;
+
+    private Button clicked;
 
     public StartScreen(Renderer renderer) {
         super(renderer);
@@ -133,26 +136,47 @@ public class StartScreen extends Screen {
 
     @Override
     public void onTransitionFinished(Transition transition) {
-        if(transition.getComponent() == title)
-        {
+
+        if (transition.getComponent() == title) {
             title.startTransition();
         }
 
-        if(transition.getName().equals(TRANS_SLIDE_IN) && transition.getComponent() == startButton)
+        if(clicked != null && transition.getComponent() == startButton)
         {
-            startSliding();
-            bestButton.addButtonListener(new Button.ButtonListener() {
-                @Override
-                public void onClick(Button button) {
-                    animateOut();
-                    bestButton.clearButtonListeners();
-                }
-            });
+            if(clicked == startButton)
+            {
+                finishScreen(new GameScreen(renderer, new Treasure()));
+            }
+            else if(clicked == bestButton)
+            {
+                finishScreen(new BestScreen(renderer));
+            }
         }
+        else if(clicked == null) {
 
-        if(transition.getComponent() == bestButton)
-        {
-            finish();
+            if (transition.getName().equals(TRANS_SLIDE_IN) && transition.getComponent() == startButton) {
+                startSliding();
+
+                bestButton.addButtonListener(new Button.ButtonListener() {
+                    @Override
+                    public void onClick(Button button) {
+                        animateOut();
+                        startButton.clearButtonListeners();
+                        bestButton.clearButtonListeners();
+                        clicked = bestButton;
+                    }
+                });
+
+                startButton.addButtonListener(new Button.ButtonListener() {
+                    @Override
+                    public void onClick(Button button) {
+                        animateOut();
+                        startButton.clearButtonListeners();
+                        bestButton.clearButtonListeners();
+                        clicked = startButton;
+                    }
+                });
+            }
         }
     }
 }

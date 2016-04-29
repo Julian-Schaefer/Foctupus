@@ -14,6 +14,7 @@ public abstract class Screen extends Container implements Component.ComponentLis
 
     private Component popUp;
 
+    public ScreenListener screenListener;
 
     public Screen(Renderer renderer)
     {
@@ -70,5 +71,21 @@ public abstract class Screen extends Container implements Component.ComponentLis
         float innerWidth = height * (9f/16f);
 
         return 100f * (innerWidth / width);
+    }
+
+    public void finishScreen(Screen nextScreen)
+    {
+        if(screenListener != null)
+            screenListener.OnScreenFinished(nextScreen);
+    }
+
+    public void setScreenListener(ScreenListener screenListener)
+    {
+        this.screenListener = screenListener;
+    }
+
+    public interface ScreenListener
+    {
+        void OnScreenFinished(Screen nextScreen);
     }
 }
