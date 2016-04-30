@@ -29,7 +29,6 @@ public class Game implements Tentacle.TentacleListener {
     private boolean hasCut = false;
 
     private Vector lastTouch;
-    private boolean clear;
 
     public Game(Treasure treasure)
     {
@@ -53,8 +52,8 @@ public class Game implements Tentacle.TentacleListener {
 
     public void draw(boolean gameOver)
     {
-        if(clear)
-            tentacles.clear();
+        //if(clear)
+        // tentacles.clear();
 
         ListIterator<Tentacle> iterator = tentacles.listIterator();
 
@@ -86,11 +85,6 @@ public class Game implements Tentacle.TentacleListener {
         {
             tentacle.getTexture().revalidate();
         }
-    }
-
-    public void clear()
-    {
-        clear = true;
     }
 
     public void onPress(float x, float y)

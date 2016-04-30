@@ -103,11 +103,11 @@ public class SplashScreen extends Screen {
 
     @Override
     public void revalidate() {
-        calculateSprite();
         setScreenImage(screenImageName);
         setBackgroundColor(rgbBackground);
         setProgressBackgroundColor(rgbProgressBackground);
         setProgressColor(rgbProgess);
+        calculateSprite();
     }
 
     private void loadSprite(Component component, String name, int[] rgb)

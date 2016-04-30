@@ -137,10 +137,6 @@ public class StartScreen extends Screen {
     @Override
     public void onTransitionFinished(Transition transition) {
 
-        if (transition.getComponent() == title) {
-            title.startTransition();
-        }
-
         if(clicked != null && transition.getComponent() == startButton)
         {
             if(clicked == startButton)

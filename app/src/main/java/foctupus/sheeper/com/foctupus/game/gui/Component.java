@@ -51,6 +51,8 @@ public class Component implements IUpdateble {
 
         if(current != null && !current.isFinished())
             current.update();
+        else
+            startTransition();
 
     }
 
@@ -114,10 +116,10 @@ public class Component implements IUpdateble {
 
     public void startTransition()
     {
-        stopTransition();
-
         if(transitions.size() > 0)
         {
+            stopTransition();
+
             current = transitions.removeFirst();
             current.start();
         }
