@@ -5,9 +5,7 @@ import foctupus.sheeper.com.foctupus.game.gui.Component;
 import foctupus.sheeper.com.foctupus.game.gui.Screen;
 import foctupus.sheeper.com.foctupus.game.gui.transition.PositionTransition;
 import foctupus.sheeper.com.foctupus.game.gui.transition.Transition;
-import foctupus.sheeper.com.foctupus.game.logic.Counter;
-import foctupus.sheeper.com.foctupus.game.logic.GameManager;
-import foctupus.sheeper.com.foctupus.game.logic.Scoreboard;
+import foctupus.sheeper.com.foctupus.game.logic.Bestboard;
 import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.game.renderer.Texture;
@@ -22,7 +20,7 @@ public class BestScreen extends Screen {
     private static final String TRANS_SLIDE_IN = "slide_in";
     private static final String TRANS_SLIDING= "sliding";
 
-    private Scoreboard scoreboard;
+    private Bestboard bestboard;
     private Button backButton;
 
     public BestScreen(Renderer renderer) {
@@ -34,13 +32,13 @@ public class BestScreen extends Screen {
     @Override
     protected void init() {
 
-        scoreboard = new Scoreboard(renderer);
-        scoreboard.setRelativeSize(new Vector(80, USE_RATIO));
+        bestboard = new Bestboard(renderer);
+        bestboard.setRelativeSize(new Vector(80, USE_RATIO));
 
         backButton = new Button(new Sprite(new Texture(Textures.BTN_BACK)));
         backButton.setRelativeSize(new Vector(30, USE_SAME));
 
-        addChild(scoreboard);
+        addChild(bestboard);
         addChild(backButton);
 
         animateIn();
@@ -48,10 +46,10 @@ public class BestScreen extends Screen {
 
     private void animateIn()
     {
-        Transition scoreBoardTransition = new Transition(TRANS_SLIDE_IN, scoreboard);
+        Transition scoreBoardTransition = new Transition(TRANS_SLIDE_IN, bestboard);
         scoreBoardTransition.setPositionTransition(new PositionTransition(new Vector(50, 150), new Vector(50, 65)));
         scoreBoardTransition.setListener(this);
-        scoreboard.startTransition(scoreBoardTransition);
+        bestboard.startTransition(scoreBoardTransition);
 
         Transition backButtonTransition = new Transition(TRANS_SLIDE_IN, backButton);
         backButtonTransition.setPositionTransition(new PositionTransition(new Vector(50, -50), new Vector(50, 25)));
@@ -60,9 +58,9 @@ public class BestScreen extends Screen {
 
     private void animateOut()
     {
-        Transition scoreBoardTransition = new Transition(TRANS_SLIDE_IN, scoreboard);
+        Transition scoreBoardTransition = new Transition(TRANS_SLIDE_IN, bestboard);
         scoreBoardTransition.setPositionTransition(new PositionTransition(new Vector(50, 65), new Vector(50, 150)));
-        scoreboard.startTransition(scoreBoardTransition);
+        bestboard.startTransition(scoreBoardTransition);
 
         Transition backButtonTransition = new Transition(TRANS_SLIDE_IN, backButton);
         backButtonTransition.setPositionTransition(new PositionTransition(new Vector(50, 25), new Vector(50, -50)));
@@ -82,7 +80,7 @@ public class BestScreen extends Screen {
         {
             finishScreen(new StartScreen(renderer));
         }
-        else if(transition.getComponent() == scoreboard)
+        else if(transition.getComponent() == bestboard)
         {
             backButton.addButtonListener(new Button.ButtonListener() {
                 @Override

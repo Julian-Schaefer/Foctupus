@@ -36,13 +36,13 @@ public class GameOverContainer extends Container implements Transition.Transitio
     private void init()
     {
         gameOver = new Component(new Sprite(new Texture(Textures.LBL_GAMEOVER)));
-        gameOver.setRelativeSize(new Vector(80, USE_RATIO));
+        gameOver.setRelativeSize(new Vector(82, USE_RATIO));
 
         homeButton = new Button(new Sprite(new Texture(Textures.BTN_HOME)));
-        homeButton.setRelativeSize(new Vector(40, USE_SAME));
+        homeButton.setRelativeSize(new Vector(38, USE_SAME));
 
         retryButton = new Button(new Sprite(new Texture(Textures.BTN_RETRY)));
-        retryButton.setRelativeSize(new Vector(40, USE_SAME));
+        retryButton.setRelativeSize(new Vector(38, USE_SAME));
 
         animateIn();
 
@@ -54,32 +54,32 @@ public class GameOverContainer extends Container implements Transition.Transitio
     private void animateIn()
     {
         Transition gameOverInTransition = new Transition("SLIDE_IN", gameOver);
-        gameOverInTransition.setPositionTransition(new PositionTransition(new Vector(50, 150), new Vector(50, 75)));
+        gameOverInTransition.setPositionTransition(new PositionTransition(new Vector(50, 150), new Vector(50, 85)));
         gameOverInTransition.setListener(this);
         gameOver.startTransition(gameOverInTransition);
 
         Transition homeButtonInTransition = new Transition("SLIDE_IN", homeButton);
-        homeButtonInTransition.setPositionTransition(new PositionTransition(new Vector(-50, 60), new Vector(30, 60)));
+        homeButtonInTransition.setPositionTransition(new PositionTransition(new Vector(-50, 65), new Vector(25, 65)));
         homeButton.startTransition(homeButtonInTransition);
 
         Transition retryButtonInTransition = new Transition("SLIDE_IN", retryButton);
-        retryButtonInTransition.setPositionTransition(new PositionTransition(new Vector(150, 60), new Vector(70, 60)));
+        retryButtonInTransition.setPositionTransition(new PositionTransition(new Vector(150, 65), new Vector(75, 65)));
         retryButton.startTransition(retryButtonInTransition);
     }
 
     private void animateOut()
     {
         Transition gameOverOutTransition = new Transition("SLIDE_IN", gameOver);
-        gameOverOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 75), new Vector(50, 150)));
+        gameOverOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 85), new Vector(50, 150)));
         gameOverOutTransition.setListener(this);
         gameOver.startTransition(gameOverOutTransition);
 
         Transition homeButtonOutTransition = new Transition("SLIDE_IN", homeButton);
-        homeButtonOutTransition.setPositionTransition(new PositionTransition(new Vector(30, 60), new Vector(-50, 60)));
+        homeButtonOutTransition.setPositionTransition(new PositionTransition(new Vector(25, 65), new Vector(-50, 65)));
         homeButton.startTransition(homeButtonOutTransition);
 
         Transition retryButtonOutTransition = new Transition("SLIDE_IN", retryButton);
-        retryButtonOutTransition.setPositionTransition(new PositionTransition(new Vector(70, 60), new Vector(150, 60)));
+        retryButtonOutTransition.setPositionTransition(new PositionTransition(new Vector(75, 65), new Vector(150, 65)));
         retryButton.startTransition(retryButtonOutTransition);
     }
 

@@ -12,13 +12,13 @@ import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 /**
  * Created by julianschafer on 23.04.16.
  */
-public class Scoreboard extends Container {
+public class Bestboard extends Container {
 
 
     private Component best;
     private Counter bestCounter;
 
-    public Scoreboard(Renderer renderer) {
+    public Bestboard(Renderer renderer) {
         super(renderer, new Sprite(new Texture(Textures.SCOREBOARD)));
 
         best = new Component(new Sprite(new Texture(Textures.LBL_YOURBEST)));
