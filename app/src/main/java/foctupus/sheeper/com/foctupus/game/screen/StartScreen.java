@@ -137,7 +137,7 @@ public class StartScreen extends Screen {
         {
             if(clicked == startButton)
             {
-                finishScreen(new GameScreen(renderer, new Treasure()));
+                finishScreen(new GameScreen(renderer));
             }
             else if(clicked == bestButton)
             {

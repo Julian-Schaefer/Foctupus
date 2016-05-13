@@ -21,7 +21,7 @@ public class BackgroundScreen extends Screen {
     private static final int BUBBLE_PRIO = 1000;
     private static final int BUBBLE_SPAWN_TIME = 11000;
 
-    private Component cliffs;
+    private Sprite cliffs;
     private Component beach;
     private LinkedList<Bubble> bubbles;
 
@@ -46,11 +46,7 @@ public class BackgroundScreen extends Screen {
     @Override
     protected void init()
     {
-
-        cliffs = new Component(new Sprite(new Texture(Textures.CLIFFS)));
-        cliffs.getSprite().setBottomLeftAligned(true);
-        cliffs.setRelativePosition(new Vector(0, 8));
-        cliffs.setRelativeSize(new Vector(80, USE_RATIO));
+        initCliffs();
 
         beach = new Component(new Sprite(new Texture(Textures.BEACH)));
 
@@ -58,11 +54,22 @@ public class BackgroundScreen extends Screen {
         beach.setRelativePosition(new Vector(0, 0));
         beach.setRelativeSize(new Vector(100, USE_RATIO));
 
-        addChild(cliffs);
         addChild(beach);
 
         priority = getPriority();
         treasure = new Treasure();
+    }
+
+    private void initCliffs()
+    {
+        float innerWidth = Renderer.getHeight() * (9f/16f);
+        float left = (Renderer.getWidth() - innerWidth) / 2 + (float) Maths.toPercent(30, innerWidth);
+        float height =  (float) Maths.toPercent(60, Renderer.getHeight());
+
+        cliffs = new Sprite(new Texture(Textures.CLIFFS));
+        cliffs.setPosition(left, (float) Maths.toPercent(31, Renderer.getHeight()));
+        cliffs.setSize((float) Maths.toPercent(100, innerWidth), height);
+        cliffs.setVisible(true);
     }
 
     public Treasure getTreasure()
@@ -75,6 +82,7 @@ public class BackgroundScreen extends Screen {
     public void revalidate() {
         super.revalidate();
 
+        initCliffs();
         treasure = new Treasure();
 
         for(Bubble bubble : bubbles)
@@ -99,7 +107,7 @@ public class BackgroundScreen extends Screen {
 
         if(System.currentTimeMillis() - lastBubble > BUBBLE_SPAWN_TIME)
         {
-            for(int i = 0; i < Maths.randInt(1,2); i++) {
+            for(int i = 0; i < Maths.randInt(0,2); i++) {
                 Bubble b = new Bubble();
                 bubbles.add(b);
             }
@@ -109,8 +117,9 @@ public class BackgroundScreen extends Screen {
 
     @Override
     public void draw() {
-        super.draw();
-
+        renderer.addSprite(getSprite(), priority);
+        renderer.addSprite(cliffs, priority);
+        renderer.addSprite(beach.getSprite(), priority);
         renderer.addSprite(treasure, priority);
 
         for(Bubble bubble : bubbles)

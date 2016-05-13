@@ -7,6 +7,7 @@ import foctupus.sheeper.com.foctupus.engine.gui.Screen;
 import foctupus.sheeper.com.foctupus.engine.gui.transition.ResizeTransition;
 import foctupus.sheeper.com.foctupus.engine.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.logic.Game;
+import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.logic.Score;
 import foctupus.sheeper.com.foctupus.game.logic.Treasure;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
@@ -33,10 +34,10 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     private GameState gameState = GameState.STARTING;
 
-    public GameScreen(Renderer renderer, Treasure treasure) {
+    public GameScreen(Renderer renderer) {
         super(renderer);
 
-        this.treasure = treasure;
+        this.treasure = GameManager.getBackgroundScreen().getTreasure();
 
         init();
     }
@@ -112,7 +113,7 @@ public class GameScreen extends Screen implements Game.GameListener {
         gameState = GameState.GAME_OVER;
         clearChilds();
 
-        gameOverContainer = new GameOverContainer(renderer, this, 1213);
+        gameOverContainer = new GameOverContainer(renderer, this, score.getCount());
         gameOverContainer.setRelativeSize(new Vector(100, 100));
         gameOverContainer.setRelativePosition(new Vector(50, 50));
         addChild(gameOverContainer);

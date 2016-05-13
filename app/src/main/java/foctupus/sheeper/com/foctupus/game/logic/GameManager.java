@@ -14,15 +14,9 @@ import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
  */
 public class GameManager implements Screen.ScreenListener {
 
-
-    public enum GameState
-    {
-        LOADING, STARTSCREEN, SCORESCREEN, PLAYING
-    }
-
     private Renderer renderer;
     private Screen screen;
-    private BackgroundScreen backgroundScreen;
+    private static BackgroundScreen backgroundScreen;
 
     private static GameManager instance;
 
@@ -128,6 +122,11 @@ public class GameManager implements Screen.ScreenListener {
 
         if(!(screen instanceof SplashScreen) && backgroundScreen == null)
             backgroundScreen = new BackgroundScreen();
+    }
+
+    public static BackgroundScreen getBackgroundScreen()
+    {
+        return backgroundScreen;
     }
 
 

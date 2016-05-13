@@ -46,13 +46,11 @@ public class GameOverContainer extends Container implements Transition.Transitio
         retryButton = new Button(new Sprite(new Texture(Textures.BTN_RETRY)));
         retryButton.setRelativeSize(new Vector(38, USE_SAME));
 
-        scoreboard = new Scoreboard(renderer, 49223193);
+        scoreboard = new Scoreboard(renderer, scoreCount);
         scoreboard.setRelativeSize(new Vector(95, USE_RATIO));
 
-        scoreCount = 300;
-
         if(scoreCount > FoctupusDatabase.getInstance().getBest()) {
-            //FoctupusDatabase.getInstance().setBest(scoreCount);
+            FoctupusDatabase.getInstance().setBest(scoreCount);
 
             newBest = new Component(new Sprite(new Texture(Textures.TITLE)));
             newBest.setRelativeSize(new Vector(40, USE_RATIO));
