@@ -7,23 +7,19 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
-import android.graphics.RectF;
-import android.util.Log;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import foctupus.sheeper.com.foctupus.game.renderer.Loader;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.StaticSpriteList;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.BoundingBox;
+import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.StaticSpriteList;
+import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.BoundingBox;
 import foctupus.sheeper.com.foctupus.game.tools.Function;
 import foctupus.sheeper.com.foctupus.game.tools.Maths;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by schae on 24.11.2015.
@@ -62,12 +58,9 @@ public class Tentacle extends StaticSpriteList {
 
     private boolean leftOrRight = true;
 
-    private int texture;
-
-
     public Tentacle(Treasure treasure, int animationTime)
     {
-        super(new Texture(Textures.TENTACLE));
+        super();
 
         this.treasure = treasure;
         this.animationTime = animationTime;
@@ -496,9 +489,7 @@ public class Tentacle extends StaticSpriteList {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
-
-
-        texture = Loader.loadTexture(output);
+        super.setTexture(new Texture("tentacle", Loader.loadTexture(output)));
     }
 
     public void setListener(TentacleListener l)

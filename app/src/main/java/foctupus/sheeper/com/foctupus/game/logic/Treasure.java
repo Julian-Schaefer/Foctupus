@@ -1,11 +1,10 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
-import foctupus.sheeper.com.foctupus.game.gui.Component;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
+import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by julianschafer on 23.04.16.

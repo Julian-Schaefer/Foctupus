@@ -4,10 +4,8 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
-import foctupus.sheeper.com.foctupus.R;
 import foctupus.sheeper.com.foctupus.game.FoctupusDatabase;
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Loader;
+import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 
 /**
  * Created by julianschafer on 23.04.16.

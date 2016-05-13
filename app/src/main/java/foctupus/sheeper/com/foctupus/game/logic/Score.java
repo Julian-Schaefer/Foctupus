@@ -1,50 +1,37 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
-import foctupus.sheeper.com.foctupus.game.gui.Container;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.gui.Component;
+import foctupus.sheeper.com.foctupus.engine.gui.Container;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
+import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by julianschafer on 23.04.16.
  */
-public class Score extends Container {
+public class Score extends Counter {
 
-    private Counter score;
+    private Component background;
 
-    public Score(Renderer renderer) {
-        this(renderer, 0);
+    public Score() {
+        this(0);
     }
 
-    public Score(Renderer renderer, int scoreCount) {
-        super(renderer, new Sprite(new Texture(Textures.SCORE_BACKGROUND)));
+    public Score(int score) {
+        super(score);
 
         setPriority(Game.SCORE_PRIO);
+        setAdjustWidth(true);
 
-        setRelativeSize(new Vector(USE_RATIO, 11));
+        setRelativeSize(new Vector(1, 9));
         setRelativePosition(new Vector(50, 85));
 
-        score = new Counter(scoreCount);
-        score.setRelativePosition(new Vector(50, 50));
-        score.setRelativeSize(new Vector(80, 80));
+        background = new Component(new Sprite(new Texture(Textures.SCORE_BACKGROUND)));
+        background.setRelativePosition(new Vector(50, 50));
+        background.setRelativeSize(new Vector(125, 125));
 
-        addChild(score);
-    }
-
-    public void increase()
-    {
-        score.increaseCount();
-    }
-
-    public void reset()
-    {
-        score.reset();
-    }
-
-    public int getCount()
-    {
-        return score.getCount();
+        addChild(background);
     }
 }

@@ -1,12 +1,11 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.gui.Container;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by julianschafer on 23.04.16.
@@ -52,9 +51,6 @@ public class Game implements Tentacle.TentacleListener {
 
     public void draw(boolean gameOver)
     {
-        //if(clear)
-        // tentacles.clear();
-
         ListIterator<Tentacle> iterator = tentacles.listIterator();
 
         while(iterator.hasNext())
@@ -70,7 +66,7 @@ public class Game implements Tentacle.TentacleListener {
                 iterator.add(createTentacle());
             }
             else
-                renderer.addSpriteList(tentacle, 15);
+                renderer.addSpriteList(tentacle, Container.STD_PRIORITY);
         }
 
         if(!gameOver) {

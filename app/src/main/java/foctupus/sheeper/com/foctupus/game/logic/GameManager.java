@@ -4,14 +4,10 @@ import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.MainActivity;
-import foctupus.sheeper.com.foctupus.game.gui.Component;
-import foctupus.sheeper.com.foctupus.game.gui.Screen;
-import foctupus.sheeper.com.foctupus.game.gui.SplashScreen;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.screen.BestScreen;
-import foctupus.sheeper.com.foctupus.screen.GameScreen;
-import foctupus.sheeper.com.foctupus.screen.StartScreen;
+import foctupus.sheeper.com.foctupus.engine.gui.Screen;
+import foctupus.sheeper.com.foctupus.engine.gui.SplashScreen;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
 
 /**
  * Created by schae on 04.02.2016.

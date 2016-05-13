@@ -5,11 +5,7 @@ import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.MotionEvent;
 
-import foctupus.sheeper.com.foctupus.MainActivity;
-import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
 
 /**
  * Created by schae on 07.11.2015.
@@ -58,7 +54,7 @@ public class MyGLSurfaceView extends GLSurfaceView {
                     @Override
                     public void run() {
                         gameManager.onTouch(event.getX(),
-                                foctupus.sheeper.com.foctupus.game.renderer.Renderer.getHeight() - event.getY(), event.getAction());
+                                foctupus.sheeper.com.foctupus.engine.renderer.Renderer.getHeight() - event.getY(), event.getAction());
                     }
                 });
             }

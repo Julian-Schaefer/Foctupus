@@ -12,11 +12,11 @@ import android.graphics.RectF;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.game.renderer.Loader;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**

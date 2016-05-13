@@ -2,7 +2,7 @@ package foctupus.sheeper.com.foctupus.game.tools;
 
 import java.util.Random;
 
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by schae on 11.11.2015.

@@ -2,13 +2,14 @@ package foctupus.sheeper.com.foctupus.game.logic;
 
 import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.game.gui.Component;
-import foctupus.sheeper.com.foctupus.game.gui.Container;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Sprite;
-import foctupus.sheeper.com.foctupus.game.renderer.Texture;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
-import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.engine.gui.Component;
+import foctupus.sheeper.com.foctupus.engine.gui.Container;
+import foctupus.sheeper.com.foctupus.engine.renderer.GenericSpriteList;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
+import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by schae on 04.12.2015.
@@ -16,6 +17,10 @@ import foctupus.sheeper.com.foctupus.game.renderer.util.Vector;
 public class Counter extends Container {
 
     private int count = 0;
+    private boolean adjustWidth;
+    private float relativeWidth;
+
+    private GenericSpriteList numbers;
 
     public Counter()
     {
@@ -26,78 +31,83 @@ public class Counter extends Container {
     {
         super(Renderer.getInstance());
         getSprite().setVisible(false);
+
+        numbers = new GenericSpriteList();
         this.count = count;
     }
 
     protected void validate()
     {
-        calculateSprite();
+        if(getSprite().getXSize() > 0 && getSprite().getYSize() > 0) {
+            numbers.clear();
 
-        if(getRelativePosition() != null && getRelativeSize() != null) {
-            clearChilds();
-
-            float zeroRatio = (float) Texture.calcRatio(Renderer.getBitmap(Textures.CHAR_ZERO));
+            float zeroRatio = Texture.calcRatio(Renderer.getBitmap(Textures.CHAR_ONE));
 
             String numberStr = String.valueOf(count);
             int length = numberStr.length();
 
-            float numberHeight = 100f;
+            float numberHeight = getSprite().getYSize();
             float numberWidth = numberHeight / zeroRatio;
 
-            float cellWidth = (numberWidth * 1.2f);
+            float cellWidth = (numberWidth * 1.1f);
 
-            if (cellWidth * length > 100f) {
-                cellWidth = 100f / length;
-                numberWidth = cellWidth * 0.8f;
-                numberHeight = numberWidth * zeroRatio;
+            if (cellWidth * length > getSprite().getXSize()) {
+                if(!adjustWidth)
+                {
+                    cellWidth = getSprite().getXSize() / length;
+                    numberWidth = cellWidth * 0.9f;
+                    numberHeight = numberWidth * zeroRatio;
+                }
             }
 
+            setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
+
             int cell = 0;
-            float startPos = 50f - (cellWidth * length / 2f);
+            float startPos = getSprite().getActualXPos() - (cellWidth * length / 2f);
 
             for (char c : numberStr.toCharArray()) {
-                Component number = getNumber(c);
-                number.setRelativeSize(new Vector(numberWidth, numberHeight));
-                number.setRelativePosition(new Vector(startPos + (cell * cellWidth) + (cellWidth / 2f), 50f));
-                addChild(number);
+                Sprite number = getNumber(c);
+                number.setSize(numberWidth, numberHeight);
+                number.setPosition(startPos + (cell * cellWidth) + (cellWidth / 2f), getSprite().getActualYPos());
+                number.setVisible(true);
+
+                numbers.add(number);
 
                 cell++;
             }
         }
-
     }
 
     @Override
-    public void setRelativePosition(Vector relativePosition) {
-        super.setRelativePosition(relativePosition);
+    public void draw() {
+        super.draw();
+
         validate();
+        renderer.addSpriteList(numbers, getPriority());
     }
 
-    @Override
-    public void setRelativeSize(Vector relativeSize) {
-        super.setRelativeSize(relativeSize);
-        validate();
-    }
-
-    private Component getNumber(char number)
+    public void setAdjustWidth(boolean adjustWidth)
     {
-        Component num = new Component();
+        this.adjustWidth = adjustWidth;
+    }
+
+    private Sprite getNumber(char number)
+    {
+        Sprite num;
         switch (number)
         {
-            case '0': num.setSprite(new Sprite(new Texture(Textures.CHAR_ZERO))); break;
-            case '1': num.setSprite(new Sprite(new Texture(Textures.CHAR_ONE))); break;
-            case '2': num.setSprite(new Sprite(new Texture(Textures.CHAR_TWO))); break;
-            case '3': num.setSprite(new Sprite(new Texture(Textures.CHAR_THREE))); break;
-            case '4': num.setSprite(new Sprite(new Texture(Textures.CHAR_FOUR))); break;
-            case '5': num.setSprite(new Sprite(new Texture(Textures.CHAR_FIVE))); break;
-            case '6': num.setSprite(new Sprite(new Texture(Textures.CHAR_SIX))); break;
-            case '7': num.setSprite(new Sprite(new Texture(Textures.CHAR_SEVEN))); break;
-            case '8': num.setSprite(new Sprite(new Texture(Textures.CHAR_EIGHT))); break;
-            case '9': num.setSprite(new Sprite(new Texture(Textures.CHAR_NINE))); break;
-            default: num.setSprite(new Sprite(new Texture(Textures.CHAR_ZERO))); break;
+            case '0': num = new Sprite(new Texture(Textures.CHAR_ZERO)); break;
+            case '1': num = new Sprite(new Texture(Textures.CHAR_ONE)); break;
+            case '2': num = new Sprite(new Texture(Textures.CHAR_TWO)); break;
+            case '3': num = new Sprite(new Texture(Textures.CHAR_THREE)); break;
+            case '4': num = new Sprite(new Texture(Textures.CHAR_FOUR)); break;
+            case '5': num = new Sprite(new Texture(Textures.CHAR_FIVE)); break;
+            case '6': num = new Sprite(new Texture(Textures.CHAR_SIX)); break;
+            case '7': num = new Sprite(new Texture(Textures.CHAR_SEVEN)); break;
+            case '8': num = new Sprite(new Texture(Textures.CHAR_EIGHT)); break;
+            case '9': num = new Sprite(new Texture(Textures.CHAR_NINE)); break;
+            default: num = new Sprite(new Texture(Textures.CHAR_ZERO)); break;
         }
-        if(getSprite().isBottomLeftAligned())
-            num.getSprite().setBottomLeftAligned(true);
 
         return num;
     }

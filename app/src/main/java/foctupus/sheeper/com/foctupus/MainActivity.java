@@ -9,9 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdListener;
@@ -21,7 +19,6 @@ import com.google.android.gms.ads.AdView;
 
 import foctupus.sheeper.com.foctupus.game.MyGLSurfaceView;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
 
 public class MainActivity extends Activity {
 

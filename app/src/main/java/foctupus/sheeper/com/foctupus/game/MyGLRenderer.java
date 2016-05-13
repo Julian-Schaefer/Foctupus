@@ -11,10 +11,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
-import foctupus.sheeper.com.foctupus.game.renderer.Environment;
-import foctupus.sheeper.com.foctupus.game.renderer.Loader;
-import foctupus.sheeper.com.foctupus.game.renderer.Renderer;
-import foctupus.sheeper.com.foctupus.game.renderer.Textures;
+import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 
 /**
  * Created by schae on 07.11.2015.
