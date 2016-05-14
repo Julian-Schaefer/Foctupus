@@ -131,7 +131,7 @@ public class Rectangle {
 
     public void setSize(Vector vec)
     {
-        setSize((int) vec.getX(), (int) vec.getY());
+        setSize( vec.getX(), vec.getY());
     }
 
     public void setBottomLeftAligned(boolean bool)

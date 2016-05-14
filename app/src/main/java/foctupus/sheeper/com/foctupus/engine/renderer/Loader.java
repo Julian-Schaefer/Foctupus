@@ -35,7 +35,6 @@ public final class Loader {
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID, options);
 
-
         return bitmap;
     }
 

@@ -60,12 +60,12 @@ public class StartScreen extends Screen {
     private void animateIn()
     {
         Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(0, USE_RATIO), new Vector(100, USE_RATIO)));
+        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(0, USE_RATIO), new Vector(98, USE_RATIO)));
         titleGrowTransition.setListener(this);
         title.addTransition(titleGrowTransition);
 
         Transition titleShrinkTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(100, USE_RATIO), new Vector(94, USE_RATIO)));
+        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, USE_RATIO), new Vector(92, USE_RATIO)));
         title.addTransition(titleShrinkTransition);
 
         title.startTransition();
@@ -87,13 +87,13 @@ public class StartScreen extends Screen {
     private void animateOut()
     {
         Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(94, USE_RATIO), new Vector(100, USE_RATIO)));
+        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(92, USE_RATIO), new Vector(98, USE_RATIO)));
         titleGrowTransition.setListener(this);
         titleGrowTransition.setAnimationTime(200);
         title.addTransition(titleGrowTransition);
 
         Transition titleShrinkTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(100, USE_RATIO), new Vector(0, USE_RATIO)));
+        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, USE_RATIO), new Vector(0, USE_RATIO)));
         titleShrinkTransition.setAnimationTime(400);
         title.addTransition(titleShrinkTransition);
 

@@ -32,16 +32,16 @@ public class Scoreboard extends Container {
         score = new Counter(scoreCount);
         best = new Counter(FoctupusDatabase.getInstance().getBest());
 
-        lblScore.setRelativePosition(new Vector(31, 75));
+        lblScore.setRelativePosition(new Vector(31, 72));
         lblScore.setRelativeSize(new Vector(34, 20));
 
-        lblBest.setRelativePosition(new Vector(30, 25));
+        lblBest.setRelativePosition(new Vector(30, 28));
         lblBest.setRelativeSize(new Vector(34, 20));
 
-        score.setRelativePosition(new Vector(70, 75));
+        score.setRelativePosition(new Vector(70, 72));
         score.setRelativeSize(new Vector(39, 18));
 
-        best.setRelativePosition(new Vector(70, 25));
+        best.setRelativePosition(new Vector(70, 28));
         best.setRelativeSize(new Vector(39, 18));
 
         addChild(lblScore);

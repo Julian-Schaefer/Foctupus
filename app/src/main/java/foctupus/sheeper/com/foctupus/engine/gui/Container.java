@@ -51,7 +51,8 @@ public class Container extends Component implements IDrawable {
 
         for(Component child : childs)
         {
-            updateChild(child);
+            if(child.gotUpdated())
+                updateChild(child);
 
             if(child instanceof Container)
                 ((Container) child).draw();
@@ -62,12 +63,6 @@ public class Container extends Component implements IDrawable {
 
     @Override
     public void onTouch(float x, float y, int mode) {
-        /*for(int i = 0; i < childs.size(); i++)
-        {
-            Component child = childs.get(i);
-            child.onTouch(x, y, mode);
-        }*/
-
         for(Component child : childs)
             child.onTouch(x, y, mode);
     }
@@ -168,11 +163,23 @@ public class Container extends Component implements IDrawable {
                 height = sprite.getYSize() / 100f * relativeSize.getY();
             }
 
-            childSprite.setSize(width, height);
+            if(width != childSprite.getXSize() || height != childSprite.getYSize())
+                childSprite.setSize(width, height);
 
             childSprite.setPosition(bottomLeft.getX() + (sprite.getXSize() / 100f * relativePosition.getX()),
                     bottomLeft.getY() + (sprite.getYSize() / 100f * relativePosition.getY()));
         }
+
+        if(child instanceof Container)
+        {
+            ((Container) child).updateChilds();
+        }
+    }
+
+    public void updateChilds()
+    {
+        for(Component child : childs)
+            updateChild(child);
     }
 
     public void setParent(Container parent)

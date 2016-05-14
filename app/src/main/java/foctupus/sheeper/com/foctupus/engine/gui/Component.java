@@ -24,7 +24,7 @@ public class Component implements IUpdateble {
     private Vector relativeSize;
 
     private int priority;
-
+    private boolean updated;
 
     public Component()
     {
@@ -80,6 +80,7 @@ public class Component implements IUpdateble {
     public void setRelativePosition(Vector relativePosition)
     {
         this.relativePosition = relativePosition;
+        updated = true;
     }
 
     public Vector getRelativeSize()
@@ -90,6 +91,14 @@ public class Component implements IUpdateble {
     public void setRelativeSize(Vector relativeSize)
     {
         this.relativeSize = relativeSize;
+        updated = true;
+    }
+
+    public boolean gotUpdated()
+    {
+        boolean temp = updated;
+        updated = false;
+        return temp;
     }
 
     public void addTransition(Transition transition)

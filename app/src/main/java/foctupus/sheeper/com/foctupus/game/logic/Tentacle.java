@@ -489,7 +489,7 @@ public class Tentacle extends StaticSpriteList {
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
         canvas.drawBitmap(bitmap, rect, rect, paint);
 
-        super.setTexture(new Texture("tentacle", Loader.loadTexture(output)));
+        setTexture(new Texture("tentacle", Loader.loadTexture(output)));
     }
 
     public void setListener(TentacleListener l)

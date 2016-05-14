@@ -1,5 +1,7 @@
 package foctupus.sheeper.com.foctupus.engine.renderer;
 
+import android.util.Log;
+
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -104,5 +106,10 @@ public class Sprite extends Rectangle {
         return isVisible;
     }
 
-
+    @Override
+    public void setSize(float x, float y) {
+        super.setSize(x, y);
+        if(getTexture() != null)
+        Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " y=" + y);
+    }
 }
