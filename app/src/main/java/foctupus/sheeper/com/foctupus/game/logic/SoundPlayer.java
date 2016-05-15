@@ -4,6 +4,7 @@ import android.content.Context;
 import android.media.AudioManager;
 import android.media.SoundPool;
 
+import foctupus.sheeper.com.foctupus.R;
 import foctupus.sheeper.com.foctupus.game.FoctupusDatabase;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 
@@ -53,7 +54,7 @@ public class SoundPlayer {
 
     private void loadSounds()
     {
-        //cutSoundID = soundPool.load(context, R.raw.test, 1);
+        cutSoundID = soundPool.load(context, R.raw.swipe, 1);
     }
 
     public void playCutSound()

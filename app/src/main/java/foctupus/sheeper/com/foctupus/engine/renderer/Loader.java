@@ -9,6 +9,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
+import android.util.Log;
 
 public final class Loader {
 
@@ -34,6 +35,9 @@ public final class Loader {
         options.inScaled = false;
 
         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), resID, options);
+
+        if(bitmap == null)
+            Log.e("ERRORMSE", name);
 
         return bitmap;
     }

@@ -22,6 +22,9 @@ public class Textures {
     public static final String BTN_BEST = "btn_best";
     public static final String BTN_HOME = "btn_home";
     public static final String BTN_RETRY = "btn_retry";
+    public static final String BTN_HELP = "btn_help";
+    public static final String BTN_MUTED = "btn_muted";
+    public static final String BTN_UNMUTED = "btn_unmuted";
 
     public static final String LBL_BEST = "lbl_best";
     public static final String LBL_GAMEOVER = "lbl_gameover";
@@ -58,6 +61,9 @@ public class Textures {
             BTN_HOME,
             BTN_RETRY,
             BTN_START,
+            BTN_HELP,
+            BTN_MUTED,
+            BTN_UNMUTED,
             LBL_BEST,
             LBL_GAMEOVER,
             LBL_SCORE,

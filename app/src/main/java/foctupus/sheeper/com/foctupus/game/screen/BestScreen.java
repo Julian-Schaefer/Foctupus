@@ -33,10 +33,10 @@ public class BestScreen extends Screen {
     protected void init() {
 
         bestboard = new Bestboard(renderer);
-        bestboard.setRelativeSize(new Vector(80, USE_RATIO));
+        bestboard.setRelativeSize(new Vector(90, USE_RATIO));
 
         backButton = new Button(new Sprite(new Texture(Textures.BTN_BACK)));
-        backButton.setRelativeSize(new Vector(30, USE_SAME));
+        backButton.setRelativeSize(new Vector(32, USE_SAME));
 
         addChild(bestboard);
         addChild(backButton);

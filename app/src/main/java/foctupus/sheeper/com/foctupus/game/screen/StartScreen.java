@@ -6,6 +6,7 @@ import foctupus.sheeper.com.foctupus.engine.gui.Screen;
 import foctupus.sheeper.com.foctupus.engine.gui.transition.PositionTransition;
 import foctupus.sheeper.com.foctupus.engine.gui.transition.ResizeTransition;
 import foctupus.sheeper.com.foctupus.engine.gui.transition.Transition;
+import foctupus.sheeper.com.foctupus.game.FoctupusDatabase;
 import foctupus.sheeper.com.foctupus.game.logic.Treasure;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
@@ -20,11 +21,13 @@ public class StartScreen extends Screen {
 
     private static final String TRANS_SLIDE_IN = "slide_in";
     private static final String TRANS_SLIDING= "sliding";
+    private static final String TRANS_SLIDE_OUT = "slide_out";
 
     private Component title;
     private Button startButton;
     private Button bestButton;
     private Button soundButton;
+    private Button helpButton;
 
     private Button clicked;
 
@@ -46,15 +49,44 @@ public class StartScreen extends Screen {
         bestButton = new Button(new Sprite(new Texture(Textures.BTN_BEST)));
         bestButton.setRelativeSize(new Vector(38, USE_SAME));
 
-        soundButton = new Button(new Sprite(new Texture(Textures.BTN_RETRY)));
+        soundButton = new Button(new Sprite(getSoundButtonTexture()));
         soundButton.setRelativeSize(new Vector(22, USE_SAME));
+        soundButton.setRelativePosition(new Vector(25, 20));
+        soundButton.addButtonListener(new Button.ButtonListener() {
+            @Override
+            public void onClick(Button button)
+            {
+                if(FoctupusDatabase.getInstance().isSoundEnabled())
+                    FoctupusDatabase.getInstance().setSoundEnabled(false);
+                else
+                    FoctupusDatabase.getInstance().setSoundEnabled(true);
+
+                soundButton.getSprite().setTexture(getSoundButtonTexture());
+            }
+        });
+
+        helpButton = new Button(new Sprite(new Texture(Textures.BTN_HELP)));
+        helpButton.setRelativeSize(new Vector(22, USE_SAME));
+        helpButton.setRelativePosition(new Vector(75, 20));
 
         addChild(title);
         addChild(startButton);
         addChild(bestButton);
         addChild(soundButton);
+        addChild(helpButton);
+
+        helpButton.getSprite().setVisible(false);
+        soundButton.getSprite().setVisible(false);
 
         animateIn();
+    }
+
+    private Texture getSoundButtonTexture()
+    {
+        if(FoctupusDatabase.getInstance().isSoundEnabled())
+            return new Texture(Textures.BTN_UNMUTED);
+        else
+            return new Texture(Textures.BTN_MUTED);
     }
 
     private void animateIn()
@@ -78,40 +110,35 @@ public class StartScreen extends Screen {
         Transition bestTransition = new Transition(TRANS_SLIDE_IN, bestButton);
         bestTransition.setPositionTransition(new PositionTransition(new Vector(150, 38), new Vector(50, 38)));
         bestButton.startTransition(bestTransition);
-
-        Transition soundTransition = new Transition(TRANS_SLIDE_IN, soundButton);
-        soundTransition.setPositionTransition(new PositionTransition(new Vector(-50, 20), new Vector(30, 20)));
-        soundButton.startTransition(soundTransition);
     }
 
     private void animateOut()
     {
-        Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
+        helpButton.getSprite().setVisible(false);
+        soundButton.getSprite().setVisible(false);
+
+        Transition titleGrowTransition = new Transition(TRANS_SLIDE_OUT, title);
         titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(92, USE_RATIO), new Vector(98, USE_RATIO)));
         titleGrowTransition.setListener(this);
         titleGrowTransition.setAnimationTime(200);
         title.addTransition(titleGrowTransition);
 
-        Transition titleShrinkTransition = new Transition(TRANS_SLIDE_IN, title);
+        Transition titleShrinkTransition = new Transition(TRANS_SLIDE_OUT, title);
         titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, USE_RATIO), new Vector(0, USE_RATIO)));
         titleShrinkTransition.setAnimationTime(400);
         title.addTransition(titleShrinkTransition);
 
         title.startTransition();
 
-        Transition startTransition = new Transition(TRANS_SLIDE_IN, startButton);
+        Transition startTransition = new Transition(TRANS_SLIDE_OUT, startButton);
         startTransition.setPositionTransition(new PositionTransition(new Vector(50, 67), new Vector(-50, 67)));
         startTransition.setListener(this);
         startButton.startTransition(startTransition);
 
-        Transition bestTransition = new Transition(TRANS_SLIDE_IN, bestButton);
+        Transition bestTransition = new Transition(TRANS_SLIDE_OUT, bestButton);
         bestTransition.setPositionTransition(new PositionTransition(new Vector(50, 38), new Vector(150, 38)));
         bestTransition.setListener(this);
         bestButton.startTransition(bestTransition);
-
-        Transition soundTransition = new Transition(TRANS_SLIDE_IN, soundButton);
-        soundTransition.setPositionTransition(new PositionTransition(new Vector(30, 20), new Vector(-50, 20)));
-        soundButton.startTransition(soundTransition);
     }
 
     private void startSliding()
@@ -148,6 +175,9 @@ public class StartScreen extends Screen {
 
             if (transition.getName().equals(TRANS_SLIDE_IN) && transition.getComponent() == startButton) {
                 startSliding();
+
+                helpButton.getSprite().setVisible(true);
+                soundButton.getSprite().setVisible(true);
 
                 bestButton.addButtonListener(new Button.ButtonListener() {
                     @Override
