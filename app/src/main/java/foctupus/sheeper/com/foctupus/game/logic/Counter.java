@@ -58,9 +58,9 @@ public class Counter extends Container {
                     numberWidth = cellWidth * 0.9f;
                     numberHeight = numberWidth * zeroRatio;
                 }
+                else
+                    super.setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
             }
-
-            setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
 
             int cell = 0;
             float startPos = getSprite().getActualXPos() - (cellWidth * length / 2f);
@@ -79,16 +79,14 @@ public class Counter extends Container {
     }
 
     @Override
-    public void draw() {
-        super.draw();
-
-        validate();
-        renderer.addSpriteList(numbers, getPriority());
+    public void update()
+    {
     }
 
-    public void setAdjustWidth(boolean adjustWidth)
-    {
-        this.adjustWidth = adjustWidth;
+    @Override
+    public void draw() {
+        super.draw();
+        renderer.addSpriteList(numbers, getPriority());
     }
 
     private Sprite getNumber(char number)
@@ -114,19 +112,25 @@ public class Counter extends Container {
 
     public void increaseCount()
     {
-        count++;
-        validate();
+        setCount(++count);
     }
 
     public void setCount(int count)
     {
         this.count = count;
-        validate();
+        updated = true;
     }
 
     public void reset()
     {
         count = 0;
+        updated = true;
+    }
+
+    @Override
+    public void updateChilds()
+    {
+        super.updateChilds();
         validate();
     }
 
@@ -135,4 +139,8 @@ public class Counter extends Container {
         return count;
     }
 
+    public void setAdjustWidth(boolean adjustWidth)
+    {
+        this.adjustWidth = adjustWidth;
+    }
 }

@@ -461,7 +461,7 @@ public class Tentacle extends StaticSpriteList {
         startY = y;
     }
 
-    private void createTexture()
+    public void createTexture()
     {
         Bitmap bitmap = Bitmap.createBitmap(distance + (int) endSize, (int) currentSize, Bitmap.Config.ARGB_8888);
 
@@ -479,7 +479,6 @@ public class Tentacle extends StaticSpriteList {
 
         paint.setFilterBitmap(true);
         paint.setAntiAlias(true);
-        canvas.drawARGB(0, 0, 0, 0);
         paint.setColor(color);
 
         canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);

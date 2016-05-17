@@ -6,6 +6,8 @@ import java.util.ListIterator;
 import foctupus.sheeper.com.foctupus.engine.gui.Container;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.game.MyGLRenderer;
+import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by julianschafer on 23.04.16.
@@ -79,12 +81,13 @@ public class Game implements Tentacle.TentacleListener {
     {
         for(Tentacle tentacle : tentacles)
         {
-            tentacle.getTexture().revalidate();
+            tentacle.createTexture();
         }
     }
 
     public void onPress(float x, float y)
     {
+        slider.reset();
         lastTouch = new Vector(x, y);
         slider.addPoint(x, y);
     }
@@ -92,14 +95,18 @@ public class Game implements Tentacle.TentacleListener {
     public void onMove(float x, float y)
     {
         Vector currentTouch = new Vector(x, y);
-        for(Tentacle tentacle : tentacles)
+        if(lastTouch != null && Maths.lengthOf(currentTouch, lastTouch) < Renderer.getHeight()/4)
         {
-            if(!hasCut)
-                tentacle.checkPoints(lastTouch, currentTouch);
+            for (Tentacle tentacle : tentacles)
+            {
+                if (!hasCut)
+                    tentacle.checkPoints(lastTouch, currentTouch);
+            }
+
+            slider.addPoint(x, y);
         }
 
         lastTouch = currentTouch;
-        slider.addPoint(x, y);
     }
 
     public void onRelease(float x, float y)

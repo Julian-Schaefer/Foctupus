@@ -126,8 +126,9 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     @Override
     public void revalidate() {
-        super.revalidate();
         game.revalidate();
+        score.revalidate();
+        gameOverContainer.revalidate();
     }
 
     @Override
