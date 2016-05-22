@@ -24,6 +24,9 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
     private boolean created = false;
 
+    private long lastTime;
+    private long lastWritten;
+
     public MyGLRenderer(Context context)
     {
         FoctupusDatabase.getInstance(context);
@@ -85,12 +88,21 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
 
-        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
+        long curTime = System.currentTimeMillis();
+        long deltaTime = curTime - lastTime;
+        double aproxFps = 1000 / deltaTime;
+        lastTime = curTime;
 
-        if (gameManager != null) {
+        if(System.currentTimeMillis() - lastWritten > 250)
+        {
+            Log.d("FPS", "Currently: " + aproxFps);
+            lastWritten = System.currentTimeMillis();
+        }
+
+        //if (gameManager != null) {
             gameManager.update();
             gameManager.draw();
-        }
+        //}
     }
 
 }

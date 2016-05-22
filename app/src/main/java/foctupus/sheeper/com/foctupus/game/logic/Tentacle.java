@@ -3,10 +3,12 @@ package foctupus.sheeper.com.foctupus.game.logic;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.graphics.Shader;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -28,16 +30,16 @@ public class Tentacle extends StaticSpriteList {
 
 
     private static final int ANIMATE_OUT_TIME = 700;
-    private static final double END_SIZE = 2.5;
-    private static final double SHRINK_FACTOR = 0.98;
+    private static final float END_SIZE = 2.5f;
+    private static final float SHRINK_FACTOR = 0.98f;
 
     private TentacleListener listener;
 
-    private static int distance = 20;
+    private static float distance = 20;
 
     private int startX, startY;
-    private double dirX, dirY;
-    private double divX, divY;
+    private float dirX, dirY;
+    private float divX, divY;
 
     private Treasure treasure;
     private Vector[] way;
@@ -234,86 +236,84 @@ public class Tentacle extends StaticSpriteList {
         dirX = Renderer.getWidth() / 2 - startX;
         dirY = Renderer.getHeight() / 2 - startY;
 
+
         int divisions = Maths.randInt(3, 5);
         divX = dirX / divisions;
         divY = dirY / divisions;
 
-
         double length = Math.sqrt(dirX * dirX + dirY * dirY);
-        double tX = dirX / length;
-        double tY = dirY / length;
+        dirX = (float) (dirX / length);
+        dirY = (float) (dirY / length);
 
 
+        Function[] functions = new Function[divisions];
 
-        dirX = (tX * 1);
-        dirY = (tY * 1);
+        boolean isLeft = true;
 
+        int maxDeflection = 0;
 
-        int[] deflections = new int[divisions];
-
-        boolean left = true;
         for (int i = 0; i < divisions; i++) {
 
-
             int deflection = Maths.randInt(Renderer.getHeight() / 50, Renderer.getHeight() / 35);
-            deflections[i] = deflection;
 
+            if(deflection > maxDeflection)
+                maxDeflection = deflection;
 
-            if (left) {
-                left = false;
-                deflections[i] *= -1;
-            } else {
-                left = true;
+            if (isLeft)
+            {
+                isLeft = false;
+                deflection *= -1;
             }
+            else
+            {
+                isLeft = true;
+            }
+
+            float funcB = deflection;
+            float funcA = (-funcB) / (float)Math.pow((Maths.lengthOf(divX, divY)) / 2, 2);
+
+            functions[i] = new Function(funcA, funcB);
         }
 
-        calcDistance(deflections, (int) length / divisions);
+        calcDistance(maxDeflection, length / divisions);
 
 
         LinkedList<Vector> wayPositions = new LinkedList<>();
         wayPositions.add(new Vector(startX, startY));
 
+        int width = Maths.lengthOf(divX, divY);
+        int left = width / 2;
+
+        float currentX = startX;
+        float currentY = startY;
 
 
-        int leftX = (-Maths.lengthOf(divX, divY)) / 2;
-        int rightX = leftX * -1;
+        int totalLength = width * divisions;
+        int current = 1;
+        int last = 0;
 
-        float currentX = startX, currentY = startY;
+        Function lastFunc = functions[last / width];
 
-        for (int i = 0; i < divisions; i++) {
+        while(current < totalLength)
+        {
+            Function func = functions[current / width];
 
-            float funcB = deflections[i];
-            float funcA = (-funcB) / (float) Math.pow(rightX, 2);
+            if (Maths.lengthOf(current - last, func.valueAt((current % width) - left, 2) - lastFunc.valueAt((last % width) - left, 2)) > distance)
+            {
+                isLeft = true;
+                if (func.getA() >= 0)
+                    isLeft = false;
 
-            Function f = new Function(funcA, funcB);
+                Vector point = getPointFromDeflection(new Vector(currentX, currentY), (int) func.valueAt((current % width) - left, 2), isLeft);
+                wayPositions.add(point);
 
-
-            int tempX = leftX;
-            int lastX = leftX;
-
-            while (tempX <= rightX) {
-                double deflection = f.valueAt(tempX, 2);
-
-                if(Maths.lengthOf(new Vector(tempX, (float) deflection), new Vector(lastX, (float) f.valueAt(lastX, 2))) >= distance) {
-
-
-                    boolean isLeft = true;
-                    if (deflection >= 0) {
-                        isLeft = false;
-                    }
-
-                    Vector point = getPointFromDeflection(new Vector(currentX, currentY), (int) deflection, isLeft);
-
-                    wayPositions.add(point);
-
-                    lastX = tempX;
-                }
-
-                currentX += dirX * 1;
-                currentY += dirY * 1;
-
-                tempX += 1;
+                last = current;
+                lastFunc = functions[last / width];
             }
+
+            current++;
+            currentX += dirX;
+            currentY += dirY;
         }
 
         wayPositions.add(new Vector(Renderer.getWidth() / 2, Renderer.getHeight() / 2));
@@ -353,18 +353,8 @@ public class Tentacle extends StaticSpriteList {
         return tPart;
     }
 
-    private void calcDistance(int[] deflections, int pDistance)
+    private void calcDistance(int maxDeflection, double pDistance)
     {
-        int maxDef = deflections[0];
-        for(int def : deflections)
-        {
-            if(def > maxDef)
-            {
-                maxDef = def;
-            }
-        }
-
-
         /*
         Hier ist die Version mit der Punkt zu Punkt distanz (Pythagoras)
 
@@ -384,33 +374,33 @@ public class Tentacle extends StaticSpriteList {
 
         */
 
-        int percentDistance = (int) Maths.toPercent(1.1, Renderer.getHeight());
+        double percentDistance;
 
-        double x = (double) maxDef / (double) percentDistance;
-        distance = (int) (((double) pDistance/2) / x);
+        if(leftOrRight)
+            percentDistance = Maths.toPercent(2.4, Renderer.getWidth());
+        else
+            percentDistance = Maths.toPercent(1.2, Renderer.getHeight());
+
+        double x = maxDeflection / percentDistance;
+        distance = (float) ((pDistance/2) / x);
     }
 
-    private Vector getPointFromDeflection(Vector point, int deflection, boolean left)
+    private Vector getPointFromDeflection(Vector point, double deflection, boolean left)
     {
-        int eX = (int) point.getX();
-        int eY = (int) point.getY();
+        float eX = point.getX();
+        float eY = point.getY();
 
-        Vector normal = new Vector((float) -divY, (float) divX);
+        Vector normal = new Vector(-divY, divX);
 
         double normalSum = Math.pow(normal.getX(), 2) + Math.pow(normal.getY(), 2);
-        deflection = (int ) Math.pow(deflection, 2);
+        deflection = Math.pow(deflection, 2);
 
-        float multiplicator = (float) Math.sqrt((double) deflection / normalSum);
-
+        float multiplicator = (float) Math.sqrt(deflection / normalSum);
 
         if(left)
-        {
             return new Vector(eX - (normal.getX() * multiplicator), eY - (normal.getY() * multiplicator));
-        }
         else
-        {
             return new Vector(eX + (normal.getX() * multiplicator), eY + (normal.getY() * multiplicator));
-        }
     }
 
     private void setRandomLocation()
@@ -463,32 +453,50 @@ public class Tentacle extends StaticSpriteList {
 
     public void createTexture()
     {
-        Bitmap bitmap = Bitmap.createBitmap(distance + (int) endSize, (int) currentSize, Bitmap.Config.ARGB_8888);
+        Bitmap bitmap = Bitmap.createBitmap((int) (distance + endSize), (int) endSize, Bitmap.Config.ARGB_8888);
 
-        Canvas c1 = new Canvas(bitmap);
-        c1.drawColor(Color.RED);
+        int padding = (int) Maths.toPercent(12, bitmap.getHeight());
 
-
-        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(),
-                bitmap.getHeight(), Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(output);
-
-        int color = Color.RED;
         Paint paint = new Paint();
-        Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
-
         paint.setFilterBitmap(true);
         paint.setAntiAlias(true);
-        paint.setColor(color);
+        paint.setShader(new LinearGradient(0, 0, 0, bitmap.getHeight()*3, Color.RED, Color.BLACK, Shader.TileMode.MIRROR));
+        //paint.setColor(Color.RED);
+
+        Canvas canvas = new Canvas(bitmap);
 
         canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
-        canvas.drawRect(bitmap.getHeight() / 2, bitmap.getHeight(), bitmap.getWidth() - bitmap.getHeight() / 2, 0, paint);
         canvas.drawCircle(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
 
-        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
-        canvas.drawBitmap(bitmap, rect, rect, paint);
+        canvas.drawRect(bitmap.getHeight() / 2, bitmap.getHeight(), bitmap.getWidth() - bitmap.getHeight() / 2, 0, paint);
 
-        setTexture(new Texture("tentacle", Loader.loadTexture(output)));
+        //paint.setColor(Color.RED);
+
+        //canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, (bitmap.getHeight() / 2) - padding, paint);
+        //canvas.drawRect(bitmap.getHeight() / 2, bitmap.getHeight() - padding, bitmap.getWidth() - bitmap.getHeight() / 2, padding, paint);
+        //canvas.drawCircle(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() / 2, (bitmap.getHeight() / 2) - padding, paint);
+
+
+/*
+
+        Paint paint = new Paint();
+        paint.setFilterBitmap(true);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.BLACK);
+
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getHeight()/2, paint);
+
+
+        paint = new Paint();
+        paint.setFilterBitmap(true);
+        paint.setAntiAlias(true);
+        paint.setColor(Color.RED);
+
+        canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, (bitmap.getHeight()/2) - 10, paint);
+*/
+
+        setTexture(new Texture("tentacle", Loader.loadTexture(bitmap)));
     }
 
     public void setListener(TentacleListener l)

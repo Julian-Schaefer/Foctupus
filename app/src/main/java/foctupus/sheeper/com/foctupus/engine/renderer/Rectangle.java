@@ -19,12 +19,25 @@ public class Rectangle {
 
     private float[] mModelMatrix = new float[16];
 
+    private boolean changed;
+
     public Rectangle()
     {
 
     }
 
     public float[] getTransformationMatrix()
+    {
+        if(changed)
+        {
+            calculateTransformationMatrix();
+            changed = false;
+        }
+
+        return mModelMatrix;
+    }
+
+    private void  calculateTransformationMatrix()
     {
         Matrix.setIdentityM(mModelMatrix, 0);
 
@@ -33,13 +46,12 @@ public class Rectangle {
         Matrix.rotateM(mModelMatrix, 0, angle, 0.0f, 0.0f, 1.0f);
 
         Matrix.scaleM(mModelMatrix, 0, xSize, ySize, 1);
-
-        return mModelMatrix;
     }
 
     public void setAngle(float angle)
     {
         this.angle = angle;
+        changed = true;
     }
 
     public float getAngle()
@@ -98,6 +110,8 @@ public class Rectangle {
             xPos = x + xSize / 2;
             yPos = y + ySize / 2;
         }
+
+        changed = true;
     }
 
     public float getXSize()
@@ -125,6 +139,8 @@ public class Rectangle {
 
         if(bottomLeftAligned)
             setPosition(getXPos()-oldX/2, getYPos()-oldY/2);
+
+        changed = true;
     }
 
 

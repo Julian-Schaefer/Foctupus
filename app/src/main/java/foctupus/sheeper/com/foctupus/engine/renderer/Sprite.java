@@ -110,6 +110,6 @@ public class Sprite extends Rectangle {
     public void setSize(float x, float y) {
         super.setSize(x, y);
         if(getTexture() != null)
-        Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " y=" + y);
+        ;//Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " y=" + y);
     }
 }

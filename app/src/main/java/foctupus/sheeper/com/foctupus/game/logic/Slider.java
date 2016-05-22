@@ -52,11 +52,17 @@ public class Slider {
 
     public void addPoint(float x, float y)
     {
+        if(textures.size() >  0)
+        {
+            Sprite last = textures.getFirst();
+            calculatePoint(last.getActualXPos() + (x - last.getActualXPos()) / 2, last.getActualYPos() + (y - last.getActualYPos()) / 2);
+        }
 
-        //if(textures.size() > 0 && Maths.lengthOf(new Vector(x,y), textures.getFirst().getPosition()) < initSize) {
-        //    return;
-        //}
+        calculatePoint(x, y);
+    }
 
+    private void calculatePoint(float x, float y)
+    {
         Sprite newCircle = new Sprite();
         newCircle.setTexture(new Texture("sliderCircle", circleID));
         newCircle.setPosition(x, y);
@@ -74,11 +80,10 @@ public class Slider {
             textures.addFirst(newCircle);
 
 
-        if(textures.size() > 20)
+        if(textures.size() > 25)
         {
             textures.removeLast();
         }
-
     }
 
     private void resizeTextures()

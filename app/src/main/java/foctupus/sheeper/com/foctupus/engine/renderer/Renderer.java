@@ -22,6 +22,8 @@ public class Renderer {
     private volatile static HashMap<String, Integer> textures = new HashMap<>();
     private volatile static HashMap<String, Bitmap> bitmaps = new HashMap<>();
 
+    private static final float[] standardMVP = new float[16];
+
     private TextureShader shader;
 
     private volatile LinkedHashMap<Integer, LinkedList<SpriteList>> spriteLists;
@@ -33,7 +35,6 @@ public class Renderer {
 
     private float[] projectionMatrix;
     private float[] mvp;
-    private float[] transformation;
 
     private int mPositionHandle;
     private int mTexHandle;
@@ -97,6 +98,8 @@ public class Renderer {
 
     public void draw()
     {
+        updatePriorities();
+
         for(int priority : priorities)
         {
             if(sprites.containsKey(priority))
@@ -128,9 +131,7 @@ public class Renderer {
                 GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, staticList.getTexture().getID());
 
                 for(Sprite sprite : list)
-                {
                     drawSprite(sprite);
-                }
             }
 
         }
@@ -147,7 +148,6 @@ public class Renderer {
     {
         if(sprite.getTexture() != null && sprite.isVisible())
         {
-
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, sprite.getTexture().getID());
             drawSprite(sprite);
         }
@@ -155,10 +155,9 @@ public class Renderer {
 
     private void drawSprite(Sprite sprite)
     {
-        mvp = new float[16];
-        transformation = sprite.getTransformationMatrix();
+        mvp = standardMVP;
 
-        Matrix.multiplyMM(mvp, 0, projectionMatrix, 0, transformation, 0);
+        Matrix.multiplyMM(mvp, 0, projectionMatrix, 0, sprite.getTransformationMatrix(), 0);
 
         shader.loadMVPMatrix(mvp);
 
@@ -177,7 +176,6 @@ public class Renderer {
             spriteContainer.add(sprite);
             sprites.put(priority, spriteContainer);
         }
-        updatePriorities();
     }
 
     public void addSpriteList(SpriteList spriteList, int priority)
@@ -192,7 +190,6 @@ public class Renderer {
             spriteListContainer.add(spriteList);
             spriteLists.put(priority, spriteListContainer);
         }
-        updatePriorities();
     }
 
     private void updatePriorities()
@@ -250,9 +247,9 @@ public class Renderer {
 
     public static void registerTextures()
     {
-        Renderer.textures.clear();
+        textures.clear();
 
-        for(Map.Entry<String, Bitmap> entry : Renderer.bitmaps.entrySet())
+        for(Map.Entry<String, Bitmap> entry : bitmaps.entrySet())
         {
             updateTextureID(entry.getKey(), Loader.loadTexture(entry.getValue()));
         }

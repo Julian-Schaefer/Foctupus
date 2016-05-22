@@ -1,5 +1,7 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -87,6 +89,8 @@ public class Game implements Tentacle.TentacleListener {
 
     public void onPress(float x, float y)
     {
+        Log.d("OAsd", "PRESSED: x=" + x + " y= " + y);
+
         slider.reset();
         lastTouch = new Vector(x, y);
         slider.addPoint(x, y);
@@ -94,23 +98,31 @@ public class Game implements Tentacle.TentacleListener {
 
     public void onMove(float x, float y)
     {
+        Log.d("OAsd", "MOVED: x=" + x + " y= " + y);
         Vector currentTouch = new Vector(x, y);
-        if(lastTouch != null && Maths.lengthOf(currentTouch, lastTouch) < Renderer.getHeight()/4)
+
+        if(lastTouch != null)
         {
-            for (Tentacle tentacle : tentacles)
+            if (Maths.lengthOf(currentTouch, lastTouch) < Renderer.getHeight() / 6)
             {
-                if (!hasCut)
-                    tentacle.checkPoints(lastTouch, currentTouch);
-            }
+                for (Tentacle tentacle : tentacles)
+                {
+                    if (!hasCut)
+                        tentacle.checkPoints(lastTouch, currentTouch);
+                }
 
-            slider.addPoint(x, y);
+                slider.addPoint(x, y);
+                lastTouch = currentTouch;
+            } else
+                onRelease(lastTouch.getX(), lastTouch.getY());
         }
-
-        lastTouch = currentTouch;
+        else
+            lastTouch = currentTouch;
     }
 
     public void onRelease(float x, float y)
     {
+        Log.d("OAsd", "RELEASED: x=" + x + " y= " + y);
         Vector currentTouch = new Vector(x, y);
         for(Tentacle tentacle : tentacles)
         {

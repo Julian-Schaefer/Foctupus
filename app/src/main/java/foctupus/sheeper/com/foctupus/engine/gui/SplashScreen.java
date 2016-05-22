@@ -31,6 +31,8 @@ public class SplashScreen extends Screen {
     private Component progressBackground;
     private Component progress;
 
+    private SplashLoadTask loadTask;
+
     public SplashScreen(Renderer renderer)
     {
         super(renderer, true);
@@ -117,9 +119,6 @@ public class SplashScreen extends Screen {
 
         int id = Loader.loadTexture(bitmap);
 
-        //Renderer.updateTextureBitmap(name, bitmap);
-        //Renderer.updateTextureID(name, id);
-
         component.getSprite().setTexture(new Texture(name, id));
     }
 
@@ -166,11 +165,24 @@ public class SplashScreen extends Screen {
 
     }
 
+    public void setLoadTask(SplashLoadTask loadTask)
+    {
+        this.loadTask = loadTask;
+    }
+
     private class LoadTask extends AsyncTask<String, Object, Void>
     {
 
         @Override
         protected Void doInBackground(String[] textureNames) {
+
+            if(loadTask != null)
+            {
+                toLoad++;
+                loadedCount++;
+
+                loadTask.executeTask();
+            }
 
             Renderer.resetTextures();
             for (String name : textureNames) {
@@ -195,10 +207,16 @@ public class SplashScreen extends Screen {
         protected void onProgressUpdate(Object... objects) {
             loadedCount++;
 
-            if(loadedCount == Textures.pictureNames.length)
+            if(loadedCount == toLoad)
                 loaded = true;
         }
     }
+
+    public interface SplashLoadTask
+    {
+        void executeTask();
+    }
+
 
 
 }

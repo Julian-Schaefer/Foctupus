@@ -110,6 +110,14 @@ public class GameManager implements Screen.ScreenListener {
         splashScreen.setBackgroundColor(new int[]{255, 0, 0});
         splashScreen.setProgressBackgroundColor(new int[]{0, 0, 255});
         splashScreen.setProgressColor(new int[]{0, 255, 0});
+        splashScreen.setLoadTask(new SplashScreen.SplashLoadTask() {
+            @Override
+            public void executeTask()
+            {
+            }
+        });
+
+
         splashScreen.load(Textures.pictureNames);
 
         screen = splashScreen;
