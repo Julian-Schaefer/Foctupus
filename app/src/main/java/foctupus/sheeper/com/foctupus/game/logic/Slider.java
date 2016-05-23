@@ -80,7 +80,7 @@ public class Slider {
             textures.addFirst(newCircle);
 
 
-        if(textures.size() > 25)
+        if(textures.size() > 20)
         {
             textures.removeLast();
         }
@@ -95,7 +95,7 @@ public class Slider {
 
         while(iterator.hasNext())
         {
-            int size = (int) Maths.toPercent(90, previous.getYSize());
+            float size = (float) Maths.toPercent(95, previous.getYSize());
             Sprite circle = iterator.next();
             circle.setSize(size, size);
 

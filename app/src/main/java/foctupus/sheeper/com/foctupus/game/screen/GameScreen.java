@@ -37,7 +37,7 @@ public class GameScreen extends Screen implements Game.GameListener {
     public GameScreen(Renderer renderer) {
         super(renderer);
 
-        this.treasure = GameManager.getBackgroundScreen().getTreasure();
+        this.treasure = GameManager.getBackground().getTreasure();
 
         init();
     }

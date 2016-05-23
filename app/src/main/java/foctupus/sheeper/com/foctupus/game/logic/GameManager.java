@@ -16,7 +16,7 @@ public class GameManager implements Screen.ScreenListener {
 
     private Renderer renderer;
     private Screen screen;
-    private static BackgroundScreen backgroundScreen;
+    private static Background background;
 
     private static GameManager instance;
 
@@ -37,17 +37,14 @@ public class GameManager implements Screen.ScreenListener {
 
     public void update()
     {
-        if(backgroundScreen != null)
-            backgroundScreen.update();
-
         if(screen != null)
             screen.update();
     }
 
     public void draw()
     {
-        if(backgroundScreen != null)
-            backgroundScreen.draw();
+        if(background != null)
+            background.updateAndDraw();
 
         screen.draw();
 
@@ -69,8 +66,8 @@ public class GameManager implements Screen.ScreenListener {
                 Renderer.registerTextures();
         }
 
-        if(backgroundScreen != null)
-            backgroundScreen.revalidate();
+        if(background != null)
+            background.revalidate();
 
         if(screen != null)
             screen.revalidate();
@@ -128,13 +125,13 @@ public class GameManager implements Screen.ScreenListener {
         this.screen = screen;
         screen.setScreenListener(this);
 
-        if(!(screen instanceof SplashScreen) && backgroundScreen == null)
-            backgroundScreen = new BackgroundScreen();
+        if(!(screen instanceof SplashScreen) && background == null)
+            background = new Background();
     }
 
-    public static BackgroundScreen getBackgroundScreen()
+    public static Background getBackground()
     {
-        return backgroundScreen;
+        return background;
     }
 
 

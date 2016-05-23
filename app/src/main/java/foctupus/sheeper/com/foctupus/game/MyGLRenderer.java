@@ -88,6 +88,8 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onDrawFrame(GL10 gl) {
 
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+
         long curTime = System.currentTimeMillis();
         long deltaTime = curTime - lastTime;
         double aproxFps = 1000 / deltaTime;
