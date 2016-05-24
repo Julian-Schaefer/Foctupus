@@ -48,9 +48,35 @@ public class Game implements Tentacle.TentacleListener {
 
     private Tentacle createTentacle()
     {
-        Tentacle t = new Tentacle(treasure, animationTime);
-        t.setListener(this);
-        return t;
+        Tentacle.Position position;
+        Tentacle tentacle;
+
+        do
+        {
+            switch (Maths.randInt(1, 4))
+            {
+                case 1:
+                    position = Tentacle.Position.LEFT;
+                    break;
+                case 2:
+                    position = Tentacle.Position.RIGHT;
+                    break;
+                case 3:
+                    position = Tentacle.Position.BOTTOM;
+                    break;
+                case 4:
+                    position = Tentacle.Position.TOP;
+                    break;
+                default:
+                    position = Tentacle.Position.BOTTOM;
+            }
+
+            tentacle = new Tentacle(treasure, animationTime, position);
+
+        } while(containsTentacleWay(tentacle.getWay()));
+
+        tentacle.setListener(this);
+        return tentacle;
     }
 
     public void draw(boolean gameOver)
@@ -77,6 +103,15 @@ public class Game implements Tentacle.TentacleListener {
             slider.render(renderer);
         }
 
+    }
+
+    private boolean containsTentacleWay(Tentacle.TentacleWay way)
+    {
+        for (Tentacle tentacle : tentacles)
+            if(tentacle.getWay() == way)
+                return true;
+
+        return false;
     }
 
     public void revalidate()

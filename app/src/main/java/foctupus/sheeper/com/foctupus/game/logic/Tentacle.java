@@ -5,11 +5,14 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
+import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.Shader;
+import android.util.Log;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -28,6 +31,14 @@ import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
  */
 public class Tentacle extends StaticSpriteList {
 
+    public enum Position {
+        LEFT, RIGHT, BOTTOM, TOP
+    }
+
+    private static LinkedList<TentacleWay> leftTentacles = new LinkedList<>();
+    private static LinkedList<TentacleWay> rightTentacles = new LinkedList<>();
+    private static LinkedList<TentacleWay> bottomTentacles = new LinkedList<>();
+    private static LinkedList<TentacleWay> topTentacles = new LinkedList<>();
 
     private static final int ANIMATE_OUT_TIME = 700;
     private static final float END_SIZE = 2.5f;
@@ -35,18 +46,18 @@ public class Tentacle extends StaticSpriteList {
 
     private TentacleListener listener;
 
-    private static float distance = 20;
-
     private int startX, startY;
     private float dirX, dirY;
     private float divX, divY;
 
     private Treasure treasure;
-    private Vector[] way;
 
+    private TentacleWay way;
+    private LinkedList<Vector> positions;
+    private float distance;
 
-    private double endSize;
-    private double currentSize;
+    private float endSize;
+    private float currentSize;
 
     private boolean finished = false;
     private boolean isOut = false;
@@ -58,22 +69,28 @@ public class Tentacle extends StaticSpriteList {
     private int animationTime;
     private long startTime;
 
-    private boolean leftOrRight = true;
-
-    public Tentacle(Treasure treasure, int animationTime)
+    public Tentacle(Treasure treasure, int animationTime, Position position)
     {
         super();
 
         this.treasure = treasure;
         this.animationTime = animationTime;
 
-        endSize = Maths.toPercent(END_SIZE, Renderer.getHeight());
+        switch (position)
+        {
+            case LEFT: way = leftTentacles.get(Maths.randInt(0, leftTentacles.size()-1)); break;
+            case RIGHT: way = rightTentacles.get(Maths.randInt(0, rightTentacles.size()-1)); break;
+            case BOTTOM: way = bottomTentacles.get(Maths.randInt(0, bottomTentacles.size()-1)); break;
+            case TOP: way = topTentacles.get(Maths.randInt(0, topTentacles.size()-1)); break;
+        }
 
-        setRandomLocation();
-        calc();
+        distance = way.getDistance();
+        positions = way.getPositions();
 
-        double diff = endSize - (endSize * SHRINK_FACTOR);
-        currentSize = endSize + way.length * diff;
+        endSize = (float) Maths.toPercent(END_SIZE, Renderer.getHeight());
+
+        float diff = endSize - (endSize * SHRINK_FACTOR);
+        currentSize = endSize + positions.size() * diff;
 
         createTexture();
 
@@ -92,12 +109,12 @@ public class Tentacle extends StaticSpriteList {
 
             if(diff <= animationTime)
             {
-                int toPosition = (int) (way.length * diff/ (double) animationTime);
+                int toPosition = (int) (positions.size() * diff/ (double) animationTime);
                 int positionDif = toPosition - currentPos;
 
                 for(int i = 0; i < positionDif; i++)
                 {
-                    if(currentPos < way.length) {
+                    if(currentPos < positions.size()) {
                         addFirst(getNewPart(currentPos++));
                     }
                 }
@@ -114,7 +131,6 @@ public class Tentacle extends StaticSpriteList {
                 if (listener != null)
                     listener.hasFinished();
             }
-
 
         }
         else {
@@ -231,20 +247,77 @@ public class Tentacle extends StaticSpriteList {
         }
     }
 
+    public void createTexture()
+    {
+        Bitmap bitmap = Bitmap.createBitmap((int) (distance + currentSize), (int) currentSize, Bitmap.Config.ARGB_8888);
 
-    public void calc() {
-        dirX = Renderer.getWidth() / 2 - startX;
-        dirY = Renderer.getHeight() / 2 - startY;
+        Paint paint = new Paint();
+        paint.setFilterBitmap(true);
+        paint.setAntiAlias(true);
+        paint.setShader(new LinearGradient(0, 0, 0, bitmap.getHeight()*3, Color.RED, Color.BLACK, Shader.TileMode.MIRROR));
+
+        Canvas canvas = new Canvas(bitmap);
+
+        canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
+        canvas.drawCircle(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() / 2, (bitmap.getHeight() / 2) * SHRINK_FACTOR, paint);
+
+
+        float shrink = (bitmap.getHeight() - (bitmap.getHeight() * SHRINK_FACTOR)) / 2;
+
+        Path path = new Path();
+        path.moveTo(bitmap.getHeight() / 2, 0);
+        path.lineTo(bitmap.getHeight() / 2, bitmap.getHeight());
+        path.lineTo(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() - shrink);
+        path.lineTo(bitmap.getWidth() - bitmap.getHeight() / 2, shrink);
+        path.lineTo(bitmap.getHeight() / 2, 0);
+        path.close();
+
+        canvas.drawPath(path, paint);
+
+        setTexture(new Texture("tentacle", Loader.loadTexture(bitmap)));
+    }
+
+
+    public static TentacleWay calculateTentacle(Position position)
+    {
+        int size = (int) Maths.toPercent(END_SIZE, Renderer.getHeight());
+
+        int startX, startY;
+
+        switch (position)
+        {
+            case LEFT:
+                startX = -2 * size;
+                startY = Maths.randInt(-size, Renderer.getHeight() + size);
+                break;
+            case RIGHT:
+                startX = Renderer.getWidth() + (2 * size);
+                startY = Maths.randInt(-size, Renderer.getHeight() + size);
+                break;
+            case BOTTOM:
+                startX = Maths.randInt(-size, Renderer.getWidth() + size);
+                startY = -2 * size;
+                break;
+            case TOP:
+                startX = Maths.randInt(-size, Renderer.getWidth() + size);
+                startY = Renderer.getHeight() + (2 * size);
+                break;
+            default:
+                startX = Maths.randInt(-size, Renderer.getWidth() + size);
+                startY = -2 * size;
+        }
+
+        float dirX = Renderer.getWidth() / 2 - startX;
+        float dirY = Renderer.getHeight() / 2 - startY;
 
 
         int divisions = Maths.randInt(3, 5);
-        divX = dirX / divisions;
-        divY = dirY / divisions;
+        float divX = dirX / divisions;
+        float divY = dirY / divisions;
 
         double length = Math.sqrt(dirX * dirX + dirY * dirY);
         dirX = (float) (dirX / length);
         dirY = (float) (dirY / length);
-
 
         Function[] functions = new Function[divisions];
 
@@ -275,8 +348,7 @@ public class Tentacle extends StaticSpriteList {
             functions[i] = new Function(funcA, funcB);
         }
 
-        calcDistance(maxDeflection, length / divisions);
-
+        float distance = calcDistance(maxDeflection, length / divisions, position);
 
         LinkedList<Vector> wayPositions = new LinkedList<>();
         wayPositions.add(new Vector(startX, startY));
@@ -304,7 +376,7 @@ public class Tentacle extends StaticSpriteList {
                 if (func.getA() >= 0)
                     isLeft = false;
 
-                Vector point = getPointFromDeflection(new Vector(currentX, currentY), (int) func.valueAt((current % width) - left, 2), isLeft);
+                Vector point = getPointFromDeflection(new Vector(currentX, currentY), new Vector(-divY, divX), (int) func.valueAt((current % width) - left, 2), isLeft);
                 wayPositions.add(point);
 
                 last = current;
@@ -318,33 +390,27 @@ public class Tentacle extends StaticSpriteList {
 
         wayPositions.add(new Vector(Renderer.getWidth() / 2, Renderer.getHeight() / 2));
 
-        way = wayPositions.toArray(new Vector[wayPositions.size()]);
-
-
-        if(leftOrRight)
-            animationTime *= 2;
-
+        return new TentacleWay(wayPositions, distance);
     }
+
 
     private Sprite getNewPart(int pos)
     {
-        Vector pos1 = way[pos];
-        Vector pos2 = way[pos + 1];
-
+        Vector pos1 = positions.get(pos);
+        Vector pos2 = positions.get(pos + 1);
 
         float xPos = pos1.getX() + ((pos2.getX() - pos1.getX())/2);
         float yPos = pos1.getY() + ((pos2.getY() - pos1.getY())/2);
 
         float angle = (float) Math.toDegrees(Math.atan((pos2.getY() - pos1.getY()) / (pos2.getX() - pos1.getX())));
 
-        if(angle < 0)
+        if(pos2.getX() < pos1.getX())
             angle += 180;
 
         int distance = Maths.lengthOf(pos1, pos2);
 
-
         Sprite tPart = new Sprite();
-        tPart.setSize(distance + (int) currentSize, (int) currentSize);
+        tPart.setSize(distance + currentSize, (int) currentSize);
         currentSize *= SHRINK_FACTOR;
         tPart.setPosition(xPos, yPos);
         tPart.setAngle(angle);
@@ -353,44 +419,23 @@ public class Tentacle extends StaticSpriteList {
         return tPart;
     }
 
-    private void calcDistance(int maxDeflection, double pDistance)
+    private static float calcDistance(int maxDeflection, double pDistance, Position position)
     {
-        /*
-        Hier ist die Version mit der Punkt zu Punkt distanz (Pythagoras)
-
-        int percentDistance = (int) Maths.toPercent(2.6, Renderer.norm);
-
-
-        double x = (double) pDistance/2;
-        double y = maxDef;
-
-        double a = Math.pow(x, 2);
-        double b = Math.pow(y, 2);
-        double c = Math.pow(percentDistance, 2);
-
-        double div = (a + b)/c;
-
-        distance = (int) (x / div);
-
-        */
-
         double percentDistance;
 
-        if(leftOrRight)
+        if(position == Position.LEFT || position == Position.RIGHT)
             percentDistance = Maths.toPercent(2.4, Renderer.getWidth());
         else
             percentDistance = Maths.toPercent(1.2, Renderer.getHeight());
 
         double x = maxDeflection / percentDistance;
-        distance = (float) ((pDistance/2) / x);
+        return (float) ((pDistance/2) / x);
     }
 
-    private Vector getPointFromDeflection(Vector point, double deflection, boolean left)
+    private static Vector getPointFromDeflection(Vector point, Vector normal, double deflection, boolean left)
     {
         float eX = point.getX();
         float eY = point.getY();
-
-        Vector normal = new Vector(-divY, divX);
 
         double normalSum = Math.pow(normal.getX(), 2) + Math.pow(normal.getY(), 2);
         deflection = Math.pow(deflection, 2);
@@ -403,108 +448,30 @@ public class Tentacle extends StaticSpriteList {
             return new Vector(eX + (normal.getX() * multiplicator), eY + (normal.getY() * multiplicator));
     }
 
-    private void setRandomLocation()
+    public static void generateTentacles(int count)
     {
-        int random = Maths.randInt(1, 6);
+        leftTentacles.clear();
+        rightTentacles.clear();
+        bottomTentacles.clear();
+        topTentacles.clear();
 
-        int size = (int) endSize;
-
-        int x = 0, y = 0;
-        switch (random)
+        for(int i = 0; i < count; i++)
         {
-            //Unten
-            case 1:
-                y = -2 * size;
-                x = Maths.randInt(-size, Renderer.getWidth() + size);
-                leftOrRight = false;
-                break;
-            //Oben
-            case 2:
-                y = Renderer.getHeight() + 2 * size;
-                x = Maths.randInt(-size, Renderer.getWidth() + size);
-                leftOrRight = false;
-                break;
-            //UntenRechts
-            case 3:
-                y = Maths.randInt(-size, Renderer.getHeight()/4 - size);
-                x = Renderer.getWidth() + 2 * size;
-                break;
-
-            //UntenLinks
-            case 4:
-                y = Maths.randInt(-size, Renderer.getHeight()/4 - size);
-                x = -2 * size;
-                break;
-            //ObenRechts
-            case 5:
-                y = Maths.randInt(Renderer.getHeight()/2 + Renderer.getHeight()/4 + size, Renderer.getHeight() + size);
-                x = Renderer.getWidth() + 2 * size;
-                break;
-            //ObenLinks
-            case 6:
-                y = Maths.randInt(Renderer.getHeight()/2 + Renderer.getHeight()/4 + size, Renderer.getHeight() + size);
-                x = -2 * size;
-                break;
+            leftTentacles.add(calculateTentacle(Position.LEFT));
+            rightTentacles.add(calculateTentacle(Position.RIGHT));
+            bottomTentacles.add(calculateTentacle(Position.BOTTOM));
+            topTentacles.add(calculateTentacle(Position.TOP));
         }
-
-        startX = x;
-        startY = y;
     }
 
-    public void createTexture()
-    {
-        Bitmap bitmap = Bitmap.createBitmap((int) (distance + endSize), (int) endSize, Bitmap.Config.ARGB_8888);
 
-        int padding = (int) Maths.toPercent(12, bitmap.getHeight());
-
-        Paint paint = new Paint();
-        paint.setFilterBitmap(true);
-        paint.setAntiAlias(true);
-        paint.setShader(new LinearGradient(0, 0, 0, bitmap.getHeight()*3, Color.RED, Color.BLACK, Shader.TileMode.MIRROR));
-        //paint.setColor(Color.RED);
-
-        Canvas canvas = new Canvas(bitmap);
-
-        canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
-        canvas.drawCircle(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() / 2, bitmap.getHeight() / 2, paint);
-
-        canvas.drawRect(bitmap.getHeight() / 2, bitmap.getHeight(), bitmap.getWidth() - bitmap.getHeight() / 2, 0, paint);
-
-        //paint.setColor(Color.RED);
-
-        //canvas.drawCircle(bitmap.getHeight() / 2, bitmap.getHeight() / 2, (bitmap.getHeight() / 2) - padding, paint);
-        //canvas.drawRect(bitmap.getHeight() / 2, bitmap.getHeight() - padding, bitmap.getWidth() - bitmap.getHeight() / 2, padding, paint);
-        //canvas.drawCircle(bitmap.getWidth() - bitmap.getHeight() / 2, bitmap.getHeight() / 2, (bitmap.getHeight() / 2) - padding, paint);
-
-
-/*
-
-        Paint paint = new Paint();
-        paint.setFilterBitmap(true);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
-
-        Canvas canvas = new Canvas(bitmap);
-        canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, bitmap.getHeight()/2, paint);
-
-
-        paint = new Paint();
-        paint.setFilterBitmap(true);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.RED);
-
-        canvas.drawCircle(bitmap.getWidth()/2, bitmap.getHeight()/2, (bitmap.getHeight()/2) - 10, paint);
-*/
-
-        setTexture(new Texture("tentacle", Loader.loadTexture(bitmap)));
-    }
 
     public void setListener(TentacleListener l)
     {
         listener = l;
     }
 
-    public Vector[] getWay()
+    public TentacleWay getWay()
     {
         return way;
     }
@@ -513,5 +480,26 @@ public class Tentacle extends StaticSpriteList {
     {
         void isCut(Tentacle t);
         void hasFinished();
+    }
+
+    public static class TentacleWay {
+
+        private LinkedList<Vector> positions;
+        private float distance;
+
+        public TentacleWay(LinkedList<Vector> positions, float distance)
+        {
+            this.positions = positions;
+            this.distance = distance;
+        }
+
+        public LinkedList<Vector> getPositions() {
+            return positions;
+        }
+
+        public float getDistance()
+        {
+            return distance;
+        }
     }
 }

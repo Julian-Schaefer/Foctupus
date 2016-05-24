@@ -34,24 +34,28 @@ public class Button extends Component {
     public void onTouch(float x, float y, int mode) {
         super.onTouch(x, y, mode);
 
-        switch (mode)
+        if(listeners.size() > 0)
         {
-            case MotionEvent.ACTION_DOWN:
-                if(isIntersected(x, y))
-                    press();
-                else
-                    release();
-                break;
-            case MotionEvent.ACTION_MOVE:
-                if(!isIntersected(x, y))
-                    release();
-                break;
-            case MotionEvent.ACTION_UP:
-                if(isIntersected(x, y) && pressed) {
-                    onButtonClick();
-                    release();
-                }
-                break;
+            switch (mode)
+            {
+                case MotionEvent.ACTION_DOWN:
+                    if (isIntersected(x, y))
+                        press();
+                    else
+                        release();
+                    break;
+                case MotionEvent.ACTION_MOVE:
+                    if (!isIntersected(x, y))
+                        release();
+                    break;
+                case MotionEvent.ACTION_UP:
+                    if (isIntersected(x, y) && pressed)
+                    {
+                        onButtonClick();
+                        release();
+                    }
+                    break;
+            }
         }
     }
 

@@ -78,12 +78,6 @@ public class Slider {
         }
         else
             textures.addFirst(newCircle);
-
-
-        if(textures.size() > 20)
-        {
-            textures.removeLast();
-        }
     }
 
     private void resizeTextures()
@@ -92,14 +86,21 @@ public class Slider {
         Sprite previous = iterator.next();
         iterator.next();
 
+        float minSize = previous.getXSize()/2;
 
         while(iterator.hasNext())
         {
             float size = (float) Maths.toPercent(95, previous.getYSize());
-            Sprite circle = iterator.next();
-            circle.setSize(size, size);
 
-            previous = circle;
+            if(size >= minSize)
+            {
+                Sprite circle = iterator.next();
+                circle.setSize(size, size);
+
+                previous = circle;
+            }
+            else
+                iterator.remove();
 
             if(iterator.hasNext())
             {

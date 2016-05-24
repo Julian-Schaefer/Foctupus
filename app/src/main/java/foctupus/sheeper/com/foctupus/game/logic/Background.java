@@ -95,18 +95,6 @@ public class Background {
         background.setVisible(true);
     }
 
-    private void initCliffs()
-    {
-        float innerWidth = Renderer.getHeight() * (9f/16f);
-        float left = (Renderer.getWidth() - innerWidth) / 2 + (float) Maths.toPercent(30, innerWidth);
-        float height =  (float) Maths.toPercent(60, Renderer.getHeight());
-
-        Sprite cliffs = new Sprite(new Texture(Textures.CLIFFS));
-        cliffs.setPosition(left, (float) Maths.toPercent(31, Renderer.getHeight()));
-        cliffs.setSize((float) Maths.toPercent(100, innerWidth), height);
-        cliffs.setVisible(true);
-    }
-
     public void updateAndDraw()
     {
         Iterator<Bubble> iterator = bubbles.iterator();

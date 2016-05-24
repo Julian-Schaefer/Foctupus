@@ -9,6 +9,7 @@ import foctupus.sheeper.com.foctupus.engine.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.game.logic.Game;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.game.logic.Score;
+import foctupus.sheeper.com.foctupus.game.logic.Tentacle;
 import foctupus.sheeper.com.foctupus.game.logic.Treasure;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
@@ -97,6 +98,8 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     public void startGame()
     {
+        Tentacle.generateTentacles(50);
+
         gameState = GameState.PLAYING;
         clearChilds();
 
