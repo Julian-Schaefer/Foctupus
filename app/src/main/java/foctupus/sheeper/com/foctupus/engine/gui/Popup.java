@@ -1,6 +1,7 @@
 package foctupus.sheeper.com.foctupus.engine.gui;
 
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 
 /**
  * Created by schae on 12.03.2016.
@@ -11,7 +12,12 @@ public abstract class Popup extends Container {
         super(renderer);
     }
 
-    protected abstract void init();
+    public Popup(Renderer renderer, Sprite sprite)
+    {
+        super(renderer, sprite);
+
+        getSprite().setVisible(true);
+    }
 
     public void close()
     {

@@ -60,6 +60,11 @@ public abstract class Screen extends Container implements Component.ComponentLis
         popUp = null;
     }
 
+    @Override
+    public void onFinished(Component component) {
+        removePopUp();
+    }
+
     private float calcWidth()
     {
         float width = Renderer.getWidth();

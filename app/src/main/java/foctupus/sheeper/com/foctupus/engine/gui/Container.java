@@ -63,9 +63,12 @@ public class Container extends Component implements IDrawable {
 
     @Override
     public void onTouch(float x, float y, int mode) {
-        for(Component child : childs)
+        for(int i = 0; i < childs.size(); i++)
+        {
+            Component child = childs.get(i);
             if(child.getSprite().isVisible())
                 child.onTouch(x, y, mode);
+        }
     }
 
     public void revalidate() {

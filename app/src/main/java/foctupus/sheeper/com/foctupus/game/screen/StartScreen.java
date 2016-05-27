@@ -68,6 +68,14 @@ public class StartScreen extends Screen {
         helpButton = new Button(new Sprite(new Texture(Textures.BTN_HELP)));
         helpButton.setRelativeSize(new Vector(22, USE_SAME));
         helpButton.setRelativePosition(new Vector(75, 20));
+        helpButton.addButtonListener(new Button.ButtonListener() {
+            @Override
+            public void onClick(Button button)
+            {
+                title.getSprite().setVisible(false);
+                showPopUp(new HelpPopup(renderer));
+            }
+        });
 
         addChild(title);
         addChild(startButton);
@@ -88,6 +96,7 @@ public class StartScreen extends Screen {
         else
             return new Texture(Textures.BTN_MUTED);
     }
+
 
     private void animateIn()
     {
@@ -153,11 +162,6 @@ public class StartScreen extends Screen {
     }
 
     @Override
-    public void onFinished(Component component) {
-        removePopUp();
-    }
-
-    @Override
     public void onTransitionFinished(Transition transition) {
 
         if(clicked != null && transition.getComponent() == startButton)
@@ -201,4 +205,13 @@ public class StartScreen extends Screen {
             }
         }
     }
+
+
+    @Override
+    public void onFinished(Component component)
+    {
+        super.onFinished(component);
+        title.getSprite().setVisible(true);
+    }
+
 }

@@ -76,8 +76,8 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     public void showStarter()
     {
-        gameState = GameState.STARTING;
         clearChilds();
+        gameState = GameState.STARTING;
 
         Component starter = new Component(new Sprite(new Texture(Textures.TITLE)));
         starter.setRelativePosition(new Vector(50, 75));

@@ -16,6 +16,7 @@ public class Textures {
     public static final String LOADSCREEN = "loadscreen";
     public static final String SCORE_BACKGROUND = "score_background";
     public static final String IC_LAUNCHER = "ic_launcher";
+    public static final String HELP_INSTRUCTION = "help_instruction";
 
     public static final String BTN_BACK = "btn_back";
     public static final String BTN_START = "btn_start";
@@ -25,6 +26,9 @@ public class Textures {
     public static final String BTN_HELP = "btn_help";
     public static final String BTN_MUTED = "btn_muted";
     public static final String BTN_UNMUTED = "btn_unmuted";
+    public static final String BTN_OK = "btn_ok";
+
+
 
     public static final String LBL_BEST = "lbl_best";
     public static final String LBL_GAMEOVER = "lbl_gameover";
@@ -56,6 +60,7 @@ public class Textures {
             SCORE_BACKGROUND,
             TITLE,
             IC_LAUNCHER,
+            HELP_INSTRUCTION,
             BTN_BACK,
             BTN_BEST,
             BTN_HOME,
@@ -64,6 +69,7 @@ public class Textures {
             BTN_HELP,
             BTN_MUTED,
             BTN_UNMUTED,
+            BTN_OK,
             LBL_BEST,
             LBL_GAMEOVER,
             LBL_SCORE,
