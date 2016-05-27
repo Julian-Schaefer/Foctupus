@@ -18,7 +18,6 @@ public class Counter extends Container {
 
     private int count = 0;
     private boolean adjustWidth;
-    private float relativeWidth;
 
     private GenericSpriteList numbers;
 
@@ -81,6 +80,15 @@ public class Counter extends Container {
     @Override
     public void update()
     {
+    }
+
+    @Override
+    public void revalidate()
+    {
+        super.revalidate();
+
+        for(Sprite number : numbers)
+            number.getTexture().revalidate();
     }
 
     @Override

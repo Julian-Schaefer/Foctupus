@@ -99,9 +99,8 @@ public class Game implements Tentacle.TentacleListener {
                 renderer.addSpriteList(tentacle, Container.STD_PRIORITY);
         }
 
-        if(!gameOver) {
-            slider.render(renderer);
-        }
+        if(!gameOver)
+            slider.draw(renderer);
 
     }
 
@@ -120,6 +119,8 @@ public class Game implements Tentacle.TentacleListener {
         {
             tentacle.createTexture();
         }
+
+        slider.revalidate();
     }
 
     public void onPress(float x, float y)

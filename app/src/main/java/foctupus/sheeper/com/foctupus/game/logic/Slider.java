@@ -8,6 +8,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.util.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.StaticSpriteList;
 import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.tools.Maths;
@@ -24,16 +26,25 @@ import foctupus.sheeper.com.foctupus.game.tools.Maths;
  */
 public class Slider {
 
-    private LinkedList<Sprite> textures;
+    private StaticSpriteList circles;
+    private StaticSpriteList squares;
 
     private int initSize = (int) Maths.toPercent(1.2, Renderer.getHeight());
+    private float minSize = initSize/2f;
 
     private int squareID;
     private int circleID;
+
     public Slider()
     {
-        textures = new LinkedList<>();
+        loadTextures();
 
+        circles = new StaticSpriteList(new Texture("slider_circle", circleID));
+        squares = new StaticSpriteList(new Texture("slider_square", squareID));
+    }
+
+    private void loadTextures()
+    {
         Bitmap bitmap = Bitmap.createBitmap(initSize, initSize, Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(bitmap);
@@ -45,20 +56,31 @@ public class Slider {
         bitmap.recycle();
     }
 
+    public void revalidate()
+    {
+        loadTextures();
+
+        circles = new StaticSpriteList(new Texture("slider_circle", circleID));
+        squares = new StaticSpriteList(new Texture("slider_square", squareID));
+    }
+
     public void reset()
     {
-        textures.clear();
+        circles.clear();
+        squares.clear();
     }
 
     public void addPoint(float x, float y)
     {
-        if(textures.size() >  0)
+        if(circles.size() >  0)
         {
-            Sprite last = textures.getFirst();
+            Sprite last = circles.getFirst();
             calculatePoint(last.getActualXPos() + (x - last.getActualXPos()) / 2, last.getActualYPos() + (y - last.getActualYPos()) / 2);
+            resizeSprites();
         }
 
         calculatePoint(x, y);
+        resizeSprites();
     }
 
     private void calculatePoint(float x, float y)
@@ -69,43 +91,43 @@ public class Slider {
         newCircle.setSize(initSize, initSize);
         newCircle.setVisible(true);
 
-        if (textures.size() > 0) {
-            Sprite newSquare = calculateSquare(newCircle, textures.getFirst());
+        if (circles.size() > 0) {
+            Sprite newSquare = calculateSquare(newCircle, circles.getFirst());
             newSquare.setTexture(new Texture("sliderSquare", squareID));
-            textures.addFirst(newSquare);
-            textures.addFirst(newCircle);
-            resizeTextures();
+            squares.addFirst(newSquare);
+            circles.addFirst(newCircle);
         }
         else
-            textures.addFirst(newCircle);
+            circles.addFirst(newCircle);
     }
 
-    private void resizeTextures()
+    private void resizeSprites()
     {
-        Iterator<Sprite> iterator = textures.iterator();
-        Sprite previous = iterator.next();
-        iterator.next();
-
-        float minSize = previous.getXSize()/2;
-
-        while(iterator.hasNext())
+        if(circles.size() > 0)
         {
-            float size = (float) Maths.toPercent(95, previous.getYSize());
+            Iterator<Sprite> circleIterator = circles.iterator();
+            Iterator<Sprite> squareIterator = squares.iterator();
 
-            if(size >= minSize)
+            Sprite previous = circleIterator.next();
+
+            while (circleIterator.hasNext() && squareIterator.hasNext())
             {
-                Sprite circle = iterator.next();
-                circle.setSize(size, size);
+                float size = (float) Maths.toPercent(95, previous.getYSize());
+
+                Sprite circle = circleIterator.next();
+                Sprite square = squareIterator.next();
 
                 previous = circle;
-            }
-            else
-                iterator.remove();
 
-            if(iterator.hasNext())
-            {
-                Sprite square = iterator.next();
-                square.setSize(square.getXSize(), size);
+                if (size >= minSize)
+                {
+                    circle.setSize(size, size);
+                    square.setSize(square.getXSize(), size);
+                } else
+                {
+                    squareIterator.remove();
+                    circleIterator.remove();
+                }
             }
         }
     }
@@ -113,10 +135,10 @@ public class Slider {
     private static Sprite calculateSquare(Sprite c1, Sprite c2)
     {
 
-        Sprite s = new Sprite();
+        Sprite square = new Sprite();
 
-        double y = c1.getYPos() - c2.getYPos();
         double x = c1.getXPos() - c2.getXPos();
+        double y = c1.getYPos() - c2.getYPos();
 
         Vector middle = new Vector(0.5f * (c1.getXPos() + c2.getXPos()), 0.5f * (c1.getYPos() + c2.getYPos()));
         int length = Maths.lengthOf(x, y);
@@ -124,21 +146,18 @@ public class Slider {
         int angle = (int) Math.toDegrees(Math.atan(y / x));
 
 
-        s.setSize(length, c1.getYSize());
-        s.setAngle(angle);
-        s.setPosition(middle.getX(), middle.getY());
-        s.setVisible(true);
+        square.setSize(length, c1.getYSize());
+        square.setAngle(angle);
+        square.setPosition(middle.getX(), middle.getY());
+        square.setVisible(true);
 
-        return s;
-
+        return square;
     }
 
-    public void render(Renderer renderer)
+    public void draw(Renderer renderer)
     {
-        for(Sprite texture : textures)
-        {
-            renderer.addSprite(texture, Game.SLIDER_PRIO);
-        }
+        renderer.addSpriteList(circles, Game.SLIDER_PRIO);
+        renderer.addSpriteList(squares, Game.SLIDER_PRIO);
     }
 
     private static Bitmap getCircleBitmap(Bitmap bitmap) {
@@ -146,14 +165,12 @@ public class Slider {
                 bitmap.getHeight(), Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
-        int color = Color.RED;
         Paint paint = new Paint();
         Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
         RectF rectF = new RectF(rect);
 
         paint.setAntiAlias(true);
         canvas.drawARGB(0, 0, 0, 0);
-        paint.setColor(color);
         canvas.drawOval(rectF, paint);
 
         paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
