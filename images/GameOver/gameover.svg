@@ -24,22 +24,34 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.17677671"
-     inkscape:cx="4216.9603"
-     inkscape:cy="1831.3942"
+     inkscape:zoom="0.32"
+     inkscape:cx="1672.1747"
+     inkscape:cy="2122.6291"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showborder="false"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="2560"
+     inkscape:window-height="1331"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
      inkscape:window-maximized="1"
      inkscape:snap-page="true"
      showguides="true" />
   <defs
      id="defs4712">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4635">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4637" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4639" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient4784">
@@ -2025,6 +2037,15 @@
        y1="-1108.5562"
        x2="747.83057"
        y2="143.35938" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4635"
+       id="linearGradient4641"
+       x1="2089.1714"
+       y1="-2040.3644"
+       x2="3545.1713"
+       y2="-2040.3644"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <metadata
      id="metadata4715">
@@ -2443,26 +2464,29 @@
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:265.52429199px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000" /></flowRegion><flowPara
          id="flowPara4670">Game over</flowPara></flowRoot>    <g
        id="g6256"
-       transform="translate(-2415.4766,-616.59706)">
+       transform="translate(-2415.4766,-616.59706)"
+       style="stroke:#000000;stroke-opacity:1">
       <flowRoot
          xml:space="preserve"
          id="flowRoot4656"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          transform="matrix(1.4346954,0,0,1.4346954,1622.9347,229.42774)"><flowRegion
-           id="flowRegion4658"><rect
+           id="flowRegion4658"
+           style="stroke:url(#linearGradient4641)"><rect
              id="rect4660"
              width="1278.4491"
              height="421.43564"
              x="345.06812"
              y="-1674.2416"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000" /></flowRegion><flowPara
-           id="flowPara4662">Game over</flowPara></flowRoot>      <rect
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000;stroke:#000000;stroke-opacity:1" /></flowRegion><flowPara
+           id="flowPara4662"
+           style="stroke:#000000;stroke-opacity:1">Game over</flowPara></flowRoot>      <rect
          y="-1946.9513"
          x="2089.1714"
          height="31.999998"
          width="1455.9999"
          id="rect4749"
-         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
+         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-opacity:1" />
     </g>
     <ellipse
        ry="330.92593"
@@ -2565,7 +2589,7 @@
          ry="25" />
     </g>
     <g
-       transform="translate(-11.313708,-316.09752)"
+       transform="translate(-11.313708,-309.84752)"
        id="g4929">
       <g
          id="g4790"
@@ -2667,7 +2691,7 @@
     </g>
     <g
        id="g4695"
-       transform="matrix(0.92844839,0,0,1,130.4054,480.83257)">
+       transform="matrix(0.92844839,0,0,1,105.4054,349.58257)">
       <flowRoot
          xml:space="preserve"
          id="flowRoot4687"
@@ -2824,21 +2848,23 @@
        id="g6448"
        inkscape:export-xdpi="25.946032"
        inkscape:export-ydpi="25.946032"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\gameover.png">
+       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\gameover.png"
+       style="stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="translate(-128.125,-159.375)">
       <flowRoot
          transform="translate(-16.622609,0)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="flowRoot6265"
          xml:space="preserve"><flowRegion
            id="flowRegion6267"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
              y="-3354.8813"
              x="715.10266"
              height="604.63177"
              width="1834.1851"
              id="rect6269" /></flowRegion><flowPara
            id="flowPara6271">Game over</flowPara></flowRoot>      <rect
-         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
+         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect6273"
          width="1404.839"
          height="31.999998"
@@ -2924,7 +2950,7 @@
            style="-inkscape-font-specification:'Showcard Gothic';font-family:'Showcard Gothic';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></flowRegion><flowPara
          id="flowPara6361" /></flowRoot>    <g
        id="g6379"
-       transform="matrix(1,0,0,1.0028495,16.970561,-437.63971)">
+       transform="matrix(1,0,0,1.0028495,-39.279439,-125.13971)">
       <flowRoot
          xml:space="preserve"
          id="flowRoot6371"
@@ -3040,31 +3066,35 @@
            height="503.45999"
            x="2262.7415"
            y="-2036.2799" /></flowRegion><flowPara
-         id="flowPara4658" /></flowRoot>    <flowRoot
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:273.5899353px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="flowRoot4645"
-       xml:space="preserve"
-       transform="matrix(1.0094616,0,0,1.0094616,-27.114814,16.723589)"><flowRegion
-         id="flowRegion4647"><rect
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000;fill-opacity:1"
-           y="-1884.6991"
-           x="2262.4304"
-           height="2843.822"
-           width="4817.0864"
-           id="rect4650" /></flowRegion><flowPara
-         id="flowPara4652">Let's go!</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot4660"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="matrix(6.7426761,0,0,6.7426761,-14301.851,11503.659)"><flowRegion
-         id="flowRegion4662"><rect
-           id="rect4664"
-           width="704.27832"
-           height="415.77875"
-           x="2457.9031"
-           y="-1985.3683"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
-         id="flowPara4666">Let's go!</flowPara></flowRoot>    <g
+         id="flowPara4658" /></flowRoot>    <g
+       id="g4643"
+       transform="matrix(0.98410633,0,0,0.98410633,73.681416,-137.46753)">
+      <flowRoot
+         transform="matrix(1.0094616,0,0,1.0094616,-27.114814,16.723589)"
+         xml:space="preserve"
+         id="flowRoot4645"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:273.5899353px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
+           id="flowRegion4647"><rect
+             id="rect4650"
+             width="4817.0864"
+             height="2843.822"
+             x="2262.4304"
+             y="-1884.6991"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000;fill-opacity:1" /></flowRegion><flowPara
+           id="flowPara4652">Let's go!</flowPara></flowRoot>      <flowRoot
+         transform="matrix(6.7426761,0,0,6.7426761,-14301.851,11503.659)"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4660"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4662"><rect
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1"
+             y="-1985.3683"
+             x="2457.9031"
+             height="415.77875"
+             width="704.27832"
+             id="rect4664" /></flowRegion><flowPara
+           id="flowPara4666">Let's go!</flowPara></flowRoot>    </g>
+    <g
        id="g4721"
        transform="matrix(0.97818776,0,0,0.97818776,11.911699,-32.336787)"
        inkscape:export-xdpi="23.831661"
@@ -3152,33 +3182,46 @@
          d="m 2581.872,-2962.011 0.2023,-228.9993 -167.2167,114.2917 167.0144,114.7076 z"
          id="path4821" />
     </g>
-    <g
-       transform="matrix(0.92844839,0,0,1,130.4054,480.83257)"
-       id="g4836">
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot4653"
+       style="fill:black;stroke:none;stroke-opacity:1;stroke-width:1px;stroke-linejoin:miter;stroke-linecap:butt;fill-opacity:1;font-family:'Showcard Gothic';font-style:normal;font-weight:normal;font-size:40px;line-height:125%;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:'Showcard Gothic';font-stretch:normal;font-variant:normal;"><flowRegion
+         id="flowRegion4655"><rect
+           id="rect4657"
+           width="675"
+           height="462.5"
+           x="2437.5"
+           y="-935.13782"
+           style="-inkscape-font-specification:'Showcard Gothic';font-family:'Showcard Gothic';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></flowRegion><flowPara
+         id="flowPara4659"></flowPara></flowRoot>    <g
+       id="g4677"
+       transform="translate(-28.125,-6.25)">
       <flowRoot
-         transform="matrix(1.6266129,0,0,1.6266129,-1387.9143,1137.6581)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="flowRoot4838"
-         xml:space="preserve"><flowRegion
-           id="flowRegion4840"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000;fill-opacity:1"
-             y="-1668.7258"
-             x="2312.0283"
-             height="337.10507"
-             width="530.75256"
-             id="rect4842" /></flowRegion><flowPara
-           id="flowPara4844">Score:</flowPara></flowRoot>      <flowRoot
          xml:space="preserve"
-         id="flowRoot4846"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         transform="matrix(1.5237405,0,0,1.5237405,-1129.8748,971.31771)"><flowRegion
-           id="flowRegion4848"><rect
-             id="rect4850"
-             width="530.75256"
-             height="337.10507"
-             x="2312.0283"
-             y="-1668.7258"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
-           id="flowPara4852">Score:</flowPara></flowRoot>    </g>
+         id="flowRoot4669"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffe6d5;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         transform="matrix(1.6509647,0,0,1.6509647,-1530.0566,646.38826)"><flowRegion
+           id="flowRegion4671"><rect
+             id="rect4673"
+             width="468.75"
+             height="337.5"
+             x="2406.25"
+             y="-916.38782"
+             style="fill:#ffe6d5" /></flowRegion><flowPara
+           id="flowPara4675"
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffe6d5">new best!</flowPara></flowRoot>      <flowRoot
+         transform="matrix(1.5967176,0,0,1.5967176,-1386.9269,598.77257)"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         id="flowRoot4661"
+         xml:space="preserve"><flowRegion
+           id="flowRegion4663"><rect
+             style="fill:#ff0000"
+             y="-916.38782"
+             x="2406.25"
+             height="337.5"
+             width="468.75"
+             id="rect4665" /></flowRegion><flowPara
+           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000"
+           id="flowPara4667">new best!</flowPara></flowRoot>    </g>
   </g>
 </svg>

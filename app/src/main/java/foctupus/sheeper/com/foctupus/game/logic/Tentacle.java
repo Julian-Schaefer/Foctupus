@@ -69,12 +69,15 @@ public class Tentacle extends StaticSpriteList {
     private int animationTime;
     private long startTime;
 
+    private Position position;
+
     public Tentacle(Treasure treasure, int animationTime, Position position)
     {
         super();
 
         this.treasure = treasure;
         this.animationTime = animationTime;
+        this.position = position;
 
         switch (position)
         {
@@ -474,6 +477,11 @@ public class Tentacle extends StaticSpriteList {
     public TentacleWay getWay()
     {
         return way;
+    }
+
+    public Position getPosition()
+    {
+        return position;
     }
 
     public interface TentacleListener

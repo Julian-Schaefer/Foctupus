@@ -51,6 +51,8 @@ public class Game implements Tentacle.TentacleListener {
         Tentacle.Position position;
         Tentacle tentacle;
 
+        int count;
+
         do
         {
             switch (Maths.randInt(1, 4))
@@ -71,9 +73,14 @@ public class Game implements Tentacle.TentacleListener {
                     position = Tentacle.Position.BOTTOM;
             }
 
+            count = 0;
+            for (Tentacle t : tentacles)
+                if(t.getPosition() == position)
+                    count++;
+
             tentacle = new Tentacle(treasure, animationTime, position);
 
-        } while(containsTentacleWay(tentacle.getWay()));
+        } while(containsTentacleWay(tentacle.getWay()) || count > 1);
 
         tentacle.setListener(this);
         return tentacle;

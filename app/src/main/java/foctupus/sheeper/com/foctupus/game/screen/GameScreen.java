@@ -1,6 +1,9 @@
 package foctupus.sheeper.com.foctupus.game.screen;
 
+import android.os.AsyncTask;
 import android.view.MotionEvent;
+
+import java.util.concurrent.ThreadFactory;
 
 import foctupus.sheeper.com.foctupus.engine.gui.Component;
 import foctupus.sheeper.com.foctupus.engine.gui.Screen;
@@ -34,6 +37,8 @@ public class GameScreen extends Screen implements Game.GameListener {
     private GameOverContainer gameOverContainer;
 
     private GameState gameState = GameState.STARTING;
+
+    private boolean loadTaskFinished;
 
     public GameScreen(Renderer renderer) {
         super(renderer);
@@ -79,6 +84,8 @@ public class GameScreen extends Screen implements Game.GameListener {
         clearChilds();
         gameState = GameState.STARTING;
 
+        new GeneratorTask().execute();
+
         Component starter = new Component(new Sprite(new Texture(Textures.TITLE)));
         starter.setRelativePosition(new Vector(50, 75));
 
@@ -98,9 +105,10 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     public void startGame()
     {
-        Tentacle.generateTentacles(50);
+        while(!loadTaskFinished);
 
-        gameState = GameState.PLAYING;
+        loadTaskFinished = false;
+
         clearChilds();
 
         score.reset();
@@ -109,6 +117,8 @@ public class GameScreen extends Screen implements Game.GameListener {
         game = new Game(treasure);
         game.setListener(this);
         game.start();
+
+        gameState = GameState.PLAYING;
     }
 
     private void showGameOver()
@@ -167,5 +177,23 @@ public class GameScreen extends Screen implements Game.GameListener {
     @Override
     public void onScoreIncrease() {
         score.increaseCount();
+    }
+
+    private class GeneratorTask extends AsyncTask<Void, Void, Void>
+    {
+
+        @Override
+        protected Void doInBackground(Void... voids)
+        {
+            Tentacle.generateTentacles(60);
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void s)
+        {
+            loadTaskFinished = true;
+        }
     }
 }
