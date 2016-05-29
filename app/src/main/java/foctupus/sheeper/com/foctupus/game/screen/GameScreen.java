@@ -51,9 +51,7 @@ public class GameScreen extends Screen implements Game.GameListener {
     @Override
     public void draw() {
         if(gameState == GameState.PLAYING)
-            game.draw(false);
-        else if(gameState == GameState.GAME_OVER)
-            game.draw(true);
+            game.draw();
 
         super.draw();
     }
@@ -86,7 +84,7 @@ public class GameScreen extends Screen implements Game.GameListener {
 
         new GeneratorTask().execute();
 
-        Component starter = new Component(new Sprite(new Texture(Textures.TITLE)));
+        Component starter = new Component(new Sprite(new Texture(Textures.LBL_GAMESTART)));
         starter.setRelativePosition(new Vector(50, 75));
 
         Transition inTransition = new Transition("STARTER_IN", starter);

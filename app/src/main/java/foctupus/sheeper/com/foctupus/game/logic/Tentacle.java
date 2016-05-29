@@ -122,17 +122,17 @@ public class Tentacle extends StaticSpriteList {
                     }
                 }
 
-                if(treasure.intersects(((Sprite) getFirst()).getPosition())) {
+                if(treasure.intersects((getFirst()).getPosition())) {
                     finished = true;
                     if (listener != null)
-                        listener.hasFinished();
+                        listener.hasFinished(this);
                 }
             }
             else
             {
                 finished = true;
                 if (listener != null)
-                    listener.hasFinished();
+                    listener.hasFinished(this);
             }
 
         }
@@ -164,6 +164,11 @@ public class Tentacle extends StaticSpriteList {
             }
 
         }
+    }
+
+    public void setOutside(boolean outside)
+    {
+        isOut = outside;
     }
 
     public boolean isOutside()
@@ -487,7 +492,7 @@ public class Tentacle extends StaticSpriteList {
     public interface TentacleListener
     {
         void isCut(Tentacle t);
-        void hasFinished();
+        void hasFinished(Tentacle t);
     }
 
     public static class TentacleWay {

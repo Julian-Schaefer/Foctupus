@@ -24,6 +24,7 @@ public class HelpPopup extends Popup {
         setRelativeSize(new Vector(95, 95));
 
         okButton = new Button(new Sprite(new Texture(Textures.BTN_OK)));
+        okButton.setSquared();
         okButton.setRelativePosition(new Vector(50, 11));
         okButton.setRelativeSize(new Vector(USE_RATIO, 11));
         okButton.addButtonListener(new Button.ButtonListener() {

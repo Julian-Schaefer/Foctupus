@@ -4,6 +4,7 @@ import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.concurrent.ThreadFactory;
 
 import foctupus.sheeper.com.foctupus.engine.gui.Container;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
@@ -19,6 +20,8 @@ public class Game implements Tentacle.TentacleListener {
     public static final int SLIDER_PRIO = 20;
     public static final int SCORE_PRIO = 30;
 
+    private static final int GAME_OVER_TIMEOUT = 1000;
+
     private Renderer renderer;
     private Treasure treasure;
 
@@ -33,6 +36,9 @@ public class Game implements Tentacle.TentacleListener {
 
     private Vector lastTouch;
 
+    private boolean gameOver = false;
+    private long endTime = -1;
+
     public Game(Treasure treasure)
     {
         renderer = Renderer.getInstance();
@@ -44,7 +50,6 @@ public class Game implements Tentacle.TentacleListener {
 
         start();
     }
-
 
     private Tentacle createTentacle()
     {
@@ -86,29 +91,29 @@ public class Game implements Tentacle.TentacleListener {
         return tentacle;
     }
 
-    public void draw(boolean gameOver)
+    public void draw()
     {
         ListIterator<Tentacle> iterator = tentacles.listIterator();
 
-        while(iterator.hasNext())
+        while (iterator.hasNext())
         {
             Tentacle tentacle = iterator.next();
 
-            if(!gameOver)
-                tentacle.update();
+            tentacle.update();
 
-            if(tentacle.isOutside())
+            if (tentacle.isOutside())
             {
                 iterator.remove();
-                iterator.add(createTentacle());
-            }
-            else
+                if(!gameOver)
+                    iterator.add(createTentacle());
+            } else
                 renderer.addSpriteList(tentacle, Container.STD_PRIORITY);
         }
 
         if(!gameOver)
             slider.draw(renderer);
-
+        else
+            onGameOver();
     }
 
     private boolean containsTentacleWay(Tentacle.TentacleWay way)
@@ -200,9 +205,20 @@ public class Game implements Tentacle.TentacleListener {
     }
 
     @Override
-    public void hasFinished() {
-        if(listener != null)
-            listener.onGameOver();
+    public void hasFinished(Tentacle t) {
+        gameOver = true;
+        endTime = System.currentTimeMillis();
+    }
+
+    private void onGameOver()
+    {
+        if(endTime != -1 && System.currentTimeMillis() - endTime > GAME_OVER_TIMEOUT)
+        {
+            endTime = -1;
+            if(listener != null)
+                listener.onGameOver();
+        }
+
     }
 
     public void setListener(GameListener listener)

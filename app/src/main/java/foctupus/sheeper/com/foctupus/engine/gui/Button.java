@@ -15,9 +15,11 @@ import foctupus.sheeper.com.foctupus.game.tools.Maths;
 public class Button extends Component {
 
     private boolean pressed;
+    private boolean round = true;
 
     private LinkedList<ButtonListener> listeners;
-    private float normalWidth;
+    private float normalWidth = -1f;
+    private float normalHeight = -1f;
 
     public Button(Sprite sprite)
     {
@@ -28,6 +30,16 @@ public class Button extends Component {
     {
         super(sprite, relativePosition, relativeSize);
         listeners = new LinkedList<>();
+    }
+
+    public void setSquared()
+    {
+        round = false;
+    }
+
+    public void setRound()
+    {
+        round = true;
     }
 
     @Override
@@ -63,8 +75,23 @@ public class Button extends Component {
     {
         if(!pressed) {
             normalWidth = getSprite().getXSize();
+            normalHeight = getSprite().getYSize();
             pressed = true;
-            setRelativeSize(new Vector(getRelativeSize().getX() * 0.85f, USE_SAME));
+
+            float x = getRelativeSize().getX() * 0.85f;
+            float y = getRelativeSize().getY() * 0.85f;
+
+            if(getRelativeSize().getX() == USE_RATIO)
+                x = USE_RATIO;
+            else if(getRelativeSize().getX() == USE_SAME)
+                x = USE_SAME;
+
+            if(getRelativeSize().getY() == USE_RATIO)
+                y = USE_RATIO;
+            else if(getRelativeSize().getY() == USE_SAME)
+                y = USE_SAME;
+
+            setRelativeSize(new Vector(x, y));
         }
     }
 
@@ -72,14 +99,43 @@ public class Button extends Component {
     {
         if(pressed) {
             pressed = false;
-            setRelativeSize(new Vector(getRelativeSize().getX() / 0.85f, USE_SAME));
+
+            float x = getRelativeSize().getX() / 0.85f;
+            float y = getRelativeSize().getY() / 0.85f;
+
+            if(getRelativeSize().getX() == USE_RATIO)
+                x = USE_RATIO;
+            else if(getRelativeSize().getX() == USE_SAME)
+                x = USE_SAME;
+
+            if(getRelativeSize().getY() == USE_RATIO)
+                y = USE_RATIO;
+            else if(getRelativeSize().getY() == USE_SAME)
+                y = USE_SAME;
+
+            setRelativeSize(new Vector(x, y));
         }
     }
 
     @Override
     public boolean isIntersected(float x, float y) {
-        if(Maths.lengthOf(getSprite().getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth/2 : getSprite().getXSize()/2))
-            return true;
+
+        normalWidth = normalWidth == -1 ? getSprite().getXSize() : normalWidth;
+        normalHeight = normalHeight == -1 ? getSprite().getYSize() : normalHeight;
+
+        if(round)
+        {
+            return Maths.lengthOf(getSprite().getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth / 2 : getSprite().getXSize() / 2);
+        }
+        else if(!round)
+        {
+            float left = getSprite().getActualXPos() - normalWidth/2;
+            float right = getSprite().getActualXPos() + normalWidth/2;
+            float bottom = getSprite().getActualYPos() - normalHeight/2;
+            float top = getSprite().getActualYPos() + normalHeight/2;
+
+            return x > left && x < right && y > bottom && y < top;
+        }
 
         return false;
     }

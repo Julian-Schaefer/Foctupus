@@ -34,6 +34,9 @@ public class Textures {
     public static final String LBL_GAMEOVER = "lbl_gameover";
     public static final String LBL_YOURBEST = "lbl_yourbest";
     public static final String LBL_SCORE = "lbl_score";
+    public static final String LBL_GAMESTART = "lbl_gamestart";
+    public static final String LBL_NEW_BEST = "lbl_newbest";
+
 
     public static final String CHAR_ZERO = "char_zero";
     public static final String CHAR_ONE = "char_one";
@@ -74,6 +77,8 @@ public class Textures {
             LBL_GAMEOVER,
             LBL_SCORE,
             LBL_YOURBEST,
+            LBL_GAMESTART,
+            LBL_NEW_BEST,
             CHAR_ZERO, CHAR_ONE, CHAR_TWO, CHAR_THREE, CHAR_FOUR, CHAR_FIVE, CHAR_SIX, CHAR_SEVEN, CHAR_EIGHT, CHAR_NINE
     };
 }

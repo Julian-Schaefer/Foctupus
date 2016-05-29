@@ -109,7 +109,24 @@ public class Sprite extends Rectangle {
     @Override
     public void setSize(float x, float y) {
         super.setSize(x, y);
+
         if(getTexture() != null)
-        ;//Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " y=" + y);
+        {
+
+            logSpriteSize("normal-hdpi", 480, 854);
+            logSpriteSize("large-hdpi", 720, 1280);
+
+
+        }
+    }
+
+    private void logSpriteSize(String name, int x, int y)
+    {
+        double xRatio = getXSize() / Renderer.getWidth();
+        double yRatio = getYSize() / Renderer.getHeight();
+
+        double x_normal_hdpi = xRatio * x;
+        double y_normal_hdpi = yRatio * y;
+        Log.d("DEBUGTEXES", getTexture().getName() + ", "  + name + ": x=" + x_normal_hdpi + " y=" + y_normal_hdpi);
     }
 }

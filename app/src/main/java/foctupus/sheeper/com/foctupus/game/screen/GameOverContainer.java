@@ -38,7 +38,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
     private void init(int scoreCount)
     {
         gameOver = new Component(new Sprite(new Texture(Textures.LBL_GAMEOVER)));
-        gameOver.setRelativeSize(new Vector(82, USE_RATIO));
+        gameOver.setRelativeSize(new Vector(85, 13));
 
         homeButton = new Button(new Sprite(new Texture(Textures.BTN_HOME)));
         homeButton.setRelativeSize(new Vector(38, USE_SAME));
@@ -49,11 +49,11 @@ public class GameOverContainer extends Container implements Transition.Transitio
         scoreboard = new Scoreboard(renderer, scoreCount);
         scoreboard.setRelativeSize(new Vector(95, USE_RATIO));
 
-        if(scoreCount > FoctupusDatabase.getInstance().getBest()) {
+        if(scoreCount > FoctupusDatabase.getInstance().getBest() || true) {
             FoctupusDatabase.getInstance().setBest(scoreCount);
 
-            newBest = new Component(new Sprite(new Texture(Textures.TITLE)));
-            newBest.setRelativeSize(new Vector(40, USE_RATIO));
+            newBest = new Component(new Sprite(new Texture(Textures.LBL_NEW_BEST)));
+            newBest.setRelativeSize(new Vector(40, 14));
 
             Transition newBestTransition = new Transition("NEWBEST", newBest);
             newBestTransition.setPositionTransition(new PositionTransition(new Vector(40, 50), new Vector(65, 50)));
@@ -76,7 +76,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
     private void animateIn()
     {
         Transition gameOverInTransition = new Transition("SLIDE_IN", gameOver);
-        gameOverInTransition.setPositionTransition(new PositionTransition(new Vector(50, 150), new Vector(50, 85)));
+        gameOverInTransition.setPositionTransition(new PositionTransition(new Vector(50, 150), new Vector(50, 88)));
         gameOverInTransition.setListener(this);
         gameOver.startTransition(gameOverInTransition);
 
@@ -96,7 +96,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
     private void animateOut()
     {
         Transition gameOverOutTransition = new Transition("SLIDE_OUT", gameOver);
-        gameOverOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 85), new Vector(50, 150)));
+        gameOverOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 88), new Vector(50, 150)));
         gameOverOutTransition.setListener(this);
         gameOver.startTransition(gameOverOutTransition);
 

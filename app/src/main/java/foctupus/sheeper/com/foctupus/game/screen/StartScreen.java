@@ -72,8 +72,7 @@ public class StartScreen extends Screen {
             @Override
             public void onClick(Button button)
             {
-                title.getSprite().setVisible(false);
-                showPopUp(new HelpPopup(renderer));
+                showHelpInstructions();
             }
         });
 
@@ -187,30 +186,51 @@ public class StartScreen extends Screen {
                     @Override
                     public void onClick(Button button) {
                         animateOut();
-                        startButton.clearButtonListeners();
-                        bestButton.clearButtonListeners();
-                        clicked = bestButton;
+                        setClicked(bestButton);
                     }
                 });
 
                 startButton.addButtonListener(new Button.ButtonListener() {
                     @Override
                     public void onClick(Button button) {
-                        animateOut();
-                        startButton.clearButtonListeners();
-                        bestButton.clearButtonListeners();
-                        clicked = startButton;
+
+                        if(FoctupusDatabase.getInstance().hasPlayedBefore())
+                            animateOut();
+                        else
+                            showHelpInstructions();
+
+                        setClicked(startButton);
                     }
                 });
             }
         }
     }
 
+    private void showHelpInstructions()
+    {
+        title.getSprite().setVisible(false);
+        showPopUp(new HelpPopup(renderer));
+    }
+
+    private void setClicked(Button clicked)
+    {
+        startButton.clearButtonListeners();
+        bestButton.clearButtonListeners();
+
+        this.clicked = clicked;
+    }
 
     @Override
     public void onFinished(Component component)
     {
         super.onFinished(component);
+
+        if(!FoctupusDatabase.getInstance().hasPlayedBefore())
+        {
+            FoctupusDatabase.getInstance().setHasPlayedBefore();
+            animateOut();
+        }
+
         title.getSprite().setVisible(true);
     }
 
