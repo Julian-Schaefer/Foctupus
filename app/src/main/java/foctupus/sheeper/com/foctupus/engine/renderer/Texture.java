@@ -21,6 +21,15 @@ public class Texture {
         ratio = calcRatio(bitmap);
     }
 
+    public Texture(String name, int id, Bitmap bitmap)
+    {
+        this.name = name;
+        this.id = id;
+        this.bitmap = bitmap;
+
+        ratio = calcRatio(bitmap);
+    }
+
     public Texture(String name)
     {
         this(name, Renderer.getTextureID(name));

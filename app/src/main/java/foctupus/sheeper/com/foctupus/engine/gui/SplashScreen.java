@@ -3,10 +3,12 @@ package foctupus.sheeper.com.foctupus.engine.gui;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
+import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.engine.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
+import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
 import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
@@ -27,7 +29,7 @@ public class SplashScreen extends Screen {
     private int[] rgbBackground;
     private String screenImageName;
 
-    private Component screenImage;
+    private Container screenImage;
     private Component progressBackground;
     private Component progress;
 
@@ -45,13 +47,14 @@ public class SplashScreen extends Screen {
     {
         getSprite().setVisible(true);
 
-        screenImage = new Component();
+        screenImage = new Container(Renderer.getInstance());
         progressBackground = new Component();
         progress = new Component();
 
-        addChild(progressBackground);
-        addChild(progress);
         addChild(screenImage);
+
+        screenImage.addChild(progressBackground, screenImage.getPriority()-1);
+        screenImage.addChild(progress, screenImage.getPriority()-1);
     }
 
     public void load(String[] textureNames)
@@ -64,6 +67,8 @@ public class SplashScreen extends Screen {
     {
         rgbBackground = rgb;
         loadSprite(this, "loadscreen_background", rgb);
+
+        align();
     }
 
     public void setProgressBackgroundColor(int[] rgb)
@@ -95,19 +100,7 @@ public class SplashScreen extends Screen {
         Bitmap bitmap = Loader.decodeTexture(name);
         int screenImageId = Loader.loadTexture(bitmap);
 
-        Renderer.updateTextureBitmap(name, bitmap);
-        Renderer.updateTextureID(name, screenImageId);
-
-        screenImage.getSprite().setTexture(new Texture(name, screenImageId));
-    }
-
-    @Override
-    public void revalidate() {
-        setScreenImage(screenImageName);
-        setBackgroundColor(rgbBackground);
-        setProgressBackgroundColor(rgbProgressBackground);
-        setProgressColor(rgbProgess);
-        calculateSprite();
+        screenImage.getSprite().setTexture(new Texture(name, screenImageId, bitmap));
     }
 
     private void loadSprite(Component component, String name, int[] rgb)
@@ -119,29 +112,18 @@ public class SplashScreen extends Screen {
 
         int id = Loader.loadTexture(bitmap);
 
+        bitmap.recycle();
+
         component.getSprite().setTexture(new Texture(name, id));
-    }
-
-    @Override
-    public void update() {
-        super.update();
-
-        if(progress != null && toLoad != 0)
-            progress.setRelativeSize(new Vector(progressBackground.getRelativeSize().getX() * loadedCount / toLoad, progress.getRelativeSize().getY()));
-
-        if(loaded && !finished) {
-            Renderer.registerTextures();
-            finished = true;
-            finishScreen(new StartScreen(renderer));
-        }
     }
 
     private void align()
     {
         if(screenImage.getRelativePosition() != null && screenImage.getRelativeSize() != null)
         {
-            progressBackground.setRelativePosition(new Vector(screenImage.getRelativePosition().getX(), screenImage.getRelativePosition().getY() - 8));
-            progressBackground.setRelativeSize(new Vector(screenImage.getRelativeSize().getX() - 4, 8));
+            progressBackground.setRelativePosition(new Vector(50, 27));
+
+            progressBackground.setRelativeSize(new Vector(94, 19));
         }
 
         if(progressBackground.getRelativePosition() != null && progressBackground.getRelativeSize() != null) {
@@ -152,6 +134,33 @@ public class SplashScreen extends Screen {
 
             progress.setRelativeSize(new Vector(0, backSize.getY()));
             progress.setRelativePosition(new Vector(backPos.getX() - backSize.getX() / 2, backPos.getY() - backSize.getY() / 2));
+        }
+
+    }
+
+    @Override
+    public void revalidate()
+    {
+        Log.d("SADS",screenImage.getRelativeSize().getX()+"");
+        super.revalidate();
+        loadScreenImage(screenImageName);
+        setBackgroundColor(rgbBackground);
+        setProgressBackgroundColor(rgbProgressBackground);
+        setProgressColor(rgbProgess);
+    }
+
+    @Override
+    public void update() {
+
+        super.update();
+
+        if(progress != null && toLoad != 0)
+            progress.setRelativeSize(new Vector(progressBackground.getRelativeSize().getX() * loadedCount / toLoad, progress.getRelativeSize().getY()));
+
+        if(loaded && !finished) {
+            Renderer.registerTextures();
+            finished = true;
+            finishScreen(new StartScreen(renderer));
         }
     }
 
@@ -188,13 +197,13 @@ public class SplashScreen extends Screen {
             for (String name : textureNames) {
 
                 Bitmap bitmap = Loader.decodeTexture(name);
-                Renderer.updateTextureBitmap(name, bitmap);
+                Renderer.addTextureBitmap(name, bitmap);
 
                 publishProgress();
 
                 try {
 
-                    Thread.sleep(0);
+                    Thread.sleep(70);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

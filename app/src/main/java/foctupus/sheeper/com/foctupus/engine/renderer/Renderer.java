@@ -236,7 +236,7 @@ public class Renderer {
         return Renderer.bitmaps != null && Renderer.bitmaps.size() > 0;
     }
 
-    public static void updateTextureBitmap(String name, Bitmap bitmap)
+    public static void addTextureBitmap(String name, Bitmap bitmap)
     {
         bitmaps.put(name, bitmap);
     }

@@ -89,11 +89,11 @@ public class Container extends Component implements IDrawable {
             if (child.getSprite().getTexture() != null)
                 child.getSprite().getTexture().revalidate();
 
+            updateChild(child);
+
             if (child instanceof Container) {
                 ((Container) child).revalidate();
             }
-
-            updateChild(child);
         }
     }
 
@@ -110,10 +110,15 @@ public class Container extends Component implements IDrawable {
 
     public void addChild(Component child)
     {
-        addChild(child, childs.size());
+        addChild(child, childs.size(), -1);
     }
 
-    public void addChild(Component child, int index)
+    public void addChild(Component child, int priority)
+    {
+        addChild(child, childs.size(), priority);
+    }
+
+    public void addChild(Component child, int index, int priority)
     {
         if(child != null)
         {
@@ -121,15 +126,19 @@ public class Container extends Component implements IDrawable {
 
             child.getSprite().setVisible(true);
 
-            if(child instanceof Container)
+            if(priority <= 0)
             {
-                ((Container) child).setParent(this);
-                child.setPriority(getPriority() + 1);
+                if (child instanceof Container)
+                {
+                    ((Container) child).setParent(this);
+                    child.setPriority(getPriority() + 1);
+                } else
+                {
+                    child.setPriority(getPriority());
+                }
             }
             else
-            {
-                child.setPriority(getPriority());
-            }
+                child.setPriority(priority);
         }
     }
 

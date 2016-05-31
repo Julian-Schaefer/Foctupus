@@ -14,7 +14,6 @@ public class Textures {
     public static final String TREASURE = "treasure";
     public static final String TITLE = "title";
     public static final String LOADSCREEN = "loadscreen";
-    public static final String SCORE_BACKGROUND = "score_background";
     public static final String IC_LAUNCHER = "ic_launcher";
     public static final String HELP_INSTRUCTION = "help_instruction";
 
@@ -60,7 +59,6 @@ public class Textures {
             TENTACLE,
             TREASURE,
             LOADSCREEN,
-            SCORE_BACKGROUND,
             TITLE,
             IC_LAUNCHER,
             HELP_INSTRUCTION,
