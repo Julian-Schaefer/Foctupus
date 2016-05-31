@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.util.Log;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -54,6 +55,9 @@ public class Background {
     {
         treasure = new Treasure();
 
+        Log.d("DEBUGTEXES", treasure.getTexture() + ": x=" + treasure.getXSize() + " von " +
+                Renderer.getWidth() + " y=" + treasure.getYSize() + " von " + Renderer.getHeight());
+
         Bitmap output = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(output);
@@ -77,6 +81,10 @@ public class Background {
                 (int) (centerX + innerWidth/2), (int) (centerY + height/2)), null);
 
 
+        Log.d("DEBUGTEXES","cliffs" + ": x=" + innerWidth + " von " +
+                Renderer.getWidth() + " y=" + height + " von " + Renderer.getHeight());
+
+
         Bitmap beach = Renderer.getBitmap(Textures.BEACH);
         Rect beachRect = new Rect(0, 0, beach.getWidth(), (int) (beach.getWidth() * Texture.calcRatio(beach)));
 
@@ -93,6 +101,9 @@ public class Background {
         background.setPosition(Renderer.getWidth()/2f, Renderer.getHeight()/2f);
         background.setSize(Renderer.getWidth(), Renderer.getHeight());
         background.setVisible(true);
+
+        Log.d("DEBUGTEXES", background.getTexture() + ": x=" + background.getXSize() + " von " +
+                Renderer.getWidth() + " y=" + background.getYSize() + " von " + Renderer.getHeight());
     }
 
     public void updateAndDraw()

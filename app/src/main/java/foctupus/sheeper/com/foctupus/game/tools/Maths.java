@@ -140,10 +140,9 @@ public final class Maths {
         return (int) Math.sqrt(Math.pow(x.getX() - y.getX(), 2)+ Math.pow(x.getY() - y.getY(), 2));
     }
 
-    public static double toPercent(double p, float all)
+    public static double toPercent(double p, double all)
     {
-        double r = ((double) all *  ( p/ (double) 100));
-        return r;
+        return all *  p / 100.0;
     }
 
 

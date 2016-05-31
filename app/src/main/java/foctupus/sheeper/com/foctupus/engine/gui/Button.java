@@ -120,14 +120,14 @@ public class Button extends Component {
     @Override
     public boolean isIntersected(float x, float y) {
 
-        normalWidth = normalWidth == -1 ? getSprite().getXSize() : normalWidth;
-        normalHeight = normalHeight == -1 ? getSprite().getYSize() : normalHeight;
+        normalWidth = normalWidth <= 0 ? getSprite().getXSize() : normalWidth;
+        normalHeight = normalHeight <= 0 ? getSprite().getYSize() : normalHeight;
 
         if(round)
         {
             return Maths.lengthOf(getSprite().getActualPosition(), new Vector(x, y)) <= (normalWidth > 0 ? normalWidth / 2 : getSprite().getXSize() / 2);
         }
-        else if(!round)
+        else
         {
             float left = getSprite().getActualXPos() - normalWidth/2;
             float right = getSprite().getActualXPos() + normalWidth/2;
@@ -136,8 +136,6 @@ public class Button extends Component {
 
             return x > left && x < right && y > bottom && y < top;
         }
-
-        return false;
     }
 
     private void onButtonClick() {

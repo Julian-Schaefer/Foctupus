@@ -6,6 +6,7 @@ import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
 import android.util.Log;
 
+
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
@@ -89,7 +90,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     public void onDrawFrame(GL10 gl) {
 
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-
+/*
         long curTime = System.currentTimeMillis();
         long deltaTime = curTime - lastTime;
         double aproxFps = 1000 / deltaTime;
@@ -100,7 +101,7 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             Log.d("FPS", "Currently: " + aproxFps);
             lastWritten = System.currentTimeMillis();
         }
-
+*/
         //if (gameManager != null) {
             gameManager.update();
             gameManager.draw();

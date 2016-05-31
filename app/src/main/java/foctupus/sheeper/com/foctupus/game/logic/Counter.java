@@ -58,7 +58,9 @@ public class Counter extends Container {
                     numberHeight = numberWidth * zeroRatio;
                 }
                 else
-                    super.setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
+                {
+                    setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
+                }
             }
 
             int cell = 0;

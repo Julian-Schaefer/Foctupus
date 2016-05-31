@@ -16,7 +16,10 @@
    id="svg4710"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="StartScreen.svg">
+   sodipodi:docname="StartScreen.svg"
+   inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/app/src/main/res/drawable-large-hdpi/title.png"
+   inkscape:export-xdpi="40.490002"
+   inkscape:export-ydpi="40.490002">
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,9 +27,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.5"
-     inkscape:cx="-618.73901"
-     inkscape:cy="1947.5737"
+     inkscape:zoom="1"
+     inkscape:cx="1196.0598"
+     inkscape:cy="3556.4738"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -4752,7 +4755,7 @@
          clip-path="url(#clipPath8160)" />
     </g>
     <flowRoot
-       transform="matrix(1.6137849,0,0,1.9179296,-21.071036,-514.87068)"
+       transform="matrix(1.4748805,0,0,1.930682,233.361,237.57463)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="flowRoot8270"
        xml:space="preserve"

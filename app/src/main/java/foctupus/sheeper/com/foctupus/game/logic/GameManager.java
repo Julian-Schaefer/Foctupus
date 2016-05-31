@@ -54,7 +54,7 @@ public class GameManager implements Screen.ScreenListener {
     public void revalidate(boolean created)
     {
         if (BuildConfig.DEBUG)
-            Log.d("asd", "GameManager.revalidate(" +  created + ") called.");
+            Log.d("DEBUGTEXES", "GameManager.revalidate(" +  created + ") called.");
 
         renderer = Renderer.getInstance();
 

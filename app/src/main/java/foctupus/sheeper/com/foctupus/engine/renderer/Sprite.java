@@ -58,15 +58,6 @@ public class Sprite extends Rectangle {
 
     public Sprite()
     {
-        FloatBuffer defaultCoords = loadTexArray();
-
-        ByteBuffer bb = ByteBuffer.allocateDirect(VERTEX_COUNT * TEX_VERTEX_STRIDE);
-        bb.order(ByteOrder.nativeOrder());
-        FloatBuffer fb = bb.asFloatBuffer();
-        defaultCoords.position(0);
-        fb.put(defaultCoords);
-        fb.position(0);
-        mTexBuffer = fb;
     }
 
     public void setTexture(Texture texture)
@@ -112,21 +103,19 @@ public class Sprite extends Rectangle {
 
         if(getTexture() != null)
         {
-
-            logSpriteSize("normal-hdpi", 480, 854);
-            logSpriteSize("large-hdpi", 720, 1280);
-
-
+            Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " von " + Renderer.getWidth() + " y=" + y + " von " + Renderer.getHeight());
         }
     }
 
-    private void logSpriteSize(String name, int x, int y)
+    private void logSpriteSize(String name, double width, double height)
     {
-        double xRatio = getXSize() / Renderer.getWidth();
+        width = height * (9f/16f);
+
+        double xRatio = getXSize() / (Renderer.getHeight() * (9f/16f));
         double yRatio = getYSize() / Renderer.getHeight();
 
-        double x_normal_hdpi = xRatio * x;
-        double y_normal_hdpi = yRatio * y;
-        Log.d("DEBUGTEXES", getTexture().getName() + ", "  + name + ": x=" + x_normal_hdpi + " y=" + y_normal_hdpi);
+        double x = xRatio * width;
+        double y = yRatio * height;
+        Log.d("DEBUGTEXES", getTexture().getName() + ", "  + name + ": x=" + x + " von " + width + " y=" + y + " von " + height);
     }
 }

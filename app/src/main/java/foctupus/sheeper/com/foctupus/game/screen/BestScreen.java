@@ -18,7 +18,6 @@ import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 public class BestScreen extends Screen {
 
     private static final String TRANS_SLIDE_IN = "slide_in";
-    private static final String TRANS_SLIDING= "sliding";
 
     private Bestboard bestboard;
     private Button backButton;
@@ -33,7 +32,7 @@ public class BestScreen extends Screen {
     protected void init() {
 
         bestboard = new Bestboard(renderer);
-        bestboard.setRelativeSize(new Vector(90, USE_RATIO));
+        bestboard.setRelativeSize(new Vector(95, 45));
 
         backButton = new Button(new Sprite(new Texture(Textures.BTN_BACK)));
         backButton.setRelativeSize(new Vector(32, USE_SAME));

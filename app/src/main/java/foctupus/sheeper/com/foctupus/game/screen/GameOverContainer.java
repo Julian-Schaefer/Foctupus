@@ -47,7 +47,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
         retryButton.setRelativeSize(new Vector(38, USE_SAME));
 
         scoreboard = new Scoreboard(renderer, scoreCount);
-        scoreboard.setRelativeSize(new Vector(95, USE_RATIO));
+        scoreboard.setRelativeSize(new Vector(95, 45));
 
         if(scoreCount > FoctupusDatabase.getInstance().getBest() || true) {
             FoctupusDatabase.getInstance().setBest(scoreCount);
@@ -89,7 +89,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
         retryButton.startTransition(retryButtonInTransition);
 
         Transition scoreBoardInTransition = new Transition("SLIDE_IN", scoreboard);
-        scoreBoardInTransition.setPositionTransition(new PositionTransition(new Vector(50, -50), new Vector(50, 30)));
+        scoreBoardInTransition.setPositionTransition(new PositionTransition(new Vector(50, -50), new Vector(50, 28)));
         scoreboard.startTransition(scoreBoardInTransition);
     }
 
@@ -109,7 +109,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
         retryButton.startTransition(retryButtonOutTransition);
 
         Transition scoreBoardOutTransition = new Transition("SLIDE_OUT", scoreboard);
-        scoreBoardOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 30), new Vector(50, -50)));
+        scoreBoardOutTransition.setPositionTransition(new PositionTransition(new Vector(50, 28), new Vector(50, -50)));
         scoreboard.startTransition(scoreBoardOutTransition);
     }
 

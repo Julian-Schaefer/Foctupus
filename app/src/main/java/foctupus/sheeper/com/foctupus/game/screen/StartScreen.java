@@ -100,12 +100,12 @@ public class StartScreen extends Screen {
     private void animateIn()
     {
         Transition titleGrowTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(0, USE_RATIO), new Vector(98, USE_RATIO)));
+        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(0, 0), new Vector(98, 12)));
         titleGrowTransition.setListener(this);
         title.addTransition(titleGrowTransition);
 
         Transition titleShrinkTransition = new Transition(TRANS_SLIDE_IN, title);
-        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, USE_RATIO), new Vector(92, USE_RATIO)));
+        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, 12), new Vector(92, 11)));
         title.addTransition(titleShrinkTransition);
 
         title.startTransition();
@@ -126,13 +126,13 @@ public class StartScreen extends Screen {
         soundButton.getSprite().setVisible(false);
 
         Transition titleGrowTransition = new Transition(TRANS_SLIDE_OUT, title);
-        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(92, USE_RATIO), new Vector(98, USE_RATIO)));
+        titleGrowTransition.setResizeTransition(new ResizeTransition(new Vector(92, 11), new Vector(98, 12)));
         titleGrowTransition.setListener(this);
         titleGrowTransition.setAnimationTime(200);
         title.addTransition(titleGrowTransition);
 
         Transition titleShrinkTransition = new Transition(TRANS_SLIDE_OUT, title);
-        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, USE_RATIO), new Vector(0, USE_RATIO)));
+        titleShrinkTransition.setResizeTransition(new ResizeTransition(new Vector(98, 12), new Vector(0, 0)));
         titleShrinkTransition.setAnimationTime(400);
         title.addTransition(titleShrinkTransition);
 

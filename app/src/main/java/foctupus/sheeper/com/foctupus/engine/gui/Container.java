@@ -1,10 +1,13 @@
 package foctupus.sheeper.com.foctupus.engine.gui;
 
+import android.util.Log;
+
 import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
+import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by schae on 12.02.2016.
@@ -29,6 +32,7 @@ public class Container extends Component implements IDrawable {
         this.renderer = renderer;
         childs = new LinkedList<>();
 
+
         setPriority(STD_PRIORITY);
         sprite.setVisible(true);
     }
@@ -47,6 +51,9 @@ public class Container extends Component implements IDrawable {
     @Override
     public void draw()
     {
+        if(gotUpdated())
+            calculateSprite();
+
         renderer.addSprite(getSprite(), getPriority());
 
         for(Component child : childs)
@@ -110,10 +117,7 @@ public class Container extends Component implements IDrawable {
     {
         if(child != null)
         {
-            calculateSprite();
-
             childs.add(index, child);
-            updateChild(child);
 
             child.getSprite().setVisible(true);
 
@@ -162,14 +166,23 @@ public class Container extends Component implements IDrawable {
                 width = sprite.getXSize() / 100f * relativeSize.getX();
                 height = width * childSprite.getTexture().getRatio();
             }
-            else {
+            else
+            {
                 width = sprite.getXSize() / 100f * relativeSize.getX();
                 height = sprite.getYSize() / 100f * relativeSize.getY();
             }
 
-            if(width != childSprite.getXSize() || height != childSprite.getYSize())
-                childSprite.setSize(width, height);
 
+
+            if(width != childSprite.getXSize() || height != childSprite.getYSize())
+            {
+                childSprite.setSize(width, height);
+                if(childSprite.getTexture() != null && childSprite.getTexture().getName().equals("btn_start"))
+                {
+                    int i = 0;
+                    Log.d("Hallo", "hllo");
+                }
+            }
             childSprite.setPosition(bottomLeft.getX() + (sprite.getXSize() / 100f * relativePosition.getX()),
                     bottomLeft.getY() + (sprite.getYSize() / 100f * relativePosition.getY()));
         }
@@ -200,6 +213,7 @@ public class Container extends Component implements IDrawable {
     {
         if(parent == null)
         {
+
             if(getRelativePosition() != null)
                 getSprite().setPosition(Renderer.getWidth() / 100f * getRelativePosition().getX(),
                         Renderer.getHeight() / 100f * getRelativePosition().getY());
@@ -207,6 +221,8 @@ public class Container extends Component implements IDrawable {
             if(getRelativeSize() != null)
                 getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
                         Renderer.getHeight() / 100f * getRelativeSize().getY());
+
+            Log.d("DEBUGTEXES", "Ich bin " + getSprite().getXSize() + " breit und " + getSprite().getYSize() + " hoch");
         }
     }
 
@@ -227,17 +243,5 @@ public class Container extends Component implements IDrawable {
             else
                 child.setPriority(priority);
         }
-    }
-
-    @Override
-    public void setRelativePosition(Vector relativePosition) {
-        super.setRelativePosition(relativePosition);
-        calculateSprite();
-    }
-
-    @Override
-    public void setRelativeSize(Vector relativeSize) {
-        super.setRelativeSize(relativeSize);
-        calculateSprite();
     }
 }

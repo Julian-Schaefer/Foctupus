@@ -25,7 +25,7 @@ public class Score extends Counter {
         setPriority(Game.SCORE_PRIO);
         setAdjustWidth(true);
 
-        setRelativeSize(new Vector(1, 9));
+        setRelativeSize(new Vector(10, 9));
         setRelativePosition(new Vector(50, 85));
 
         background = new Component(new Sprite(new Texture(Textures.SCORE_BACKGROUND)));
