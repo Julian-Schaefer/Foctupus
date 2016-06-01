@@ -117,28 +117,29 @@ public class Tentacle extends StaticSpriteList {
 
                 for(int i = 0; i < positionDif; i++)
                 {
-                    if(currentPos < positions.size()) {
+                    if(currentPos < positions.size())
                         addFirst(getNewPart(currentPos++));
-                    }
                 }
 
-                if(treasure.intersects((getFirst()).getPosition())) {
-                    finished = true;
-                    if (listener != null)
-                        listener.hasFinished(this);
-                }
+                if(treasure.intersects((getFirst()).getPosition()))
+                    finish();
             }
             else
             {
-                finished = true;
-                if (listener != null)
-                    listener.hasFinished(this);
+                finish();
             }
 
         }
         else {
             animateOut();
         }
+    }
+
+    private void finish()
+    {
+        finished = true;
+        if (listener != null)
+            listener.hasFinished(this);
     }
 
     public void animateOut()

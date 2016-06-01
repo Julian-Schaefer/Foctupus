@@ -34,12 +34,12 @@ public class Score extends Counter {
         setPriority(Game.SCORE_PRIO);
         setAdjustWidth(true);
 
-        setRelativeSize(new Vector(10, 9));
-        setRelativePosition(new Vector(50, 85));
-
         background = new Component(new Sprite());
         background.setRelativePosition(new Vector(50, 50));
         background.setRelativeSize(new Vector(125, 125));
+
+        setRelativeSize(new Vector(10, 9));
+        setRelativePosition(new Vector(50, 85));
 
         addChild(background);
     }

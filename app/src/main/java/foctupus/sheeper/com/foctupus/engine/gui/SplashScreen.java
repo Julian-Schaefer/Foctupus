@@ -29,6 +29,7 @@ public class SplashScreen extends Screen {
     private int[] rgbBackground;
     private String screenImageName;
 
+    private Sprite background;
     private Container screenImage;
     private Component progressBackground;
     private Component progress;
@@ -37,7 +38,7 @@ public class SplashScreen extends Screen {
 
     public SplashScreen(Renderer renderer)
     {
-        super(renderer, true);
+        super(renderer);
 
         init();
     }
@@ -45,7 +46,10 @@ public class SplashScreen extends Screen {
     @Override
     protected void init()
     {
-        getSprite().setVisible(true);
+        background = new Sprite();
+        background.setSize(Renderer.getWidth(), Renderer.getHeight());
+        background.setPosition(Renderer.getWidth()/2, Renderer.getHeight()/2);
+        background.setVisible(true);
 
         screenImage = new Container(Renderer.getInstance());
         progressBackground = new Component();
@@ -66,7 +70,7 @@ public class SplashScreen extends Screen {
     public void setBackgroundColor(int[] rgb)
     {
         rgbBackground = rgb;
-        loadSprite(this, "loadscreen_background", rgb);
+        loadSprite(background, "loadscreen_background", rgb);
 
         align();
     }
@@ -74,14 +78,14 @@ public class SplashScreen extends Screen {
     public void setProgressBackgroundColor(int[] rgb)
     {
         rgbProgressBackground = rgb;
-        loadSprite(progressBackground, "progress_background", rgb);
+        loadSprite(progressBackground.getSprite(), "progress_background", rgb);
         align();
     }
 
     public void setProgressColor(int[] rgb)
     {
         rgbProgess = rgb;
-        loadSprite(progress, "progress", rgb);
+        loadSprite(progress.getSprite(), "progress", rgb);
         align();
     }
 
@@ -90,7 +94,7 @@ public class SplashScreen extends Screen {
         loadScreenImage(name);
 
         screenImage.setRelativePosition(new Vector(50, 50));
-        screenImage.setRelativeSize(new Vector(80, USE_RATIO));
+        screenImage.setRelativeSize(new Vector(85, USE_RATIO));
 
         align();
     }
@@ -103,7 +107,7 @@ public class SplashScreen extends Screen {
         screenImage.getSprite().setTexture(new Texture(name, screenImageId, bitmap));
     }
 
-    private void loadSprite(Component component, String name, int[] rgb)
+    private void loadSprite(Sprite sprite, String name, int[] rgb)
     {
         Bitmap bitmap = Bitmap.createBitmap(12, 12, Bitmap.Config.ARGB_8888);
 
@@ -114,7 +118,7 @@ public class SplashScreen extends Screen {
 
         bitmap.recycle();
 
-        component.getSprite().setTexture(new Texture(name, id));
+        sprite.setTexture(new Texture(name, id));
     }
 
     private void align()
@@ -141,12 +145,14 @@ public class SplashScreen extends Screen {
     @Override
     public void revalidate()
     {
-        Log.d("SADS",screenImage.getRelativeSize().getX()+"");
         super.revalidate();
         loadScreenImage(screenImageName);
         setBackgroundColor(rgbBackground);
         setProgressBackgroundColor(rgbProgressBackground);
         setProgressColor(rgbProgess);
+
+        background.setPosition(Renderer.getWidth()/2, Renderer.getHeight()/2);
+        background.setSize(Renderer.getWidth(), Renderer.getHeight());
     }
 
     @Override
@@ -162,6 +168,13 @@ public class SplashScreen extends Screen {
             finished = true;
             finishScreen(new StartScreen(renderer));
         }
+    }
+
+    @Override
+    public void draw()
+    {
+        renderer.addSprite(background, getPriority());
+        super.draw();
     }
 
     @Override

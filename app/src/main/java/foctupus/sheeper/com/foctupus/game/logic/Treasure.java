@@ -22,22 +22,18 @@ public class Treasure extends Sprite {
         float height = Renderer.getHeight() * 15f/100;
         setSize(height/getTexture().getRatio(), height);
 
-        float shadowHeight = (getYSize()/2) * 0.3f;
-        left = getXPos() - getXSize()/2;
-        right = getXPos() + getXSize()/2;
-        bottom = getYPos() - getYSize()/2 + shadowHeight;
-        top = getYPos() + getYSize()/2;
+        left = getXPos() - getXSize()/6;
+        right = getXPos() + getXSize()/6;
+        bottom = getYPos() - getYSize()/6;
+        top = getYPos() + getYSize()/6;
 
         setVisible(true);
     }
 
     public boolean intersects(Vector pos)
     {
-
         if(pos.getX() >= left && pos.getX() <= right && pos.getY() >= bottom && pos.getY() <= top)
-        {
             return true;
-        }
 
         return false;
     }

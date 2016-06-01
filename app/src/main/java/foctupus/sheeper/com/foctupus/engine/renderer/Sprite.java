@@ -128,7 +128,8 @@ public class Sprite extends Rectangle {
     {
         if(sizes.containsKey(name))
         {
-            if(sizes.get(name).getX() < x || sizes.get(name).getY() < y)
+
+            if((sizes.get(name).getX() < x || sizes.get(name).getY() < y) || name.equals(Textures.TITLE))
             {
                 Vector v = new Vector(x, y);
                 sizes.put(name, v);
@@ -145,10 +146,83 @@ public class Sprite extends Rectangle {
 
         Log.d("DEBUGTEXES", "------NEUE AUSGABE------");
 
-        for(Map.Entry<String, Vector> entry : sizes.entrySet())
+        writeSize("beach");
+        writeSize("background");
+        writeSize("cliffs");
+        writeSize("bubble");
+        writeSize("scoreboard");
+        writeSize("treasure");
+        writeSize("title");
+        writeSize("loadscreen");
+        writeSize("help_instruction");
+        writeSize("btn_back");
+        writeSize("btn_start");
+        writeSize("btn_best");
+        writeSize("btn_home");
+        writeSize("btn_retry");
+        writeSize("btn_muted");
+        writeSize("btn_unmuted");
+        writeSize("btn_help");
+        writeSize("btn_ok");
+        writeSize("lbl_best");
+        writeSize("lbl_gameover");
+        writeSize("lbl_yourbest");
+        writeSize("lbl_score");
+        writeSize("lbl_newbest");
+        writeSize("lbl_gamestart");
+        writeSize("char_one");
+        writeSize("char_two");
+        writeSize("char_three");
+        writeSize("char_four");
+        writeSize("char_five");
+        writeSize("char_six");
+        writeSize("char_seven");
+        writeSize("char_eight");
+        writeSize("char_nine");
+        writeSize("char_zero");
+
+        /*for(Map.Entry<String, Vector> entry : sizes.entrySet())
         {
             Log.d("DEBUGTEXES", entry.getKey() + ": x=" + entry.getValue().getX()
-                    + " von " + Renderer.getWidth() + " y=" + entry.getValue().getY() + " von " + Renderer.getHeight());
+                    + " von " + Renderer.getWidth() + " /----/ y=" + entry.getValue().getY() + " von " + Renderer.getHeight());
+        }*/
+    }
+
+    private static void writeSize(String name)
+    {
+        if(!sizes.containsKey(name))
+            return;
+
+        Vector size = sizes.get(name);
+
+        String nameString = name + ": ";
+        String widthString = "x= " + (int) size.getX() + " von " + Renderer.getWidth();
+        String heightString = "// y=" + (int) size.getY() + " von " + Renderer.getHeight();
+
+
+        final int width = 30;
+        StringBuffer b = new StringBuffer();
+
+        b.append(nameString);
+
+        for(int i = 0; i < width - nameString.length(); i++)
+        {
+            b.append(" ");
         }
+
+        b.append(widthString);
+        for(int i = 0; i < width - widthString.length(); i++)
+            b.append(" ");
+
+        b.append(heightString);
+        for(int i = 0; i < width - heightString.length(); i++)
+            b.append(" ");
+
+
+
+
+        Log.d("DEBUGTEXES", b.toString());
+
+        Log.d("DEBUGTEXES", "- ");
     }
 }

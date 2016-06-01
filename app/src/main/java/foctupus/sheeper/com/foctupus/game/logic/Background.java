@@ -27,7 +27,6 @@ import foctupus.sheeper.com.foctupus.game.tools.Maths;
 public class Background {
 
     private static final int BUBBLE_PRIO = 1000;
-    private static final int BUBBLE_SPAWN_TIME = 11000;
 
     private LinkedList<Bubble> bubbles;
 
@@ -36,6 +35,7 @@ public class Background {
     private Treasure treasure;
 
     private long lastBubble;
+    private int bubbleSpawnTime;
 
     private Sprite background;
 
@@ -123,14 +123,15 @@ public class Background {
             bubble.update(time);
         }
 
-        if(time - lastBubble > BUBBLE_SPAWN_TIME)
+        if(time - lastBubble > bubbleSpawnTime)
         {
-            for(int i = 0; i < Maths.randInt(0,2); i++) {
-                Bubble b = new Bubble();
-                bubbles.add(b);
-            }
+            for(int i = 0; i < Maths.randInt(0,2); i++)
+                bubbles.add(new Bubble());
+
             lastBubble = System.currentTimeMillis();
+            bubbleSpawnTime = Maths.randInt(6500, 11000);
         }
+
         renderer.addSprite(background, priority);
 
         for(Bubble bubble : bubbles)
