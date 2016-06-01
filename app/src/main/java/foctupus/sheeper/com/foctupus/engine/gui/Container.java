@@ -184,14 +184,8 @@ public class Container extends Component implements IDrawable {
 
 
             if(width != childSprite.getXSize() || height != childSprite.getYSize())
-            {
                 childSprite.setSize(width, height);
-                if(childSprite.getTexture() != null && childSprite.getTexture().getName().equals("btn_start"))
-                {
-                    int i = 0;
-                    Log.d("Hallo", "hllo");
-                }
-            }
+
             childSprite.setPosition(bottomLeft.getX() + (sprite.getXSize() / 100f * relativePosition.getX()),
                     bottomLeft.getY() + (sprite.getYSize() / 100f * relativePosition.getY()));
         }
@@ -230,8 +224,6 @@ public class Container extends Component implements IDrawable {
             if(getRelativeSize() != null)
                 getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
                         Renderer.getHeight() / 100f * getRelativeSize().getY());
-
-            Log.d("DEBUGTEXES", "Ich bin " + getSprite().getXSize() + " breit und " + getSprite().getYSize() + " hoch");
         }
     }
 

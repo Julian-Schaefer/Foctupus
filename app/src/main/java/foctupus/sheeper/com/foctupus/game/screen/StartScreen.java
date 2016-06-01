@@ -73,6 +73,7 @@ public class StartScreen extends Screen {
             public void onClick(Button button)
             {
                 showHelpInstructions();
+                Sprite.writeSizes();
             }
         });
 

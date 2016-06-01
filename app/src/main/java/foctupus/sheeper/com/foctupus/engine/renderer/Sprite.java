@@ -5,12 +5,17 @@ import android.util.Log;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.HashMap;
+import java.util.Map;
+
+import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 
 /**
  * Created by schae on 25.01.2016.
  */
 public class Sprite extends Rectangle {
 
+    private static HashMap<String, Vector> sizes = new HashMap<>();
 
     private static final float TEX_SQUARE[] = {
             -0.5f, -0.5f,   // 0 bottom left
@@ -103,7 +108,7 @@ public class Sprite extends Rectangle {
 
         if(getTexture() != null)
         {
-            Log.d("DEBUGTEXES", getTexture().getName() + ": x=" + x + " von " + Renderer.getWidth() + " y=" + y + " von " + Renderer.getHeight());
+            addSprite(getTexture().getName(), x, y);
         }
     }
 
@@ -117,5 +122,33 @@ public class Sprite extends Rectangle {
         double x = xRatio * width;
         double y = yRatio * height;
         Log.d("DEBUGTEXES", getTexture().getName() + ", "  + name + ": x=" + x + " von " + width + " y=" + y + " von " + height);
+    }
+    
+    public static void addSprite(String name, float x, float y)
+    {
+        if(sizes.containsKey(name))
+        {
+            if(sizes.get(name).getX() < x || sizes.get(name).getY() < y)
+            {
+                Vector v = new Vector(x, y);
+                sizes.put(name, v);
+            }
+        }
+        else
+        {
+            sizes.put(name, new Vector(x, y));
+        }
+    }
+
+    public static void writeSizes()
+    {
+
+        Log.d("DEBUGTEXES", "------NEUE AUSGABE------");
+
+        for(Map.Entry<String, Vector> entry : sizes.entrySet())
+        {
+            Log.d("DEBUGTEXES", entry.getKey() + ": x=" + entry.getValue().getX()
+                    + " von " + Renderer.getWidth() + " y=" + entry.getValue().getY() + " von " + Renderer.getHeight());
+        }
     }
 }

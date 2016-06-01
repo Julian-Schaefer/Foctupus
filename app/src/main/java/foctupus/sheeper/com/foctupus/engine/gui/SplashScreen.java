@@ -203,7 +203,7 @@ public class SplashScreen extends Screen {
 
                 try {
 
-                    Thread.sleep(70);
+                    Thread.sleep(10);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

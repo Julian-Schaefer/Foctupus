@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.os.Build;
 import android.util.Log;
 
 import java.util.Iterator;
@@ -55,8 +56,8 @@ public class Background {
     {
         treasure = new Treasure();
 
-        Log.d("DEBUGTEXES", treasure.getTexture() + ": x=" + treasure.getXSize() + " von " +
-                Renderer.getWidth() + " y=" + treasure.getYSize() + " von " + Renderer.getHeight());
+        //DEBUG
+        Sprite.addSprite(treasure.getTexture().getName(), treasure.getXSize(), treasure.getYSize());
 
         Bitmap output = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
 
@@ -81,9 +82,9 @@ public class Background {
                 (int) (centerX + innerWidth/2), (int) (centerY + height/2)), null);
 
 
-        Log.d("DEBUGTEXES","cliffs" + ": x=" + innerWidth + " von " +
-                Renderer.getWidth() + " y=" + height + " von " + Renderer.getHeight());
-
+        //DEBUG
+        Sprite.addSprite("cliffs", innerWidth, height);
+        Sprite.addSprite("beach", Renderer.getWidth(), -1);
 
         Bitmap beach = Renderer.getBitmap(Textures.BEACH);
         Rect beachRect = new Rect(0, 0, beach.getWidth(), (int) (beach.getWidth() * Texture.calcRatio(beach)));
@@ -102,12 +103,13 @@ public class Background {
         background.setSize(Renderer.getWidth(), Renderer.getHeight());
         background.setVisible(true);
 
-        Log.d("DEBUGTEXES", background.getTexture() + ": x=" + background.getXSize() + " von " +
-                Renderer.getWidth() + " y=" + background.getYSize() + " von " + Renderer.getHeight());
+        //DEBUG
+        Sprite.addSprite(background.getTexture().getName(), background.getXSize(), background.getYSize());
     }
 
     public void updateAndDraw()
     {
+        long time = System.currentTimeMillis();
         Iterator<Bubble> iterator = bubbles.iterator();
         while(iterator.hasNext())
         {
@@ -118,10 +120,10 @@ public class Background {
                 continue;
             }
 
-            bubble.update();
+            bubble.update(time);
         }
 
-        if(System.currentTimeMillis() - lastBubble > BUBBLE_SPAWN_TIME)
+        if(time - lastBubble > BUBBLE_SPAWN_TIME)
         {
             for(int i = 0; i < Maths.randInt(0,2); i++) {
                 Bubble b = new Bubble();
@@ -152,7 +154,8 @@ public class Background {
 
     private class Bubble extends Sprite
     {
-        private double speed;
+        private int speed;
+        private long startTime;
 
         public Bubble()
         {
@@ -169,17 +172,17 @@ public class Background {
             setPosition(xPos, yPos);
             setSize(size, size);
 
-            speed = Maths.randInt((int) Maths.toPercent(0.1, Renderer.getHeight()), (int) Maths.toPercent(0.2, Renderer.getHeight()));
+            speed = Maths.randInt(7000, 10000);
 
             setVisible(true);
+            startTime = System.currentTimeMillis();
         }
 
-        public void update()
+        public void update(long time)
         {
-            setPosition(getXPos(), (float) (getYPos() + speed));
+            float diff = (float) (time - startTime);
+            setPosition(getXPos(), Renderer.getHeight() * (diff / speed));
         }
-
-
 
         public boolean isOut()
         {
