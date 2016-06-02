@@ -16,6 +16,7 @@ import foctupus.sheeper.com.foctupus.engine.gui.Screen;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
+import foctupus.sheeper.com.foctupus.engine.renderer.StaticSpriteList;
 import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
 import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
@@ -28,7 +29,7 @@ public class Background {
 
     private static final int BUBBLE_PRIO = 1000;
 
-    private LinkedList<Bubble> bubbles;
+    private StaticSpriteList bubbles;
 
     private int priority;
 
@@ -46,7 +47,7 @@ public class Background {
     {
         renderer = Renderer.getInstance();
 
-        bubbles = new LinkedList<>();
+        bubbles = new StaticSpriteList(new Texture(Textures.BUBBLE));
 
         priority = Screen.STD_PRIORITY;
         init();
@@ -110,10 +111,10 @@ public class Background {
     public void updateAndDraw()
     {
         long time = System.currentTimeMillis();
-        Iterator<Bubble> iterator = bubbles.iterator();
+        Iterator<Sprite> iterator = bubbles.iterator();
         while(iterator.hasNext())
         {
-            Bubble bubble = iterator.next();
+            Bubble bubble = (Bubble) iterator.next();
 
             if(bubble.isOut()) {
                 iterator.remove();
@@ -134,7 +135,7 @@ public class Background {
 
         renderer.addSprite(background, priority);
 
-        for(Bubble bubble : bubbles)
+        for(Sprite bubble : bubbles)
         {
             renderer.addSprite(bubble, BUBBLE_PRIO);
         }
@@ -143,9 +144,7 @@ public class Background {
     public void revalidate()
     {
         init();
-
-        for(Bubble bubble : bubbles)
-            bubble.getTexture().revalidate();
+        bubbles.getTexture().revalidate();
     }
 
     public Treasure getTreasure()

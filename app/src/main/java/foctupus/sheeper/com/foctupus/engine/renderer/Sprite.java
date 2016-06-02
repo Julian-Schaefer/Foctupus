@@ -148,12 +148,12 @@ public class Sprite extends Rectangle {
 
         writeSize("beach");
         writeSize("background");
-        writeSize("cliffs");
+        writeSize("treasure");
+        writeSize("loadscreen");
         writeSize("bubble");
         writeSize("scoreboard");
-        writeSize("treasure");
         writeSize("title");
-        writeSize("loadscreen");
+        writeSize("cliffs");
         writeSize("help_instruction");
         writeSize("btn_back");
         writeSize("btn_start");
@@ -196,7 +196,7 @@ public class Sprite extends Rectangle {
         Vector size = sizes.get(name);
 
         String nameString = name + ": ";
-        String widthString = "x= " + (int) size.getX() + " von " + Renderer.getWidth();
+        String widthString = (int) size.getX() + " x " + (int) size.getY();
         String heightString = "// y=" + (int) size.getY() + " von " + Renderer.getHeight();
 
 
@@ -223,6 +223,5 @@ public class Sprite extends Rectangle {
 
         Log.d("DEBUGTEXES", b.toString());
 
-        Log.d("DEBUGTEXES", "- ");
     }
 }
