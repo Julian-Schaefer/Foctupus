@@ -1761,7 +1761,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.5"
-     inkscape:cx="9808.699"
+     inkscape:cx="9326.699"
      inkscape:cy="1311.7634"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -1791,15 +1791,15 @@
      inkscape:groupmode="layer"
      id="layer1">
     <rect
-       inkscape:export-ydpi="54.18"
-       inkscape:export-xdpi="54.18"
-       y="-1224.6083"
+       inkscape:export-ydpi="28.9"
+       inkscape:export-xdpi="28.9"
+       y="-1223.0082"
        x="8844.627"
-       height="1915.071"
+       height="1913.4709"
        width="1794"
        id="rect4571"
        style="fill:#ff6600;fill-opacity:1;stroke:none"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/Cliffs/images/cliffs-xlarge-hdpi.png" />
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/cliffs.png" />
     <path
        style="fill:url(#linearGradient4774);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        d="m 602.45497,-933.19363 -101.82338,268.70057 -362.03867,25.45585 67.88225,-265.87215 z"

@@ -1838,9 +1838,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="67.579501"
-     inkscape:cy="2550.3232"
+     inkscape:zoom="0.25"
+     inkscape:cx="1941.4772"
+     inkscape:cy="1506.7372"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -4513,9 +4513,9 @@
     <g
        id="g5846"
        transform="translate(-421.43565,1238.8511)"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/Treasure/images/treasure-xlarge-hdpi.png"
-       inkscape:export-xdpi="55.700001"
-       inkscape:export-ydpi="55.700001">
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/treasure.png"
+       inkscape:export-xdpi="29.67"
+       inkscape:export-ydpi="29.67">
       <path
          inkscape:connector-curvature="0"
          style="opacity:1;fill:#8f8f8f;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"

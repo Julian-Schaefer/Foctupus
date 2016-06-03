@@ -27,22 +27,29 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.35355339"
-     inkscape:cx="229.68488"
-     inkscape:cy="3648.6336"
+     inkscape:zoom="0.125"
+     inkscape:cx="306.74159"
+     inkscape:cy="2598.5923"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
      showborder="false"
-     inkscape:window-width="2560"
-     inkscape:window-height="1331"
-     inkscape:window-x="0"
-     inkscape:window-y="1"
-     inkscape:window-maximized="1"
+     inkscape:window-width="1952"
+     inkscape:window-height="1333"
+     inkscape:window-x="-6"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
      inkscape:snap-page="true"
      showguides="true" />
   <defs
      id="defs4712">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.1811 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09449 : 526.1811 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.7874 : 1"
+       id="perspective5031" />
     <linearGradient
        inkscape:collect="always"
        id="linearGradient5169">
@@ -4734,13 +4741,13 @@
          clip-path="url(#clipPath8160)" />
     </g>
     <flowRoot
-       transform="matrix(1.4748805,0,0,1.9481576,233.361,269.87864)"
+       transform="matrix(1.4726541,0,0,1.9426277,234.13729,268.14669)"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        id="flowRoot8270"
        xml:space="preserve"
-       inkscape:export-xdpi="60.799999"
-       inkscape:export-ydpi="60.799999"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/Title/title-xlarge-hdpi.png"><flowRegion
+       inkscape:export-xdpi="35.990002"
+       inkscape:export-ydpi="35.990002"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/title.png"><flowRegion
          id="flowRegion8272"><rect
            style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000"
            y="-1674.2416"
@@ -4997,10 +5004,11 @@
       </g>
     </g>
     <g
-       inkscape:export-ydpi="36"
-       inkscape:export-xdpi="36"
+       inkscape:export-ydpi="27"
+       inkscape:export-xdpi="27"
        id="g4834"
-       transform="translate(445.02774,-1476.6266)">
+       transform="translate(445.02774,-1476.6266)"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_start.png">
       <path
          id="path4836"
          d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
@@ -5123,9 +5131,9 @@
     <g
        id="g6216"
        transform="matrix(0.57600004,0,0,0.57600004,697.86218,-796.3304)"
-       inkscape:export-xdpi="60.939999"
-       inkscape:export-ydpi="60.939999"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/BestScreenButton/btn_best-xlarge-hdpi.png">
+       inkscape:export-xdpi="34.060001"
+       inkscape:export-ydpi="34.060001"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_best.png">
       <path
          id="path6218"
          d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
@@ -5225,9 +5233,9 @@
            id="flowPara11495">?</flowPara></flowRoot>    </g>
     <g
        id="g5027"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/MutedButton/btn_muted-xlarge-hdpi.png"
-       inkscape:export-xdpi="55.619999"
-       inkscape:export-ydpi="55.619999">
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_muted.png"
+       inkscape:export-xdpi="31.85"
+       inkscape:export-ydpi="31.85">
       <path
          transform="matrix(0.77227305,0,0,0.77227305,1014.389,-630.08008)"
          clip-path="url(#clipPath4450)"
@@ -5331,9 +5339,9 @@
     </g>
     <g
        id="g5043"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/UnmutedButton/btn_unmuted-xlarge-hdpi.png"
-       inkscape:export-xdpi="55.619999"
-       inkscape:export-ydpi="55.619999">
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_unmuted.png"
+       inkscape:export-xdpi="31.85"
+       inkscape:export-ydpi="31.85">
       <g
          transform="translate(274.35747,1122.8855)"
          id="g4999">
@@ -5535,9 +5543,9 @@
     </g>
     <g
        id="g5059"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/HelpButton/btn_help-xlarge-hdpi.png"
-       inkscape:export-xdpi="58.400002"
-       inkscape:export-ydpi="58.400002"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_help.png"
+       inkscape:export-xdpi="33.450001"
+       inkscape:export-ydpi="33.450001"
        transform="matrix(1.0910208,0,0,1.0910208,-139.39778,-38.14279)">
       <g
          id="g5186"
@@ -5852,10 +5860,10 @@
     </g>
     <g
        id="g5112"
-       transform="matrix(0.89714156,0,0,1,-91.884631,0)"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/HelpInstruction/help_instruction-xlarge-hdpi.png"
-       inkscape:export-xdpi="65.860001"
-       inkscape:export-ydpi="65.860001">
+       transform="matrix(0.89694847,0,0,1.0069919,-92.195174,0.41109749)"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/help_instruction.png"
+       inkscape:export-xdpi="35.330002"
+       inkscape:export-ydpi="35.330002">
       <rect
          inkscape:export-ydpi="38.414635"
          inkscape:export-xdpi="38.414635"
@@ -6021,10 +6029,10 @@
     </g>
     <g
        id="g5337"
-       transform="matrix(0.91729406,0,0,0.91729406,-2761.8753,456.22192)"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/StartScreen/images/OkButton/ok_button-xlarge-hdpi.png"
-       inkscape:export-xdpi="50.48"
-       inkscape:export-ydpi="50.48">
+       transform="matrix(0.91615043,0,0,0.91757874,-2759.2178,456.21513)"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_ok.png"
+       inkscape:export-xdpi="29.67"
+       inkscape:export-ydpi="29.67">
       <g
          transform="matrix(0.91620084,0,0,1,238.67898,0)"
          id="g5339">

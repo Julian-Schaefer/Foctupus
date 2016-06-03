@@ -14,7 +14,7 @@
    viewBox="0 0 744.09448819 1052.3622047"
    id="svg2"
    version="1.1"
-   inkscape:version="0.91pre3 r13670"
+   inkscape:version="0.91 r13725"
    sodipodi:docname="Bubble.svg"
    inkscape:export-filename="D:\Git\Foctupus\Images\Bubble\bubble_mhdpi.png"
    inkscape:export-xdpi="3.8099999"
@@ -29,16 +29,16 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.7"
-     inkscape:cx="123.18992"
+     inkscape:cx="-221.09579"
      inkscape:cy="312.30252"
      inkscape:document-units="px"
      inkscape:current-layer="g4154"
      showgrid="false"
      showborder="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1017"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
+     inkscape:window-width="2560"
+     inkscape:window-height="1331"
+     inkscape:window-x="0"
+     inkscape:window-y="1"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -48,7 +48,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -59,13 +59,14 @@
     <g
        id="g4154">
       <circle
-         inkscape:export-ydpi="3.8100116"
-         inkscape:export-xdpi="3.8100116"
+         inkscape:export-ydpi="15.48"
+         inkscape:export-xdpi="15.48"
          cy="802.36218"
          cx="250"
          id="path4140"
          style="opacity:1;fill:#c8e3fb;fill-opacity:0.69999999;fill-rule:nonzero;stroke:none;stroke-width:2.68145251;stroke-opacity:1"
-         r="250" />
+         r="250"
+         inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/bubble.png" />
       <circle
          cy="785.19751"
          cx="260.10907"

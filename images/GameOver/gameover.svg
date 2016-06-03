@@ -25,8 +25,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="0.32"
-     inkscape:cx="165.9247"
-     inkscape:cy="3122.6291"
+     inkscape:cx="2173.0456"
+     inkscape:cy="2814.6119"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -1983,44 +1983,6 @@
     <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient4537"
-       id="linearGradient6303"
-       gradientUnits="userSpaceOnUse"
-       x1="503.46002"
-       y1="-919.05145"
-       x2="-429.9209"
-       y2="133.12343" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4784"
-       id="linearGradient6305"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.92936803,0,0,0.92936803,-862.8427,-16.962078)"
-       x1="1516.037"
-       y1="-1108.5562"
-       x2="747.83057"
-       y2="143.35938" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4537"
-       id="linearGradient6325"
-       gradientUnits="userSpaceOnUse"
-       x1="503.46002"
-       y1="-919.05145"
-       x2="-429.9209"
-       y2="133.12343" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4784"
-       id="linearGradient6327"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.92936803,0,0,0.92936803,-862.8427,-16.962078)"
-       x1="1516.037"
-       y1="-1108.5562"
-       x2="747.83057"
-       y2="143.35938" />
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4537"
        id="linearGradient4832"
        gradientUnits="userSpaceOnUse"
        x1="503.46002"
@@ -2496,11 +2458,11 @@
        id="path4733"
        style="opacity:1;fill:#ff0000;fill-opacity:0;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
     <g
-       transform="matrix(0.99459584,0,0,1,1699.5701,-1527.3505)"
+       transform="matrix(0.99459584,0,0,0.98843382,1699.5701,-1533.4261)"
        id="g4805"
-       inkscape:export-xdpi="24.767"
-       inkscape:export-ydpi="24.767"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\scoreboard.png">
+       inkscape:export-xdpi="33.439999"
+       inkscape:export-ydpi="33.439999"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/scoreboard.png">
       <path
          sodipodi:nodetypes="cccccccccccccccccccccc"
          inkscape:connector-curvature="0"
@@ -2690,36 +2652,11 @@
          ry="25" />
     </g>
     <g
-       id="g4695"
-       transform="matrix(0.92844839,0,0,1,105.4054,349.58257)">
-      <flowRoot
-         xml:space="preserve"
-         id="flowRoot4687"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         transform="matrix(1.6266129,0,0,1.6266129,-1387.9143,1137.6581)"><flowRegion
-           id="flowRegion4689"><rect
-             id="rect4691"
-             width="530.75256"
-             height="337.10507"
-             x="2312.0283"
-             y="-1668.7258"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000;fill-opacity:1" /></flowRegion><flowPara
-           id="flowPara4693">Score:</flowPara></flowRoot>      <flowRoot
-         transform="matrix(1.5237405,0,0,1.5237405,-1129.8748,971.31771)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="flowRoot4679"
-         xml:space="preserve"><flowRegion
-           id="flowRegion4681"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1"
-             y="-1668.7258"
-             x="2312.0283"
-             height="337.10507"
-             width="530.75256"
-             id="rect4683" /></flowRegion><flowPara
-           id="flowPara4685">Score:</flowPara></flowRoot>    </g>
-    <g
        id="g6197"
-       transform="translate(-2240.1141,-3136.7254)">
+       transform="translate(-2202.6141,-2374.2254)"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_retry.png"
+       inkscape:export-xdpi="34.060001"
+       inkscape:export-ydpi="34.060001">
       <g
          transform="translate(2054.6036,854.98897)"
          id="g6181">
@@ -2764,179 +2701,32 @@
       </g>
     </g>
     <g
-       id="g6237"
-       transform="translate(-3040.5589,-2336.3496)"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\home.png"
-       inkscape:export-xdpi="25"
-       inkscape:export-ydpi="25">
-      <g
-         transform="translate(2221.9998,-37.999997)"
-         id="g6211">
-        <circle
-           r="254.55843"
-           cy="-1492.974"
-           cx="3275.3774"
-           id="circle6213"
-           style="opacity:1;fill:#f5c400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-        <g
-           inkscape:export-ydpi="36"
-           inkscape:export-xdpi="36"
-           transform="matrix(0.57600004,0,0,0.57600004,3208.183,-1208.3897)"
-           id="g6215">
-          <path
-             inkscape:connector-curvature="0"
-             style="opacity:1;fill:url(#linearGradient6252);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
-             d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
-             id="path6217" />
-          <path
-             inkscape:connector-curvature="0"
-             id="path6219"
-             d="m 137.15734,-996.18018 a 500,500 0 0 0 -500.00004,500 A 500,500 0 0 0 137.15734,3.8198221 500,500 0 0 0 637.1573,-496.18018 a 500,500 0 0 0 -499.99996,-500 z m 0,82.16376 A 417.83687,417.83687 0 0 1 554.99358,-496.18018 417.83687,417.83687 0 0 1 137.15734,-78.342078 417.83687,417.83687 0 0 1 -280.67895,-496.18018 417.83687,417.83687 0 0 1 137.15734,-914.01642 Z"
-             style="opacity:1;fill:url(#linearGradient6254);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-        </g>
-      </g>
-      <g
-         style="fill:#fff5cc;fill-opacity:1"
-         id="g6221"
-         transform="matrix(1.1317501,0,0,1.1317501,2649.63,131.72141)">
-        <path
-           sodipodi:nodetypes="ccccccc"
-           inkscape:connector-curvature="0"
-           id="path6223"
-           d="m 2490.4895,-1502.3448 0.5481,82.3879 85.719,0.2611 -2.8285,13.5004 -100.4091,-0.1646 0.8839,-101.2533 z"
-           style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-        <path
-           sodipodi:nodetypes="ccccccc"
-           inkscape:connector-curvature="0"
-           id="path6225"
-           d="m 2479.5294,-1499.7106 11.3137,9.7138 72.4784,0 0.7071,70.301 13.0815,12.5126 0.3536,-97.1373 z"
-           style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-        <g
-           style="fill:#fff5cc;fill-opacity:1"
-           transform="matrix(1,0,0,0.93134137,141.4811,-1283.5489)"
-           id="g6227">
-          <path
-             id="path6229"
-             d="m 2218.2029,-243.53743 333.9656,0 -166.9828,-146.84226 -166.9828,146.84226 z"
-             style="fill:#fff5cc;fill-opacity:1;stroke:none;stroke-width:2"
-             inkscape:label="Triangle"
-             inkscape:connector-curvature="0" />
-          <path
-             style="opacity:1;fill:#fff5cc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
-             d="m 2283.3633,-244.4707 0,203.646481 203.6465,0 0,-203.646481 -203.6465,0 z m 55.8594,14.84765 91.9257,0 0,91.92383 -91.9257,0 0,-91.92383 z"
-             id="path6231"
-             inkscape:connector-curvature="0" />
-        </g>
-        <path
-           transform="matrix(1,0,0,0.93134137,141.4811,-1283.5489)"
-           clip-path="url(#clipPath6517)"
-           sodipodi:nodetypes="ccccccccccc"
-           inkscape:connector-curvature="0"
-           id="path6233"
-           d="m 2385.7781,-399.32793 0,36.76955 -123.7437,102.53048 39.598,0.70711 -0.2071,201.35384 166.8772,-0.707107 24.2487,22.091882 -219.2031,1.414213 2.8285,-203.646738 -79.9031,1.41421 z"
-           style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-        <path
-           transform="matrix(1,0,0,0.93134137,141.4811,-1283.5489)"
-           clip-path="url(#clipPath6541)"
-           inkscape:connector-curvature="0"
-           id="path6235"
-           d="m 2383.6568,-397.20661 1.4142,33.94113 123.7437,103.94469 -38.1838,0 -2.1213,202.23252 31.8198,31.112696 -2.1213,-212.839126 65.7609,-2.12132 z"
-           style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1" />
-      </g>
-    </g>
-    <g
        id="g6448"
-       inkscape:export-xdpi="25.946032"
-       inkscape:export-ydpi="25.946032"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/GameOver/images/GameOverLabel/lbl_gameover.png"
-       style="stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       transform="translate(-128.125,-159.375)">
+       inkscape:export-xdpi="31.299999"
+       inkscape:export-ydpi="31.299999"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_gameover.png"
+       style="stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       transform="matrix(1,0,0,1.5203917,-204.84781,1422.1529)">
       <flowRoot
          transform="translate(-16.622609,0)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:#000000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="flowRoot6265"
          xml:space="preserve"><flowRegion
            id="flowRegion6267"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:258.24517822px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000;stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
              y="-3354.8813"
              x="715.10266"
              height="604.63177"
              width="1834.1851"
              id="rect6269" /></flowRegion><flowPara
            id="flowPara6271">Game over</flowPara></flowRoot>      <rect
-         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         style="opacity:1;fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
          id="rect6273"
          width="1404.839"
          height="31.999998"
          x="702.8941"
          y="-3129.2336" />
     </g>
-    <g
-       transform="translate(-660.1672,-1582.3211)"
-       id="g6277">
-      <circle
-         r="254.55843"
-         cy="-1492.974"
-         cx="3275.3774"
-         id="circle6279"
-         style="opacity:1;fill:#f5c400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-      <g
-         inkscape:export-ydpi="36"
-         inkscape:export-xdpi="36"
-         transform="matrix(0.57600004,0,0,0.57600004,3208.183,-1208.3897)"
-         id="g6281">
-        <path
-           inkscape:connector-curvature="0"
-           style="opacity:1;fill:url(#linearGradient6303);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
-           d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
-           id="path6283" />
-        <path
-           inkscape:connector-curvature="0"
-           id="path6285"
-           d="m 137.15734,-996.18018 a 500,500 0 0 0 -500.00004,500 A 500,500 0 0 0 137.15734,3.8198221 500,500 0 0 0 637.1573,-496.18018 a 500,500 0 0 0 -499.99996,-500 z m 0,82.16376 A 417.83687,417.83687 0 0 1 554.99358,-496.18018 417.83687,417.83687 0 0 1 137.15734,-78.342078 417.83687,417.83687 0 0 1 -280.67895,-496.18018 417.83687,417.83687 0 0 1 137.15734,-914.01642 Z"
-           style="opacity:1;fill:url(#linearGradient6305);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-      </g>
-    </g>
-    <g
-       transform="translate(52.0773,-1568.9728)"
-       id="g6309"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\retry.png"
-       inkscape:export-xdpi="25"
-       inkscape:export-ydpi="25">
-      <circle
-         r="254.55843"
-         cy="-1492.974"
-         cx="3275.3774"
-         id="circle6311"
-         style="opacity:1;fill:#f5c400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-      <g
-         inkscape:export-ydpi="36"
-         inkscape:export-xdpi="36"
-         transform="matrix(0.57600004,0,0,0.57600004,3208.183,-1208.3897)"
-         id="g6313">
-        <path
-           inkscape:connector-curvature="0"
-           style="opacity:1;fill:url(#linearGradient6325);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
-           d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
-           id="path6315" />
-        <path
-           inkscape:connector-curvature="0"
-           id="path6317"
-           d="m 137.15734,-996.18018 a 500,500 0 0 0 -500.00004,500 A 500,500 0 0 0 137.15734,3.8198221 500,500 0 0 0 637.1573,-496.18018 a 500,500 0 0 0 -499.99996,-500 z m 0,82.16376 A 417.83687,417.83687 0 0 1 554.99358,-496.18018 417.83687,417.83687 0 0 1 137.15734,-78.342078 417.83687,417.83687 0 0 1 -280.67895,-496.18018 417.83687,417.83687 0 0 1 137.15734,-914.01642 Z"
-           style="opacity:1;fill:url(#linearGradient6327);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-      </g>
-    </g>
-    <path
-       inkscape:connector-curvature="0"
-       id="path6321"
-       d="m 3198.5184,-3184.7538 a 188.09039,188.09039 0 0 0 5.1484,255.1269 188.09039,188.09039 0 0 0 254.7246,15.2032 188.09039,188.09039 0 0 0 35.457,-252.7051 l -78.6504,54.5156 a 92.499992,92.499992 0 0 1 16.5645,52.6348 92.499992,92.499992 0 0 1 -92.5,92.5 92.499992,92.499992 0 0 1 -92.5,-92.5 92.499992,92.499992 0 0 1 23.3496,-61.3047 l -71.5937,-63.4707 z"
-       style="opacity:1;fill:#fff5cc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
-    <path
-       id="path6323"
-       d="m 3167.7444,-3204.6812 124.0286,115.3146 37.8511,-165.0693 -161.8797,49.7547 z"
-       style="fill:#fff5cc;fill-opacity:1;stroke:none;stroke-width:2"
-       inkscape:label="Triangle"
-       inkscape:connector-curvature="0" />
     <flowRoot
        xml:space="preserve"
        id="flowRoot6355"
@@ -2949,38 +2739,11 @@
            y="-5000.4712"
            style="-inkscape-font-specification:'Showcard Gothic';font-family:'Showcard Gothic';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></flowRegion><flowPara
          id="flowPara6361" /></flowRoot>    <g
-       id="g6379"
-       transform="matrix(1,0,0,1.0028495,-39.279439,-125.13971)">
-      <flowRoot
-         xml:space="preserve"
-         id="flowRoot6371"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         transform="matrix(1.0496843,0,0,1.1124726,1152.7034,4814.3915)"><flowRegion
-           id="flowRegion6373"><rect
-             id="rect6375"
-             width="972.97882"
-             height="701.44989"
-             x="1120.057"
-             y="-4717.6289"
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#000000" /></flowRegion><flowPara
-           id="flowPara6377">Best:</flowPara></flowRoot>      <flowRoot
-         transform="matrix(1,0,0,1.0598164,1220.1866,4570.0475)"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="flowRoot6363"
-         xml:space="preserve"><flowRegion
-           id="flowRegion6365"><rect
-             style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff"
-             y="-4717.6289"
-             x="1120.057"
-             height="701.44989"
-             width="972.97882"
-             id="rect6367" /></flowRegion><flowPara
-           id="flowPara6369">Best:</flowPara></flowRoot>    </g>
-    <g
-       transform="matrix(1,0,0,1.0028495,972.28419,-3526.679)"
+       transform="matrix(1.2846346,0,0,1.9773041,-2101.1352,-54.281441)"
        id="g6389"
-       inkscape:export-xdpi="30.398399"
-       inkscape:export-ydpi="30.398399">
+       inkscape:export-xdpi="26.48"
+       inkscape:export-ydpi="26.48"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_best.png">
       <flowRoot
          transform="matrix(1.0496843,0,0,1.1124726,1152.7034,4814.3915)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3007,10 +2770,11 @@
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:180px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff" /></flowRegion><flowPara
            id="flowPara6405">Best:</flowPara></flowRoot>    </g>
     <g
-       transform="matrix(0.92844839,0,0,1,2061.7189,-2296.2067)"
+       transform="matrix(0.99753876,0,0,1.9710509,-1482.1701,2614.385)"
        id="g6425"
-       inkscape:export-xdpi="30"
-       inkscape:export-ydpi="30">
+       inkscape:export-xdpi="26.5"
+       inkscape:export-ydpi="26.5"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_score.png">
       <flowRoot
          transform="matrix(1.6266129,0,0,1.6266129,-1387.9143,1137.6581)"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:118.11430359px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
@@ -3096,10 +2860,10 @@
            id="flowPara4666">Let's go!</flowPara></flowRoot>    </g>
     <g
        id="g4721"
-       transform="matrix(0.97818776,0,0,0.97818776,11.911699,-32.336787)"
-       inkscape:export-xdpi="23.831661"
-       inkscape:export-ydpi="23.831661"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\yourbest.png">
+       transform="matrix(1.1328009,0,0,2.3166596,1.8417981,1961.3324)"
+       inkscape:export-xdpi="27.66"
+       inkscape:export-ydpi="27.66"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_yourbest.png">
       <flowRoot
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:196.41009521px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          id="flowRoot4705"
@@ -3123,25 +2887,12 @@
              y="-1647.6066"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
            id="flowPara4719">YOUR BEST:</flowPara></flowRoot>    </g>
-    <rect
-       style="opacity:1;fill:#fff5cc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
-       id="rect4805"
-       width="252.15471"
-       height="105.47151"
-       x="2551.644"
-       y="-3129.2461" />
-    <path
-       inkscape:connector-curvature="0"
-       inkscape:label="Triangle"
-       style="fill:#fff5cc;fill-opacity:1;stroke:none;stroke-width:2"
-       d="m 2581.872,-2962.011 0.2023,-228.9993 -167.2167,114.2917 167.0144,114.7076 z"
-       id="path4807" />
     <g
        id="g4823"
-       transform="translate(2767.9998,2039.9999)"
-       inkscape:export-xdpi="26.562494"
-       inkscape:export-ydpi="26.562494"
-       inkscape:export-filename="D:\Git\Foctupus\app\src\main\res\drawable-normal-hdpi\back.png">
+       transform="translate(1502.3748,1474.3749)"
+       inkscape:export-xdpi="28.75"
+       inkscape:export-ydpi="28.75"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_back.png">
       <g
          transform="translate(-660.1672,-1582.3211)"
          id="g4809">
@@ -3193,38 +2944,12 @@
            x="2437.5"
            y="-935.13782"
            style="-inkscape-font-specification:'Showcard Gothic';font-family:'Showcard Gothic';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;" /></flowRegion><flowPara
-         id="flowPara4659" /></flowRoot>    <flowRoot
-       transform="matrix(1.6238411,0,0,1.8272004,-1577.2418,885.45524)"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       id="flowRoot4669"
-       xml:space="preserve"><flowRegion
-         id="flowRegion4671"><rect
-           style="fill:#ffffff"
-           y="-916.38782"
-           x="2406.25"
-           height="337.5"
-           width="468.75"
-           id="rect4673" /></flowRegion><flowPara
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff"
-         id="flowPara4675">new best!</flowPara></flowRoot>    <flowRoot
-       xml:space="preserve"
-       id="flowRoot4661"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       transform="matrix(1.5967176,0,0,1.5967176,-1505.6769,683.14757)"><flowRegion
-         id="flowRegion4663"><rect
-           id="rect4665"
-           width="468.75"
-           height="337.5"
-           x="2406.25"
-           y="-916.38782"
-           style="fill:#ff0000" /></flowRegion><flowPara
-         id="flowPara4667"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000">new best!</flowPara></flowRoot>    <g
-       transform="matrix(0.98410633,0,0,0.98410633,-1491.9436,-315.59253)"
+         id="flowPara4659" /></flowRoot>    <g
+       transform="matrix(0.98410633,0,0,0.98906279,-1535.6936,-426.13194)"
        id="g4662"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/GameOver/images/GameStartLabel/game_start.png"
-       inkscape:export-xdpi="30.743153"
-       inkscape:export-ydpi="30.743153">
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_gamestart.png"
+       inkscape:export-xdpi="37.02"
+       inkscape:export-ydpi="37.02">
       <flowRoot
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:273.5899353px;line-height:125%;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          id="flowRoot4665"
@@ -3250,36 +2975,103 @@
              y="-1985.3683"
              style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff;fill-opacity:1" /></flowRegion><flowPara
            id="flowPara4679">Let's go!</flowPara></flowRoot>    </g>
-    <g
-       id="g4678"
-       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/GameOver/images/NewBestLabel/lbl_newbest.png"
-       inkscape:export-xdpi="30"
-       inkscape:export-ydpi="30">
-      <flowRoot
-         transform="matrix(1.6238411,0,0,1.8272004,-3536.6168,791.70524)"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-         id="flowRoot4662"
-         xml:space="preserve"><flowRegion
-           id="flowRegion4664"><rect
-             style="fill:#ffffff"
-             y="-916.38782"
-             x="2406.25"
-             height="337.5"
-             width="468.75"
-             id="rect4666" /></flowRegion><flowPara
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:90px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ffffff"
-           id="flowPara4668">new best!</flowPara></flowRoot>      <flowRoot
-         xml:space="preserve"
-         id="flowRoot4670"
-         style="font-style:normal;font-weight:normal;font-size:63.86870575px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"><flowRegion
-           id="flowRegion4672"><rect
-             id="rect4674"
-             width="748.46136"
-             height="538.89221"
-             x="377.04984"
-             y="-873.815"
-             style="fill:#ff0000" /></flowRegion><flowPara
-           id="flowPara4676"
-           style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:143.70458984px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000">new best!</flowPara></flowRoot>    </g>
+    <flowRoot
+       style="font-style:normal;font-weight:normal;font-size:63.86870575px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ff0000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       id="flowRoot4670"
+       xml:space="preserve"
+       transform="matrix(1,0,0,1.9112495,456.25,432.202)"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/lbl_newbest.png"
+       inkscape:export-xdpi="26.66"
+       inkscape:export-ydpi="26.66"><flowRegion
+         id="flowRegion4672"><rect
+           style="fill:#ff0000"
+           y="-873.815"
+           x="377.04984"
+           height="538.89221"
+           width="748.46136"
+           id="rect4674" /></flowRegion><flowPara
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:143.70458984px;font-family:'Showcard Gothic';-inkscape-font-specification:'Showcard Gothic';fill:#ff0000"
+         id="flowPara4676">new best!</flowPara></flowRoot>    <g
+       id="g4653"
+       inkscape:export-filename="/Users/julianschafer/Documents/Programmierung/Android Studio/foctupus_android/images/res/drawable-large-mdpi/btn_home.png"
+       inkscape:export-xdpi="34.060001"
+       inkscape:export-ydpi="34.060001">
+      <g
+         transform="translate(-959.1841,-1453.0108)"
+         id="g6211">
+        <circle
+           r="254.55843"
+           cy="-1492.974"
+           cx="3275.3774"
+           id="circle6213"
+           style="opacity:1;fill:#f5c400;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
+        <g
+           inkscape:export-ydpi="36"
+           inkscape:export-xdpi="36"
+           transform="matrix(0.57600004,0,0,0.57600004,3208.183,-1208.3897)"
+           id="g6215">
+          <path
+             inkscape:connector-curvature="0"
+             style="opacity:1;fill:url(#linearGradient6252);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1"
+             d="m 137.1582,-915.17969 a 419,419 0 0 0 -419,419 419,419 0 0 0 419,419.000002 419,419 0 0 0 419,-419.000002 419,419 0 0 0 -419,-419 z m 0,19.48438 A 399.51532,399.51532 0 0 1 536.67188,-496.17969 399.51532,399.51532 0 0 1 137.1582,-96.664062 399.51532,399.51532 0 0 1 -262.35742,-496.17969 399.51532,399.51532 0 0 1 137.1582,-895.69531 Z"
+             id="path6217" />
+          <path
+             inkscape:connector-curvature="0"
+             id="path6219"
+             d="m 137.15734,-996.18018 a 500,500 0 0 0 -500.00004,500 A 500,500 0 0 0 137.15734,3.8198221 500,500 0 0 0 637.1573,-496.18018 a 500,500 0 0 0 -499.99996,-500 z m 0,82.16376 A 417.83687,417.83687 0 0 1 554.99358,-496.18018 417.83687,417.83687 0 0 1 137.15734,-78.342078 417.83687,417.83687 0 0 1 -280.67895,-496.18018 417.83687,417.83687 0 0 1 137.15734,-914.01642 Z"
+             style="opacity:1;fill:url(#linearGradient6254);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
+        </g>
+      </g>
+      <path
+         style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 2287.0578,-2983.5683 0.6204,93.2425 97.0124,0.2955 -3.2011,15.2791 -113.638,-0.1863 1.0003,-114.5934 z"
+         id="path6223"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccc" />
+      <path
+         style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 2274.6537,-2980.587 12.8043,10.9936 82.0275,0 0.8002,79.5631 14.805,14.1612 0.4002,-109.9352 z"
+         id="path6225"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccc" />
+      <g
+         id="g6227"
+         transform="matrix(1.1317501,0,0,1.0540457,-371.43265,-2735.946)"
+         style="fill:#fff5cc;fill-opacity:1">
+        <path
+           inkscape:connector-curvature="0"
+           inkscape:label="Triangle"
+           style="fill:#fff5cc;fill-opacity:1;stroke:none;stroke-width:2"
+           d="m 2218.2029,-243.53743 333.9656,0 -166.9828,-146.84226 -166.9828,146.84226 z"
+           id="path6229" />
+        <path
+           inkscape:connector-curvature="0"
+           id="path6231"
+           d="m 2283.3633,-244.4707 0,203.646481 203.6465,0 0,-203.646481 -203.6465,0 z m 55.8594,14.84765 91.9257,0 0,91.92383 -91.9257,0 0,-91.92383 z"
+           style="opacity:1;fill:#fff5cc;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-opacity:1" />
+      </g>
+      <path
+         style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 2385.7781,-399.32793 0,36.76955 -123.7437,102.53048 39.598,0.70711 -0.2071,201.35384 166.8772,-0.707107 24.2487,22.091882 -219.2031,1.414213 2.8285,-203.646738 -79.9031,1.41421 z"
+         id="path6233"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccccccccccc"
+         clip-path="url(#clipPath6517)"
+         transform="matrix(1.1317501,0,0,1.0540457,-371.43265,-2735.946)" />
+      <path
+         style="fill:#fff5cc;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         d="m 2383.6568,-397.20661 1.4142,33.94113 123.7437,103.94469 -38.1838,0 -2.1213,202.23252 31.8198,31.112696 -2.1213,-212.839126 65.7609,-2.12132 z"
+         id="path6235"
+         inkscape:connector-curvature="0"
+         clip-path="url(#clipPath6541)"
+         transform="matrix(1.1317501,0,0,1.0540457,-371.43265,-2735.946)" />
+      <rect
+         y="-3014.0439"
+         x="2217.1875"
+         height="36.71875"
+         width="222.65625"
+         id="rect4651"
+         style="fill:#fff5cc;fill-opacity:1;stroke:none;stroke-width:10;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    </g>
   </g>
 </svg>
