@@ -57,9 +57,9 @@ public class GameManager implements Screen.ScreenListener {
 
         if(created)
         {
-            if (!Renderer.areTexturesDecoded() || screen == null)
+            if (screen == null)
                 startSplashScreen();
-            else
+            else if(!(screen instanceof SplashScreen))
                 Renderer.registerTextures();
         }
 

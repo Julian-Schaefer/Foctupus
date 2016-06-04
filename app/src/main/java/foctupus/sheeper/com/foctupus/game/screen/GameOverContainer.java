@@ -49,7 +49,7 @@ public class GameOverContainer extends Container implements Transition.Transitio
         scoreboard = new Scoreboard(renderer, scoreCount);
         scoreboard.setRelativeSize(new Vector(95, 45));
 
-        if(scoreCount > FoctupusDatabase.getInstance().getBest() || true) {
+        if(scoreCount > FoctupusDatabase.getInstance().getBest()) {
             FoctupusDatabase.getInstance().setBest(scoreCount);
 
             newBest = new Component(new Sprite(new Texture(Textures.LBL_NEW_BEST)));

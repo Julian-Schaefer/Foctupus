@@ -233,7 +233,7 @@ public class Renderer {
 
     public static boolean areTexturesDecoded()
     {
-        return Renderer.bitmaps != null && Renderer.bitmaps.size() > 0;
+        return Renderer.bitmaps != null && Renderer.bitmaps.size() == Textures.pictureNames.length;
     }
 
     public static void addTextureBitmap(String name, Bitmap bitmap)

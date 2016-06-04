@@ -61,9 +61,9 @@ public class Tentacle extends StaticSpriteList {
 
     private boolean finished = false;
     private boolean isOut = false;
-    private int splitter = -1;
-    private int animateOutPos = 0;
+    private boolean isCut = false;
 
+    private int animateOutPos = 0;
     private int currentPos = 0;
 
     private int animationTime;
@@ -106,10 +106,10 @@ public class Tentacle extends StaticSpriteList {
 
     public void update()
     {
-        if(!finished) {
+        long diff = System.currentTimeMillis() - startTime;
 
-            long diff = System.currentTimeMillis() - startTime;
-
+        if(!finished)
+        {
             if(diff <= animationTime)
             {
                 int toPosition = (int) (positions.size() * diff/ (double) animationTime);
@@ -128,48 +128,43 @@ public class Tentacle extends StaticSpriteList {
             {
                 finish();
             }
-
         }
-        else {
-            animateOut();
+        else
+        {
+            if(!isOut && isCut)
+            {
+                int toPosition = (int) ((currentPos) * diff / (double) ANIMATE_OUT_TIME);
+                int toRemove = toPosition - animateOutPos;
+
+                for (int i = 0; i < toRemove; i++) {
+                    if(!isEmpty())
+                    {
+                        removeFirst();
+                        animateOutPos++;
+                    }
+                }
+
+                if(diff > ANIMATE_OUT_TIME)
+                {
+                    clear();
+                    isOut = true;
+                }
+            }
         }
     }
 
     private void finish()
     {
         finished = true;
-        if (listener != null)
-            listener.hasFinished(this);
+        listener.hasFinished(this);
     }
 
-    public void animateOut()
+    private void cut()
     {
-        if(!isOut && splitter != -1) {
-
-            long diff = System.currentTimeMillis() - startTime;
-
-            int toPosition = (int) ((currentPos - splitter) * diff / (double) ANIMATE_OUT_TIME);
-            int toRemove = toPosition - animateOutPos;
-
-            for (int i = 0; i < toRemove; i++) {
-                if (splitter < size()) {
-                    remove(splitter);
-                    animateOutPos++;
-                }
-            }
-
-            if(diff > ANIMATE_OUT_TIME)
-            {
-                clear();
-                isOut = true;
-            }
-
-        }
-    }
-
-    public void setOutside(boolean outside)
-    {
-        isOut = outside;
+        finished = true;
+        isCut = true;
+        startTime = System.currentTimeMillis();
+        listener.isCut(this);
     }
 
     public boolean isOutside()
@@ -179,20 +174,17 @@ public class Tentacle extends StaticSpriteList {
 
     public void checkPoints(Vector first, Vector second)
     {
-        if(!finished && first != null && second != null) {
-            boolean tFinished = false;
-            int tSplitter = -1;
-
+        if(!finished && first != null && second != null)
+        {
             Function fFirst = Maths.createFunction(first, second);
             BoundingBox bounds = new BoundingBox(first, second);
-
-            int i = 0;
 
             ListIterator<Sprite> iterator = (ListIterator) iterator();
             while(iterator.hasNext())
             {
                 Sprite tFirst = iterator.next();
-                if(iterator.hasNext()) {
+                if(iterator.hasNext())
+                {
                     Sprite tSecond = iterator.next();
 
                     float left, right, top, bottom;
@@ -216,43 +208,24 @@ public class Tentacle extends StaticSpriteList {
 
                     BoundingBox cBounds = new BoundingBox(left, right, bottom, top);
 
-
                     Function fSecond = Maths.createFunction(tFirst.getPosition(), tSecond.getPosition());
-
                     Vector intercept = Maths.interception(fFirst, fSecond);
 
-
-                    if (bounds.isPointInside(intercept) && cBounds.isPointInside(intercept)) {
-                        tSplitter = i;
-                        tFinished = true;
+                    if (bounds.isPointInside(intercept) && cBounds.isPointInside(intercept))
+                    {
+                        cut();
                         break;
-                    } else if ((Maths.lengthOf(intercept, first) <= padding && cBounds.isPointInside(first)) ||
-                            (Maths.lengthOf(intercept, second) <= padding) && cBounds.isPointInside(second)) {
-                        tSplitter = i;
-                        tFinished = true;
+                    }
+                    else if ((Maths.lengthOf(intercept, first) <= padding && cBounds.isPointInside(first)) ||
+                            (Maths.lengthOf(intercept, second) <= padding) && cBounds.isPointInside(second))
+                    {
+                        cut();
                         break;
                     }
 
                     iterator.previous();
-                    i++;
                 }
             }
-
-            if(tSplitter != -1 && tFinished)
-            {
-                iterator.previous();
-                Sprite sizer = iterator.next();
-
-                //if(game.swipeLength() >= sizer.getYSize())
-                //{
-                finished = true;
-                splitter = tSplitter;
-                startTime = System.currentTimeMillis();
-
-                listener.isCut(this);
-                //}
-            }
-
         }
     }
 

@@ -5,7 +5,7 @@ package foctupus.sheeper.com.foctupus.engine.renderer;
  */
 public class Textures {
 
-    public static final String BEACH = "test";
+    public static final String BEACH = "beach";
     public static final String BACKGROUND = "background";
     public static final String CLIFFS = "cliffs";
     public static final String BUBBLE = "bubble";

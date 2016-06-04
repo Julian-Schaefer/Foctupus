@@ -64,11 +64,13 @@ public class Background {
 
         Canvas canvas = new Canvas(output);
 
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
 
         Bitmap back = Renderer.getBitmap(Textures.BACKGROUND);
         Rect backRect = new Rect(0, 0, back.getWidth(), (int) (back.getWidth() * Texture.calcRatio(back)));
 
-        canvas.drawBitmap(back, backRect, new Rect(0, 0, output.getWidth(), output.getHeight()), null);
+        canvas.drawBitmap(back, backRect, new Rect(0, 0, output.getWidth(), output.getHeight()), paint);
 
 
         Bitmap cliffs = Renderer.getBitmap(Textures.CLIFFS);
@@ -80,24 +82,25 @@ public class Background {
         float height =  (float) Maths.toPercent(60, Renderer.getHeight());
 
         canvas.drawBitmap(cliffs, cliffRect, new Rect((int) (centerX - innerWidth/2), (int) (centerY - height/2),
-                (int) (centerX + innerWidth/2), (int) (centerY + height/2)), null);
+                (int) (centerX + innerWidth/2), (int) (centerY + height/2)), paint);
 
 
         //DEBUG
         Sprite.addSprite("cliffs", innerWidth, height);
-        Sprite.addSprite("beach", Renderer.getWidth(), -1);
+        Sprite.addSprite("beach", Renderer.getWidth(), (int) (Maths.toPercent(32, Renderer.getHeight())));
 
         Bitmap beach = Renderer.getBitmap(Textures.BEACH);
         Rect beachRect = new Rect(0, 0, beach.getWidth(), (int) (beach.getWidth() * Texture.calcRatio(beach)));
 
-        canvas.drawBitmap(beach, beachRect, new Rect(0, Renderer.getHeight() - (int) (output.getWidth() * Texture.calcRatio(beach)), Renderer.getWidth(), output.getHeight()), null);
+        canvas.drawBitmap(beach, beachRect, new Rect(0, Renderer.getHeight() - (int) (output.getWidth() * Texture.calcRatio(beach)),
+                Renderer.getWidth(), output.getHeight()), paint);
 
 
         Bitmap treasureBitmap = Renderer.getBitmap(Textures.TREASURE);
         Rect treasureRect = new Rect(0, 0, treasureBitmap.getWidth(), (int) (treasureBitmap.getWidth() * Texture.calcRatio(treasureBitmap)));
 
         canvas.drawBitmap(treasureBitmap, treasureRect, new Rect((int) (treasure.getActualXPos() - treasure.getXSize()/2), (int) (treasure.getActualYPos() - treasure.getYSize()/2),
-                (int) (treasure.getActualXPos() + treasure.getXSize()/2), (int) (treasure.getActualYPos() + treasure.getYSize()/2)), null);
+                (int) (treasure.getActualXPos() + treasure.getXSize()/2), (int) (treasure.getActualYPos() + treasure.getYSize()/2)), paint);
 
         background = new Sprite(new Texture("background", Loader.loadTexture(output)));
         background.setPosition(Renderer.getWidth()/2f, Renderer.getHeight()/2f);
@@ -134,11 +137,7 @@ public class Background {
         }
 
         renderer.addSprite(background, priority);
-
-        for(Sprite bubble : bubbles)
-        {
-            renderer.addSprite(bubble, BUBBLE_PRIO);
-        }
+        renderer.addSpriteList(bubbles, BUBBLE_PRIO);
     }
 
     public void revalidate()

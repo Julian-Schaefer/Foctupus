@@ -85,7 +85,7 @@ public class Game implements Tentacle.TentacleListener {
 
             tentacle = new Tentacle(treasure, animationTime, position);
 
-        } while(containsTentacleWay(tentacle.getWay()) || count > 1);
+        } while(containsTentacleWay(tentacle.getWay()) || count > 2);
 
         tentacle.setListener(this);
         return tentacle;
@@ -206,8 +206,11 @@ public class Game implements Tentacle.TentacleListener {
 
     @Override
     public void hasFinished(Tentacle t) {
-        gameOver = true;
-        endTime = System.currentTimeMillis();
+        if(!gameOver)
+        {
+            gameOver = true;
+            endTime = System.currentTimeMillis();
+        }
     }
 
     private void onGameOver()
