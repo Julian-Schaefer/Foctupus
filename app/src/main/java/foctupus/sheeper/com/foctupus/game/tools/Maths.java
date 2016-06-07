@@ -9,17 +9,15 @@ import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
  */
 public final class Maths {
 
+    private static Random random = new Random();
+
     private Maths()
     {
 
     }
 
     public static int randInt(int min, int max) {
-
-        Random rand = new Random();
-        int randomNum = rand.nextInt((max - min) + 1) + min;
-
-        return randomNum;
+        return random.nextInt((max - min) + 1) + min;
     }
 
     public static Function createFunction(Vector first, Vector second)

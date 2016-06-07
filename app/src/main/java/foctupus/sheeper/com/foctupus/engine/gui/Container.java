@@ -42,25 +42,24 @@ public class Container extends Component implements IDrawable {
     {
         super.update();
 
+        if(gotUpdated())
+            calculateSprite();
+
         for(Component child : childs)
         {
             child.update();
+            if(child.gotUpdated() || child instanceof Container)
+                updateChild(child);
         }
     }
 
     @Override
     public void draw()
     {
-        if(gotUpdated())
-            calculateSprite();
-
         renderer.addSprite(getSprite(), getPriority());
 
         for(Component child : childs)
         {
-            if(child.gotUpdated())
-                updateChild(child);
-
             if(child instanceof Container)
                 ((Container) child).draw();
             else
@@ -224,6 +223,8 @@ public class Container extends Component implements IDrawable {
             if(getRelativeSize() != null)
                 getSprite().setSize(Renderer.getWidth() / 100f * getRelativeSize().getX(),
                         Renderer.getHeight() / 100f * getRelativeSize().getY());
+
+            updateChilds();
         }
     }
 

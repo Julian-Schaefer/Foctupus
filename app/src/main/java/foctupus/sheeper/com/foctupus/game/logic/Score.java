@@ -38,7 +38,7 @@ public class Score extends Counter {
         background.setRelativePosition(new Vector(50, 50));
         background.setRelativeSize(new Vector(125, 125));
 
-        setRelativeSize(new Vector(10, 9));
+        setRelativeSize(new Vector(0, 9));
         setRelativePosition(new Vector(50, 85));
 
         addChild(background);
@@ -53,24 +53,27 @@ public class Score extends Counter {
 
     private void generateTexture()
     {
-        Bitmap bitmap = Bitmap.createBitmap((int) background.getSprite().getXSize(),
-                (int) background.getSprite().getYSize(), Bitmap.Config.ARGB_8888);
+        if(background.getSprite().getXSize() > 0 && background.getSprite().getYSize() > 0)
+        {
+            Bitmap bitmap = Bitmap.createBitmap((int) background.getSprite().getXSize(),
+                    (int) background.getSprite().getYSize(), Bitmap.Config.ARGB_8888);
 
-        float circleRadius = bitmap.getHeight() / 7;
+            float circleRadius = bitmap.getHeight() / 7;
 
-        Canvas canvas = new Canvas(bitmap);
+            Canvas canvas = new Canvas(bitmap);
 
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setColor(Color.BLACK);
-        paint.setAlpha(110);
+            Paint paint = new Paint();
+            paint.setAntiAlias(true);
+            paint.setColor(Color.BLACK);
+            paint.setAlpha(110);
 
-        canvas.drawRoundRect(new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight()), circleRadius, circleRadius, paint);
+            canvas.drawRoundRect(new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight()), circleRadius, circleRadius, paint);
 
-        int id = Loader.loadTexture(bitmap);
+            int id = Loader.loadTexture(bitmap);
 
-        background.getSprite().setTexture(new Texture("score_background", id));
+            background.getSprite().setTexture(new Texture("score_background", id));
 
-        bitmap.recycle();
+            bitmap.recycle();
+        }
     }
 }

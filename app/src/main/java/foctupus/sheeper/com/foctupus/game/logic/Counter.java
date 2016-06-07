@@ -20,6 +20,7 @@ public class Counter extends Container {
     private boolean adjustWidth;
 
     private GenericSpriteList numbers;
+    private boolean updated;
 
     public Counter()
     {
@@ -37,10 +38,11 @@ public class Counter extends Container {
 
     protected void validate()
     {
-        if(getSprite().getXSize() > 0 && getSprite().getYSize() > 0) {
+        if(updated)
+        {
             numbers.clear();
 
-            float zeroRatio = Texture.calcRatio(Renderer.getBitmap(Textures.CHAR_ONE));
+            float zeroRatio = getDefaultRatio();
 
             String numberStr = String.valueOf(count);
             int length = numberStr.length();
@@ -50,23 +52,32 @@ public class Counter extends Container {
 
             float cellWidth = (numberWidth * 1.1f);
 
-            if (cellWidth * length > getSprite().getXSize()) {
-                if(!adjustWidth)
+            if (cellWidth * length > getSprite().getXSize())
+            {
+                if (!adjustWidth)
                 {
                     cellWidth = getSprite().getXSize() / length;
                     numberWidth = cellWidth * 0.9f;
                     numberHeight = numberWidth * zeroRatio;
                 }
-                else
+            }
+
+            if (adjustWidth)
+            {
+                if (getParent() != null)
                 {
-                    setRelativeSize(new Vector(getRelativeSize().getX() * ((cellWidth * length) / getSprite().getXSize()), getRelativeSize().getY()));
+                    setRelativeSize(new Vector(100f * cellWidth * length / getParent().getSprite().getXSize(), getRelativeSize().getY()));
+                } else
+                {
+                    setRelativeSize(new Vector(100f * cellWidth * length / Renderer.getWidth(), getRelativeSize().getY()));
                 }
             }
 
             int cell = 0;
             float startPos = getSprite().getActualXPos() - (cellWidth * length / 2f);
 
-            for (char c : numberStr.toCharArray()) {
+            for (char c : numberStr.toCharArray())
+            {
                 Sprite number = getNumber(c);
                 number.setSize(numberWidth, numberHeight);
                 number.setPosition(startPos + (cell * cellWidth) + (cellWidth / 2f), getSprite().getActualYPos());
@@ -77,6 +88,11 @@ public class Counter extends Container {
                 cell++;
             }
         }
+    }
+
+    private float getDefaultRatio()
+    {
+        return Texture.calcRatio(Renderer.getBitmap(Textures.CHAR_ONE));
     }
 
     @Override
@@ -101,23 +117,20 @@ public class Counter extends Container {
 
     private Sprite getNumber(char number)
     {
-        Sprite num;
         switch (number)
         {
-            case '0': num = new Sprite(new Texture(Textures.CHAR_ZERO)); break;
-            case '1': num = new Sprite(new Texture(Textures.CHAR_ONE)); break;
-            case '2': num = new Sprite(new Texture(Textures.CHAR_TWO)); break;
-            case '3': num = new Sprite(new Texture(Textures.CHAR_THREE)); break;
-            case '4': num = new Sprite(new Texture(Textures.CHAR_FOUR)); break;
-            case '5': num = new Sprite(new Texture(Textures.CHAR_FIVE)); break;
-            case '6': num = new Sprite(new Texture(Textures.CHAR_SIX)); break;
-            case '7': num = new Sprite(new Texture(Textures.CHAR_SEVEN)); break;
-            case '8': num = new Sprite(new Texture(Textures.CHAR_EIGHT)); break;
-            case '9': num = new Sprite(new Texture(Textures.CHAR_NINE)); break;
-            default: num = new Sprite(new Texture(Textures.CHAR_ZERO)); break;
+            case '0': return new Sprite(new Texture(Textures.CHAR_ZERO));
+            case '1': return new Sprite(new Texture(Textures.CHAR_ONE));
+            case '2': return new Sprite(new Texture(Textures.CHAR_TWO));
+            case '3': return new Sprite(new Texture(Textures.CHAR_THREE));
+            case '4': return new Sprite(new Texture(Textures.CHAR_FOUR));
+            case '5': return new Sprite(new Texture(Textures.CHAR_FIVE));
+            case '6': return new Sprite(new Texture(Textures.CHAR_SIX));
+            case '7': return new Sprite(new Texture(Textures.CHAR_SEVEN));
+            case '8': return new Sprite(new Texture(Textures.CHAR_EIGHT));
+            case '9': return new Sprite(new Texture(Textures.CHAR_NINE));
+            default: return new Sprite(new Texture(Textures.CHAR_ZERO));
         }
-
-        return num;
     }
 
     public void increaseCount()
@@ -125,23 +138,40 @@ public class Counter extends Container {
         setCount(++count);
     }
 
-    public void setCount(int count)
-    {
-        this.count = count;
-        updated = true;
-    }
-
-    public void reset()
-    {
-        count = 0;
-        updated = true;
-    }
-
     @Override
     public void updateChilds()
     {
         super.updateChilds();
         validate();
+    }
+
+    public void setCount(int count)
+    {
+        if(adjustWidth)
+            setRelativeSize(new Vector(0, getRelativeSize().getY()));
+
+        updated = true;
+        this.count = count;
+        validate();
+    }
+
+    public void reset()
+    {
+        setCount(0);
+    }
+
+    @Override
+    public void setRelativeSize(Vector relativeSize)
+    {
+        super.setRelativeSize(relativeSize);
+        updated = true;
+    }
+
+    @Override
+    public void setRelativePosition(Vector relativePosition)
+    {
+        super.setRelativePosition(relativePosition);
+        updated = true;
     }
 
     public int getCount()

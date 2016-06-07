@@ -40,15 +40,11 @@ public class Tentacle extends StaticSpriteList {
     private static LinkedList<TentacleWay> bottomTentacles = new LinkedList<>();
     private static LinkedList<TentacleWay> topTentacles = new LinkedList<>();
 
-    private static final int ANIMATE_OUT_TIME = 700;
+    private static final int ANIMATE_OUT_TIME = 300;
     private static final float END_SIZE = 2.5f;
-    private static final float SHRINK_FACTOR = 0.98f;
+    private static final float SHRINK_FACTOR = 0.96f;
 
     private TentacleListener listener;
-
-    private int startX, startY;
-    private float dirX, dirY;
-    private float divX, divY;
 
     private Treasure treasure;
 

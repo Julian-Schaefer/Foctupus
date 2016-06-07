@@ -109,7 +109,7 @@ public class GameScreen extends Screen implements Game.GameListener {
 
         clearChilds();
 
-        score.reset();
+        score = new Score();
         addChild(score);
 
         game = new Game(treasure);
@@ -149,8 +149,6 @@ public class GameScreen extends Screen implements Game.GameListener {
 
     @Override
     protected void init() {
-        score = new Score();
-
         showStarter();
     }
 
@@ -173,13 +171,12 @@ public class GameScreen extends Screen implements Game.GameListener {
     }
 
     @Override
-    public void onScoreIncrease() {
+    public void onCut() {
         score.increaseCount();
     }
 
     private class GeneratorTask extends AsyncTask<Void, Void, Void>
     {
-
         @Override
         protected Void doInBackground(Void... voids)
         {

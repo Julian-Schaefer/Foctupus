@@ -70,7 +70,7 @@ public class GameManager implements Screen.ScreenListener {
             screen.revalidate();
     }
 
-    public void showAd()
+    /*public void showAd()
     {
         MainActivity.showAd();
         adVisible = true;
@@ -94,14 +94,14 @@ public class GameManager implements Screen.ScreenListener {
             MainActivity.showAd();
             adVisible = true;
         }
-    }
+    }*/
 
     private void startSplashScreen()
     {
         SplashScreen splashScreen = new SplashScreen(renderer);
         splashScreen.setScreenListener(this);
         splashScreen.setScreenImage(Textures.LOADSCREEN);
-        splashScreen.setBackgroundColor(new int[]{249, 201, 113});
+        splashScreen.setBackgroundColor(new int[]{255, 225, 166});
         splashScreen.setProgressBackgroundColor(new int[]{81, 40, 0});
         splashScreen.setProgressColor(new int[]{159, 0, 0});
         splashScreen.setLoadTask(new SplashScreen.SplashLoadTask() {

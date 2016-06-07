@@ -31,7 +31,7 @@ public class Game implements Tentacle.TentacleListener {
     private GameListener listener;
     private Slider slider;
 
-    private int animationTime = 3000;
+    private int speed = 2450;
     private boolean hasCut = false;
 
     private Vector lastTouch;
@@ -57,7 +57,6 @@ public class Game implements Tentacle.TentacleListener {
         Tentacle tentacle;
 
         int count;
-
         do
         {
             switch (Maths.randInt(1, 4))
@@ -83,9 +82,9 @@ public class Game implements Tentacle.TentacleListener {
                 if(t.getPosition() == position)
                     count++;
 
-            tentacle = new Tentacle(treasure, animationTime, position);
+            tentacle = new Tentacle(treasure, speed, position);
 
-        } while(containsTentacleWay(tentacle.getWay()) || count > 2);
+        } while(containsTentacleWay(tentacle.getWay()) || count > 1);
 
         tentacle.setListener(this);
         return tentacle;
@@ -201,7 +200,7 @@ public class Game implements Tentacle.TentacleListener {
         hasCut = true;
 
         if(listener != null)
-            listener.onScoreIncrease();
+            listener.onCut();
     }
 
     @Override
@@ -233,6 +232,6 @@ public class Game implements Tentacle.TentacleListener {
     public interface GameListener
     {
         void onGameOver();
-        void onScoreIncrease();
+        void onCut();
     }
 }

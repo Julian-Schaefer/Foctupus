@@ -10,11 +10,9 @@ public class Textures {
     public static final String CLIFFS = "cliffs";
     public static final String BUBBLE = "bubble";
     public static final String SCOREBOARD = "scoreboard";
-    public static final String TENTACLE = "tentacle";
     public static final String TREASURE = "treasure";
     public static final String TITLE = "title";
     public static final String LOADSCREEN = "loadscreen";
-    public static final String IC_LAUNCHER = "ic_launcher";
     public static final String HELP_INSTRUCTION = "help_instruction";
 
     public static final String BTN_BACK = "btn_back";
@@ -56,11 +54,9 @@ public class Textures {
             CLIFFS,
             BUBBLE,
             SCOREBOARD,
-            TENTACLE,
             TREASURE,
             LOADSCREEN,
             TITLE,
-            IC_LAUNCHER,
             HELP_INSTRUCTION,
             BTN_BACK,
             BTN_BEST,

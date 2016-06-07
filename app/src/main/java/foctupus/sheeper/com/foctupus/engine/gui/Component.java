@@ -24,7 +24,7 @@ public class Component implements IUpdateble {
     private Vector relativeSize;
 
     private int priority;
-    protected boolean updated;
+    private boolean updated;
 
     public Component()
     {

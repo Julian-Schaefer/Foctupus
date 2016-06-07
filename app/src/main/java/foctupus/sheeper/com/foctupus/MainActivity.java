@@ -23,7 +23,7 @@ import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 public class MainActivity extends Activity {
 
     private MyGLSurfaceView surfaceView;
-    private static AdView adView;
+    //private static AdView adView;
     private static boolean loaded;
 
 
@@ -46,14 +46,10 @@ public class MainActivity extends Activity {
         final ConfigurationInfo configurationInfo = activityManager.getDeviceConfigurationInfo();
         final boolean supportsEs2 = configurationInfo.reqGlEsVersion >= 0x20000;
 
-
         if(supportsEs2 || isEmulator()) {
-
+            hideUI();
             LinearLayout surfaceViewContainer = (LinearLayout) findViewById(R.id.mainLayout);
-
             setupSurface(surfaceViewContainer);
-
-            setupAd(surfaceViewContainer);
         }
 
 
@@ -72,7 +68,7 @@ public class MainActivity extends Activity {
     }
 
 
-    private void setupAd(LinearLayout container)
+    /*private void setupAd(LinearLayout container)
     {
         adView = new AdView(this);
         adView.setAdSize(AdSize.SMART_BANNER);
@@ -92,7 +88,7 @@ public class MainActivity extends Activity {
 
         LinearLayout.LayoutParams adLayout = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         container.addView(adView, adLayout);
-    }
+    }*/
 
     private boolean isEmulator() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
@@ -104,7 +100,7 @@ public class MainActivity extends Activity {
     }
 
 
-    public static void showAd()
+    /*public static void showAd()
     {
         Handler refresh = new Handler(Looper.getMainLooper());
         refresh.post(new Runnable() {
@@ -124,7 +120,7 @@ public class MainActivity extends Activity {
                     adView.setVisibility(View.GONE);
             }
         });
-    }
+    }*/
 
 
     @Override
@@ -142,7 +138,7 @@ public class MainActivity extends Activity {
         super.onResume();
         surfaceView.onResume();
 
-        loadAd();
+        //loadAd();
     }
 
     @Override
@@ -199,7 +195,7 @@ public class MainActivity extends Activity {
     @Override
     public void onBackPressed() {}
 
-    public static void loadAd()
+    /*public static void loadAd()
     {
         if(!loaded && adView != null)
         {
@@ -212,6 +208,6 @@ public class MainActivity extends Activity {
                 }
             });
         }
-    }
+    }*/
 
 }
