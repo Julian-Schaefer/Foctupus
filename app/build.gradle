@@ -5,7 +5,7 @@ android {
     buildToolsVersion "22.0.1"
 
     defaultConfig {
-        applicationId "foctupus.sheeper.com.foctupus"
+        applicationId "com.sheeper.foctupus"
         minSdkVersion 14
         targetSdkVersion 23
         versionCode 2
