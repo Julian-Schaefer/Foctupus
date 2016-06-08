@@ -1,13 +1,10 @@
 package foctupus.sheeper.com.foctupus.engine.gui;
 
-import android.util.Log;
-
 import java.util.LinkedList;
 
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
-import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
  * Created by schae on 12.02.2016.

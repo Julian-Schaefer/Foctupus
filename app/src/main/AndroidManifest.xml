@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="foctupus.sheeper.com.foctupus">
 
+    <uses-permission android:name="com.android.vending.BILLING" />
     <uses-feature android:glEsVersion="0x00020000" android:required="true" />
+
     <supports-screens
         android:smallScreens="false"
         android:normalScreens="true"

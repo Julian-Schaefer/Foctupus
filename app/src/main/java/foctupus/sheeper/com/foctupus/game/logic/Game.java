@@ -1,10 +1,8 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
-import android.util.Log;
 
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.concurrent.ThreadFactory;
 
 import foctupus.sheeper.com.foctupus.engine.gui.Container;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
@@ -19,6 +17,7 @@ public class Game implements Tentacle.TentacleListener {
 
     public static final int SLIDER_PRIO = 20;
     public static final int SCORE_PRIO = 30;
+    public static final int[] SPEED_LEVELS = { 2270, 2130, 2030, 1950 };
 
     private static final int GAME_OVER_TIMEOUT = 1000;
 
@@ -31,7 +30,8 @@ public class Game implements Tentacle.TentacleListener {
     private GameListener listener;
     private Slider slider;
 
-    private int speed = 2450;
+    private int score;
+    private int speed;
     private boolean hasCut = false;
 
     private Vector lastTouch;
@@ -136,8 +136,6 @@ public class Game implements Tentacle.TentacleListener {
 
     public void onPress(float x, float y)
     {
-        Log.d("OAsd", "PRESSED: x=" + x + " y= " + y);
-
         slider.reset();
         lastTouch = new Vector(x, y);
         slider.addPoint(x, y);
@@ -145,23 +143,18 @@ public class Game implements Tentacle.TentacleListener {
 
     public void onMove(float x, float y)
     {
-        Log.d("OAsd", "MOVED: x=" + x + " y= " + y);
         Vector currentTouch = new Vector(x, y);
 
         if(lastTouch != null)
         {
-            if (Maths.lengthOf(currentTouch, lastTouch) < Renderer.getHeight() / 6)
+            for (Tentacle tentacle : tentacles)
             {
-                for (Tentacle tentacle : tentacles)
-                {
-                    if (!hasCut)
-                        tentacle.checkPoints(lastTouch, currentTouch);
-                }
+                if (!hasCut && !gameOver)
+                    tentacle.checkPoints(lastTouch, currentTouch);
+            }
 
-                slider.addPoint(x, y);
-                lastTouch = currentTouch;
-            } else
-                onRelease(lastTouch.getX(), lastTouch.getY());
+            slider.addPoint(x, y);
+            lastTouch = currentTouch;
         }
         else
             lastTouch = currentTouch;
@@ -169,11 +162,10 @@ public class Game implements Tentacle.TentacleListener {
 
     public void onRelease(float x, float y)
     {
-        Log.d("OAsd", "RELEASED: x=" + x + " y= " + y);
         Vector currentTouch = new Vector(x, y);
         for(Tentacle tentacle : tentacles)
         {
-            if(!hasCut)
+            if(!hasCut && !gameOver)
                 tentacle.checkPoints(lastTouch, currentTouch);
         }
 
@@ -185,6 +177,8 @@ public class Game implements Tentacle.TentacleListener {
 
     public void start()
     {
+        speed = SPEED_LEVELS[0];
+        score = 0;
         slider.reset();
         tentacles.clear();
 
@@ -198,6 +192,16 @@ public class Game implements Tentacle.TentacleListener {
     public void isCut(Tentacle t) {
         soundPlayer.playCutSound();
         hasCut = true;
+
+        score++;
+
+        if(score == 10)
+            speed = SPEED_LEVELS[1];
+        else if(score == 22)
+            speed = SPEED_LEVELS[2];
+        else if(score == 35)
+            speed = SPEED_LEVELS[3];
+
 
         if(listener != null)
             listener.onCut();
@@ -216,6 +220,7 @@ public class Game implements Tentacle.TentacleListener {
     {
         if(endTime != -1 && System.currentTimeMillis() - endTime > GAME_OVER_TIMEOUT)
         {
+            slider.reset();
             endTime = -1;
             if(listener != null)
                 listener.onGameOver();

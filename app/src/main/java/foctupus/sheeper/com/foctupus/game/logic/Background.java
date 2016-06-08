@@ -2,16 +2,10 @@ package foctupus.sheeper.com.foctupus.game.logic;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.os.Build;
-import android.util.Log;
-
 import java.util.Iterator;
-import java.util.LinkedList;
 
-import foctupus.sheeper.com.foctupus.engine.gui.Component;
 import foctupus.sheeper.com.foctupus.engine.gui.Screen;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
@@ -19,7 +13,6 @@ import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.engine.renderer.StaticSpriteList;
 import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
 import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
-import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.tools.Maths;
 
 /**
@@ -57,9 +50,6 @@ public class Background {
     {
         treasure = new Treasure();
 
-        //DEBUG
-        Sprite.addSprite(treasure.getTexture().getName(), treasure.getXSize(), treasure.getYSize());
-
         Bitmap output = Bitmap.createBitmap(Renderer.getWidth(), Renderer.getHeight(), Bitmap.Config.ARGB_8888);
 
         Canvas canvas = new Canvas(output);
@@ -85,9 +75,6 @@ public class Background {
                 (int) (centerX + innerWidth/2), (int) (centerY + height/2)), paint);
 
 
-        //DEBUG
-        Sprite.addSprite("cliffs", innerWidth, height);
-        Sprite.addSprite("beach", Renderer.getWidth(), (int) (Maths.toPercent(32, Renderer.getHeight())));
 
         Bitmap beach = Renderer.getBitmap(Textures.BEACH);
         Rect beachRect = new Rect(0, 0, beach.getWidth(), (int) (beach.getWidth() * Texture.calcRatio(beach)));
@@ -106,9 +93,6 @@ public class Background {
         background.setPosition(Renderer.getWidth()/2f, Renderer.getHeight()/2f);
         background.setSize(Renderer.getWidth(), Renderer.getHeight());
         background.setVisible(true);
-
-        //DEBUG
-        Sprite.addSprite(background.getTexture().getName(), background.getXSize(), background.getYSize());
     }
 
     public void updateAndDraw()

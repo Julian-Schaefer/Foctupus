@@ -4,13 +4,11 @@ import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.opengl.Matrix;
-import android.util.Log;
 
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import foctupus.sheeper.com.foctupus.BuildConfig;
 import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 
@@ -38,9 +36,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
 
-        if (BuildConfig.DEBUG)
-            Log.d("asdasd", "MyGLRenderer: onSurfaceCreated called.");
-
         GLES20.glClearColor((110f / 256f), (161f / 256f), (255f / 256f), 1f);
 
         GLES20.glEnable(GLES20.GL_BLEND);
@@ -57,9 +52,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
     @Override
     public void onSurfaceChanged(GL10 gl, int width, int height) {
 
-        if (BuildConfig.DEBUG)
-            Log.d("asdsa", "MyGLRenderer: onSurfaceChanged called.");
-
         boolean surfaceChanged = false;
         if(width > 0 && height > 0 && (Renderer.getInstance().getWidth() != width || Renderer.getInstance().getHeight() != height))
         {
@@ -72,10 +64,6 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
 
         if(created || surfaceChanged)
         {
-            if (BuildConfig.DEBUG)
-                Log.d("sdadasa", "Surface got changed");
-
-
             Renderer.getInstance().revalidate(projectionMatrix, width, height);
             gameManager = GameManager.getInstance();
             gameManager.revalidate(created);
@@ -102,10 +90,8 @@ public class MyGLRenderer implements GLSurfaceView.Renderer {
             lastWritten = System.currentTimeMillis();
         }
 */
-        //if (gameManager != null) {
-            gameManager.update();
-            gameManager.draw();
-        //}
+        gameManager.update();
+        gameManager.draw();
     }
 
 }

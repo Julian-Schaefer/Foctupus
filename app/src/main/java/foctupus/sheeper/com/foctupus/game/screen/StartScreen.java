@@ -73,7 +73,6 @@ public class StartScreen extends Screen {
             public void onClick(Button button)
             {
                 showHelpInstructions();
-                Sprite.writeSizes();
             }
         });
 
@@ -175,7 +174,7 @@ public class StartScreen extends Screen {
                 finishScreen(new BestScreen(renderer));
             }
         }
-        else if(clicked == null) {
+        else if(clicked == null && transition.getComponent() == startButton) {
 
             if (transition.getName().equals(TRANS_SLIDE_IN) && transition.getComponent() == startButton) {
                 startSliding();
@@ -226,7 +225,7 @@ public class StartScreen extends Screen {
     {
         super.onFinished(component);
 
-        if(!FoctupusDatabase.getInstance().hasPlayedBefore())
+        if(!FoctupusDatabase.getInstance().hasPlayedBefore() && clicked == startButton)
         {
             FoctupusDatabase.getInstance().setHasPlayedBefore();
             animateOut();

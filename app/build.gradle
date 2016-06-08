@@ -8,8 +8,8 @@ android {
         applicationId "foctupus.sheeper.com.foctupus"
         minSdkVersion 14
         targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "1.01"
     }
     buildTypes {
         release {
@@ -25,5 +25,4 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-    compile 'com.google.android.gms:play-services-ads:8.3.0'
 }

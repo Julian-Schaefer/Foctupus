@@ -1,9 +1,5 @@
 package foctupus.sheeper.com.foctupus.game.logic;
 
-import android.util.Log;
-
-import foctupus.sheeper.com.foctupus.BuildConfig;
-import foctupus.sheeper.com.foctupus.MainActivity;
 import foctupus.sheeper.com.foctupus.engine.gui.Screen;
 import foctupus.sheeper.com.foctupus.engine.gui.SplashScreen;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;

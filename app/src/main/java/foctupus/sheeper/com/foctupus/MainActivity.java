@@ -12,13 +12,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdSize;
-import com.google.android.gms.ads.AdView;
 
 import foctupus.sheeper.com.foctupus.game.MyGLSurfaceView;
-import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 
 public class MainActivity extends Activity {
 
@@ -51,10 +46,6 @@ public class MainActivity extends Activity {
             LinearLayout surfaceViewContainer = (LinearLayout) findViewById(R.id.mainLayout);
             setupSurface(surfaceViewContainer);
         }
-
-
-        Log.i("Testdas", "Activity onCreate");
-
     }
 
 
@@ -127,8 +118,6 @@ public class MainActivity extends Activity {
     protected void onPause() {
         super.onPause();
         surfaceView.onPause();
-        Log.i("Testdas", "Activity onPause");
-
     }
 
 

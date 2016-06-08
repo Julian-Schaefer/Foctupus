@@ -3,14 +3,12 @@ package foctupus.sheeper.com.foctupus.engine.gui;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.AsyncTask;
-import android.util.Log;
 
 import foctupus.sheeper.com.foctupus.engine.gui.transition.Transition;
 import foctupus.sheeper.com.foctupus.engine.renderer.Loader;
 import foctupus.sheeper.com.foctupus.engine.renderer.Renderer;
 import foctupus.sheeper.com.foctupus.engine.renderer.Sprite;
 import foctupus.sheeper.com.foctupus.engine.renderer.Texture;
-import foctupus.sheeper.com.foctupus.engine.renderer.Textures;
 import foctupus.sheeper.com.foctupus.engine.renderer.util.Vector;
 import foctupus.sheeper.com.foctupus.game.screen.StartScreen;
 

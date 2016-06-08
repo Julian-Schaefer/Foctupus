@@ -6,13 +6,8 @@ import android.graphics.Color;
 import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.Path;
-import android.graphics.PorterDuff;
-import android.graphics.PorterDuffXfermode;
-import android.graphics.Rect;
 import android.graphics.Shader;
-import android.util.Log;
 
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -41,8 +36,8 @@ public class Tentacle extends StaticSpriteList {
     private static LinkedList<TentacleWay> topTentacles = new LinkedList<>();
 
     private static final int ANIMATE_OUT_TIME = 300;
-    private static final float END_SIZE = 2.5f;
-    private static final float SHRINK_FACTOR = 0.96f;
+    private static final float END_SIZE = 2.6f;
+    private static final float SHRINK_FACTOR = 0.97f;
 
     private TentacleListener listener;
 
@@ -113,7 +108,7 @@ public class Tentacle extends StaticSpriteList {
 
                 for(int i = 0; i < positionDif; i++)
                 {
-                    if(currentPos < positions.size())
+                    if(currentPos+1 < positions.size())
                         addFirst(getNewPart(currentPos++));
                 }
 

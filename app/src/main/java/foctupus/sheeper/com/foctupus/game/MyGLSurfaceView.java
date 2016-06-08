@@ -13,7 +13,6 @@ import foctupus.sheeper.com.foctupus.game.logic.GameManager;
 public class MyGLSurfaceView extends GLSurfaceView {
 
     private MyGLRenderer renderer;
-    private boolean visible;
 
     private GameManager gameManager;
 
@@ -34,14 +33,12 @@ public class MyGLSurfaceView extends GLSurfaceView {
 
     @Override
     public void onPause() {
-        Log.i("Testdas", "SurfaceView onPause");
         super.onPause();
 
     }
 
     @Override
     public void onResume() {
-        Log.i("Testdas", "SurfaceView onResume");
         super.onResume();
 
     }
