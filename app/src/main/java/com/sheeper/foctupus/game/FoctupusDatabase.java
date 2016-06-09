@@ -60,14 +60,18 @@ public class FoctupusDatabase {
 
     private static int getBest(SQLiteDatabase db)
     {
+        int back = 0;
         Cursor c = db.rawQuery("SELECT `" + COLUMN_BEST + "` FROM `" + TABLE_NAME + "` WHERE _id=?", new String[] { "1" });
+
         if(c.getCount() > 0)
         {
             c.moveToFirst();
-            return c.getInt(0);
+            back = c.getInt(0);
         }
 
-        return 0;
+        c.close();
+
+        return back;
     }
 
     public void setSoundEnabled(boolean enabled)
@@ -80,14 +84,18 @@ public class FoctupusDatabase {
 
     public boolean isSoundEnabled()
     {
+        boolean back = false;
         Cursor c = db_readable.rawQuery("SELECT `" + COLUMN_SOUND + "` FROM `" + TABLE_NAME + "` WHERE _id=?", new String[] { "1" });
+
         if(c.getCount() > 0)
         {
             c.moveToFirst();
-            return c.getInt(0) == 1;
+            back = c.getInt(0) == 1;
         }
 
-        return false;
+        c.close();
+
+        return back;
     }
 
     public void setHasPlayedBefore()
@@ -100,14 +108,18 @@ public class FoctupusDatabase {
 
     public boolean hasPlayedBefore()
     {
+        boolean back = true;
         Cursor c = db_readable.rawQuery("SELECT `" + COLUMN_PLAYED_BEFORE + "` FROM `" + TABLE_NAME + "` WHERE _id=?", new String[] { "1" });
+
         if(c.getCount() > 0)
         {
             c.moveToFirst();
-            return c.getInt(0) == 1;
+            back = c.getInt(0) == 1;
         }
 
-        return true;
+        c.close();
+
+        return back;
     }
 
 

@@ -45,7 +45,6 @@ public class Game implements Tentacle.TentacleListener {
         this.treasure = treasure;
         tentacles = new LinkedList<>();
 
-        soundPlayer = SoundPlayer.getInstance();
         slider = new Slider();
 
         start();
@@ -177,6 +176,8 @@ public class Game implements Tentacle.TentacleListener {
 
     public void start()
     {
+        soundPlayer = new SoundPlayer();
+
         speed = SPEED_LEVELS[0];
         score = 0;
         slider.reset();

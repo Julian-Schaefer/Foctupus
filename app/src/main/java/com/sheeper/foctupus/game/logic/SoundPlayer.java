@@ -14,42 +14,40 @@ import com.sheeper.foctupus.game.FoctupusDatabase;
 
 public class SoundPlayer {
 
-    private SoundPool soundPool;
+    private static SoundPool soundPool;
+    private static int loaded = 0;
+    private static int cutSoundID;
+
     private AudioManager audioManager;
-    private FoctupusDatabase database;
 
     private Context context;
 
-    private int loaded = 0;
-    private int cutSoundID;
+    private boolean muted;
 
-    private static SoundPlayer instance;
-
-    public static SoundPlayer getInstance()
-    {
-        if(instance == null)
-            instance = new SoundPlayer();
-
-        return instance;
-    }
-
-    private SoundPlayer()
+    public SoundPlayer()
     {
         context = Loader.getContext();
 
-        soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
-        soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-            @Override
-            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
-                loaded++;
-            }
-        });
-
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        database = FoctupusDatabase.getInstance();
+        if(soundPool == null)
+        {
+            soundPool = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+            soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+                @Override
+                public void onLoadComplete(SoundPool soundPool, int sampleId, int status)
+                {
+                    loaded++;
+                }
+            });
 
-        loadSounds();
+            loadSounds();
+        }
+
+        if(FoctupusDatabase.getInstance().isSoundEnabled())
+            muted = false;
+        else
+            muted = true;
     }
 
     private void loadSounds()
@@ -59,7 +57,7 @@ public class SoundPlayer {
 
     public void playCutSound()
     {
-        if (loaded == 1 && database.isSoundEnabled()) {
+        if (loaded == 1 && !muted) {
             int actualVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
             int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
 
